@@ -30,8 +30,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ['DBNAME'],
-        'HOST': hostname,
-        'USER': os.environ['DBUSER'] + "@" + hostname,
+        'HOST': hostname + ".database.windows.net",
+        'USER': os.environ['DBUSER'],
         'PASSWORD': os.environ['DBPASS'] 
     }
 }
