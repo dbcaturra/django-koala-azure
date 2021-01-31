@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block content %}
+  <div class="container mt-4">
+    <div class="col-lg-6 col-md-6">
+      <div class="card">
+        <div class="clearfix card-img-top">
+          <span class="float-right mt-4 mr-4"
+                data-toggle="tooltip" data-placement="top"
+                title="{% trans 'This image “Closed book”, is a work called “Closed Book Icon” by Boca Tutor, available on Wikimedia Commons under CC-BY-SA 3.0.' %}">
+          <i class="fa fa-question-circle"></i>
+        </span>
+          <img src="{% static "lms/img/closed_book.svg" %}" class="application-img p-2"
+               alt="Learning application logo">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{% trans "Learning application" %}</h5>
+          <p class="card-text">
+            {% trans "Learn courses you subscribed in and write your own courses, activities and educational resources." %}
+          </p>
+          <a href="{% url "learning:index" %}" class="btn btn-primary">{% trans "Go to learning application" %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

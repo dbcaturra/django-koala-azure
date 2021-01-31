@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+  {% include "learning/_includes/messages.html" %}
+  <div class="container p-4">
+    <div class="col-md-10 offset-md-1">
+      <h1 class="text-center">{% trans "The requested page was not found (Error n°404)." %}</h1>
+      <hr>
+      <div class="alert alert-danger">
+        <p class="text-center">{% trans "Oops, the page you requested was not found on this server." %}</p>
+        <p class="text-center">{% trans "It may be because the page was moved or is no longer available." %}</p>
+      </div>
+    </div>
+    <div>
+      <div class="text-center">
+        <a href="javascript:history.back()">{% trans "Go back to previous page." %}</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

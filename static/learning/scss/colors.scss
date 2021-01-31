@@ -1,0 +1,44 @@
+/**
+ * Copyright (C) 2019-2020 Guillaume Bernard <guillaume.bernard@koala-lms.org>
+ *
+ * This file is part of Koala LMS (Learning Management system)
+
+ * Koala LMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ */
+
+/**
+ * Koala main color theme
+ */
+$koala_green: #3DB17E;
+$koala_yellow: #FBBF44;
+$koala_red: #E51347;
+
+$koala_black: #1D193B;
+$koala_white: #FFFFFF;
+
+$koala_light_green: #3DB144;
+$koala_light_red: #FF4C61;
+$koala_light_black: #3D4C61;
+
+$koala_light_grey: #EAF0F4;
+$koala_grey: #DEE2E6;
+$koala_dark_grey: #6C757D;
+
+/**
+ * Object color association
+ */
+$color_course: $koala_green;
+$color_activity: $koala_yellow;
+$color_resource: $koala_red;

@@ -1,0 +1,81 @@
+/**
+ * Copyright (C) 2019-2020 Guillaume Bernard <guillaume.bernard@koala-lms.org>
+ *
+ * This file is part of Koala LMS (Learning Management system)
+
+ * Koala LMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ */
+
+$sidebar_width: 15%;
+
+aside#learning-sidebar {
+  min-height: 100vh;
+  width: 80%;
+  max-width: $sidebar_width;
+
+
+  h5 {
+    margin: 1rem 2rem 1rem 2rem !important;
+  }
+
+  img {
+    // height: 6rem;
+    width: 1.8rem;
+    margin-top: 0;
+    margin-left: 0.8rem;
+  }
+
+  span.sidebar-item-title {
+    margin-left: 1rem;
+  }
+}
+
+@media (min-width: 992px) {
+  aside#learning-sidebar {
+    min-width: $sidebar_width;
+
+    div.tooltip {
+      display: none;
+    }
+  }
+}
+
+
+@media (max-width: 992px) {
+  aside#learning-sidebar {
+    min-width: 5%;
+
+    h5.sidebar-title {
+      display: none;
+    }
+
+    .list-group-item.list-group-item-action {
+      span.sidebar-item-title {
+        display: none;
+      }
+    }
+
+    a.list-group-item {
+      span.sidebar-item-title {
+        display: none;
+      }
+    }
+  }
+  svg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

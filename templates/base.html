@@ -1,0 +1,113 @@
+{% load i18n static %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Koala{% endblock %}</title>
+  {% block extrastyle %}
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script defer src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
+    <script defer src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'lms/css/lms.css' %}">
+    <script defer src="{% static 'lms/fonts/fontawesome.js' %}"></script>
+    <script defer src="{% static 'lms/js/lms.js' %}"></script>
+  {% endblock %}
+
+  {% block extrahead %}{% endblock %}
+
+  {# When using official Koala-LMS, favicon is the Koala Logo #}
+  <link rel="icon" type="image/png" href="{% static 'lms/img/favicon.png' %}"/>
+
+</head>
+
+<body>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-expand navbar-light bg-light border-bottom">
+    <a class="navbar-brand" href="{% url 'home' %}"><img height="30" src="{% static 'lms/img/banner-tiny.png' %}"></a>
+    <ul class="navbar-nav">
+      {% include 'learning/dropdown.html' %}
+    </ul>
+    <ul class="navbar-nav ml-auto mt-lg-0">
+      {% if running_in_demo %}
+        <li class="nav-item my-2 m-1 d-none d-lg-inline-block">
+          <div class="dropdown">
+            <button class="btn badge badge-info p-2" type="button"
+               id="versions_dropdown" data-toggle="dropdown" aria-haspopup="true"
+               aria-expanded="false">
+              {% trans "Versions used" %}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="versions_dropdown">
+              <h6 class="dropdown-header">{% trans "Koala LMS" %}</h6>
+              <a class="dropdown-item" target="_blank"
+                 href="https://gitlab.com/koala-lms/lms">
+                {% blocktrans with version=lms_version %}<strong>Koala</strong> n°{{ version }}{% endblocktrans %}
+              </a>
+              <div class="dropdown-divider"></div>
+              <h6 class="dropdown-header">{% trans "Koala LMS applications" %}</h6>
+              {% if learning_version %}
+                <a class="dropdown-item" target="_blank"
+                   href="https://gitlab.com/koala-lms/django-learning">
+                  {% blocktrans with version=learning_version %}<strong>django-koalalms-learning</strong> n°{{ version }}{% endblocktrans %}
+                </a>
+              {% endif %}
+              {% if accounts_version %}
+                <a class="dropdown-item" target="_blank"
+                   href="https://gitlab.com/koala-lms/django-accounts">
+                  {% blocktrans with version=accounts_version %}<strong>django-koalalms-accounts</strong> n°{{ version }}{% endblocktrans %}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </li>
+        <li class="nav-item my-2 m-1 d-none d-lg-inline-block">
+          <a class="btn badge badge-primary p-2" href="https://gitlab.com/koala-lms/lms/issues/new" target="_blank">{% trans "Report an issue" %}</a>
+        </li>
+        <li class="nav-item my-2 m-1 d-none d-lg-inline-block">
+          <button class="btn badge badge-warning p-2" data-toggle="tooltip" data-placement="bottom"
+                title="{% trans "When running preview, you will surely encounter bugs and other issues. This is normal and helps us to enhance Koala-LMS. Please, report any error you find." %}">
+            {% trans "Technical preview" %}
+          </button>
+        </li>
+      {% endif %}
+      <li class="nav-item ml-auto">
+        {% include 'accounts/dropdown.html' %}
+      </li>
+    </ul>
+  </nav>
+</header>
+
+{% if running_in_demo %}
+  <div class="alert alert-info mb-0 rounded-0" role="alert">
+    <p class="text-center mb-0">
+      {% trans "You are running a preview of Koala LMS. You have been automatically logged in as a demonstration user that owns courses, activities and resources to let you discover how Koala LMS works." %}
+    </p>
+  </div>
+{% endif %}
+
+<div class="main">
+{% block content %} {% endblock %}
+</div>
+
+{% block footer %}
+  <footer class="footer mt-auto w-100 p-4">
+    <div class=" d-none d-md-flex justify-content-around align-items-center m-2">
+      <a   class="d-flex" href="https://www.koala-lms.org"><img height="40" src="{% static 'lms/img/logo.png' %}"></a>
+      <a  href="https://www.koala-lms.org/us/">{% trans "About us" %}</a>
+      <a  href="https://www.koala-lms.org/projects/">{% trans "Projects" %}</a>
+      <a  href="https://www.koala-lms.org/faq/">{% trans "FAQ" %}</a>
+      <a  href="https://www.koala-lms.org/credits/">{% trans "Credits" %}</a>
+      <a  href="https://www.koala-lms.org/legal/">{% trans "Legal Notices" %}</a>
+      <a  href="https://gitlab.com/koala-lms">{% trans "Contribute on Gitlab" %}</a>
+    </div>
+    <a class="d-flex d-md-none justify-content-around align-items-center m-2" href="https://www.koala-lms.org"><img height="50" src="{% static 'lms/img/logo.png' %}"></a>
+  </footer>
+{% endblock %}
+
+</body>
+</html>
+

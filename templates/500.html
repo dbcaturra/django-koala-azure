@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+  {% include "learning/_includes/messages.html" %}
+  <div class="container p-4">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="text-center">{% trans "Something went wrong (Error n°500)." %}</h1>
+      <hr>
+      <div class="alert alert-danger">
+        <p class="text-center">{% trans "Oops, something went wrong and it seems page you request crashed." %}</p>
+      </div>
+    </div>
+    <div>
+      <div class="text-center">
+        <a href="javascript:history.back()">{% trans "Go back to previous page." %}</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

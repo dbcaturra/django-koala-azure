@@ -1,0 +1,26 @@
+img.application-img {
+    width: 45%;
+    margin: 0 27.5% 0 27.5%;
+}
+
+body {
+    position: relative;
+}
+
+.main {
+    min-height: calc(100vh - 1.5rem);
+}
+
+.footer {
+    background-color:#1D193B ;
+    position: relative;
+    left: 0;
+    bottom: 0;
+}
+
+.footer a {
+    color: #FFFFFF;
+}
+
+
+

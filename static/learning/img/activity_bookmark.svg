@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    inkscape:version="1.0beta2 (unknown)"
+    sodipodi:docname="bookmarkActivities.svg"
+    id="svg22"
+    version="1.1"
+    height="340"
+    width="160.00000000000003">
+  <metadata
+     id="metadata28">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs26" />
+  <sodipodi:namedview
+     inkscape:current-layer="svg22"
+     inkscape:window-maximized="1"
+     inkscape:window-y="27"
+     inkscape:window-x="0"
+     inkscape:cy="170"
+     inkscape:cx="80"
+     inkscape:zoom="2.5117647"
+     showgrid="false"
+     id="namedview24"
+     inkscape:window-height="1016"
+     inkscape:window-width="1920"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     inkscape:document-rotation="0"
+     bordercolor="#666666"
+     pagecolor="#ffffff" />
+  <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+  <g
+     id="g8">
+    <title
+       id="title2">background</title>
+    <rect
+       x="-1"
+       y="-1"
+       width="162"
+       height="342"
+       id="canvas_background"
+       fill="none" />
+    <g
+       id="canvasGrid"
+       width="100%"
+       height="100%"
+       x="0"
+       y="0"
+       overflow="visible"
+       display="none">
+      <rect
+         id="rect5"
+         width="100%"
+         height="100%"
+         x="0"
+         y="0"
+         stroke-width="0"
+         fill="url(#gridpattern)" />
+    </g>
+  </g>
+  <rect
+     id="svg_12"
+     height="238"
+     width="151"
+     y="5.562829"
+     x="5.1205349"
+     stroke-opacity="null"
+     stroke-width="1.5"
+     stroke="#fbbf44"
+     fill="#fbbf44" />
+  <line
+     stroke-linecap="null"
+     stroke-linejoin="null"
+     id="svg_4"
+     y2="315.56284"
+     x2="6.1205449"
+     y1="7.562829"
+     x1="6.1205449"
+     fill-opacity="0"
+     stroke-width="1.5"
+     stroke="#fbbf44"
+     fill="none" />
+  <line
+     stroke-linecap="null"
+     stroke-linejoin="null"
+     id="svg_6"
+     y2="7.562829"
+     x2="155.12054"
+     y1="7.562829"
+     x1="5.1205449"
+     fill-opacity="0"
+     stroke-width="1.5"
+     stroke="#fbbf44"
+     fill="none" />
+  <line
+     stroke="#fbbf44"
+     stroke-linecap="null"
+     stroke-linejoin="null"
+     id="svg_8"
+     y2="243.56284"
+     x2="78.120544"
+     y1="315.56284"
+     x1="6.1205449"
+     fill-opacity="0"
+     stroke-opacity="null"
+     stroke-width="1.5"
+     fill="none" />
+  <path
+     stroke="#fbbf44"
+     style="vector-effect:non-scaling-stroke"
+     id="svg_13"
+     fill-opacity="0"
+     stroke-opacity="null"
+     stroke-width="1.5"
+     fill="#fbbf44"
+     d=""
+     inkscape:connector-curvature="0" />
+  <path
+     stroke="#fbbf44"
+     id="svg_17"
+     d="M 5.3496581,244.88154 82.391012,244.83185 5.3964883,317.48409 Z"
+     stroke-opacity="null"
+     stroke-width="1.5"
+     fill="#fbbf44"
+     inkscape:connector-curvature="0" />
+  <path
+     stroke="#fbbf44"
+     id="svg_18"
+     d="m 156.21743,243.83414 0.50456,83.77332 -75.301167,-83.32283 z"
+     stroke-opacity="null"
+     stroke-width="1.5"
+     fill="#fbbf44"
+     inkscape:connector-curvature="0" />
+</svg>

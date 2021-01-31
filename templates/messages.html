@@ -1,0 +1,18 @@
+{% for message in messages %}
+  {% if message.level_tag == "debug" or message.level_tag == "info" or message.level_tag == "success" or message.level_tag == "warning" %}
+    <div class="alert alert-{{ alert_type }} alert-dismissible fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{ message }}
+    </div>
+  {% endif %}
+  {% if message.level_tag == "error" %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{ message }}
+    </div>
+  {% endif %}
+{% endfor %}
