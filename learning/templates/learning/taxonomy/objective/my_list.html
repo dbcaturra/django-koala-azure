@@ -1,0 +1,53 @@
+{% extends "learning/taxonomy/objective/base.html" %}
+{% load i18n django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} − {% trans "Objectives" %}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Objectives" "learning:objective" %}
+{% endblock %}
+
+{% block learning_content %}
+  <div class="d-flex">
+    <main id="objective-content" class="container pt-2 mb-5">
+      {% include "learning/_includes/messages.html" %}
+      {% block objective_content %}
+        <h2>{% trans "Objectives" %}</h2>
+        {% if user.is_authenticated %}
+          <div class="col-auto">
+            <a id="button-create-new-objective" href="{% url "learning:objective/create" %}" class="float-right btn btn-outline-success">
+              <i class="fa fa-plus"></i> {% trans "Create a new objective" %}
+            </a>
+          </div>
+        {% endif %}
+        {% if has_obj %}
+          <table class="table">
+            <thead>
+            <tr class="table-active">
+              <th scope="col">{% trans "Ability" %}</th>
+              <th scope="col">{% trans "Date of creation" %}</th>
+              <th scope="col">{% trans "Author" %}</th>
+              <th scope="col">{% trans "Where?" %}</th>
+              <th scope="col">{% trans "Language" %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for objective in page_obj %}
+              {% include "learning/taxonomy/_includes/block/objective_block_base.html" with objective=objective %}
+            {% endfor %}
+
+            </tbody>
+          </table>
+          {% include "learning/_includes/paginator_buttons.html" with current_page=page_obj %}
+        {% else %}
+          <div class="alert alert-info" role="alert">
+            {% trans "There is not any objective yet." %}
+          </div>
+        {% endif %}
+        <hr>
+      {% endblock %}
+    </main>
+  </div>
+{% endblock %}
+

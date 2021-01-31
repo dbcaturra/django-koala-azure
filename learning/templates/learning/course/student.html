@@ -1,0 +1,70 @@
+{% extends "learning/base.html" %}
+{% load i18n django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} − {% trans "Courses I’m following" %}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Studying" ""  %}
+  {% breadcrumb "My courses" "learning:course/student" course.slug %}
+{% endblock %}
+
+{% block learning_content %}
+  <form method="get">
+    <div class="form-row">
+      <div class="col">
+        {{ form.query }}
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-outline-primary" type="submit"><i class="fa fa-search"></i></button>
+      </div>
+    </div>
+  </form>
+
+
+  {% if search_has_obj == False %}
+    <hr>
+    <h5 class="m-5">{% trans "No courses in which you are registered match your search…" %}</h5>
+    {% else %}
+      {% if search_nb_per_page > 0 %}
+        <hr>
+        <h2>{% trans "My search" %}</h2>
+        <div class="row">
+          {% for course in search_page_obj %}
+            {% include "learning/course/_includes/block/course_block_base.html" with course=course %}
+          {% endfor %}
+        </div>
+    {% endif %}
+      {% include 'learning/_includes/paginator_buttons.html' with current_page=search_page_obj prefix='search' nb_per_page=search_nb_per_page %}
+  {% endif %}
+
+  {# The favourite courses where the connected user is student #}
+  {% if favourite_has_obj %}
+    <hr>
+    <h2>{% trans "My favourites courses" %}</h2>
+    <hr class="course_title_separator">
+    <div class="row">
+      {% for course in favourite_page_obj %}
+        {% include "learning/course/_includes/block/teacher_course_block.html" %}
+      {% endfor %}
+    </div>
+    {% include 'learning/_includes/paginator_buttons.html' with current_page=favourite_page_obj prefix='favourites' nb_per_page=favourite_nb_per_page %}
+  {% endif %}
+
+  {% if follow_has_obj %}
+    <hr>
+    <h2>{% trans "My courses" %}</h2>
+    <hr class="course_title_separator">
+    <div class="row">
+      {% for course in follow_page_obj %}
+        {% include "learning/course/_includes/block/course_block_base.html" with course=course %}
+      {% endfor %}
+    </div>
+    {% include "learning/_includes/paginator_buttons.html" with current_page=follow_page_obj prefix='follow' nb_per_page=follow_nb_per_page %}
+  {% else %}
+    <hr>
+    <div class="alert alert-info" role="alert">
+      {% trans "You did not register on any course yet. Go to the search page to find owesome courses to follow." %}
+    </div>
+  {% endif %}
+{% endblock %}

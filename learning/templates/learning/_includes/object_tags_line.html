@@ -1,0 +1,20 @@
+{% load i18n %}
+
+{% if object.tags.all %}
+  {% for tag in object.tags.all|slice:":9" %}
+    {% if tag.name|length >= 15 %}
+      <span class="badge badge-pill badge-default tags-koala" data-toggle="tooltip" data-placement="top"
+            title="{{ tag }}">
+        <small><i class="fas fa-tags"></i></small>
+          {{ tag|truncatechars:10 }}
+    {% else %}
+      <span class="badge badge-pill badge-default tags-koala">
+        <small><i class="fas fa-tags"></i></small>
+          {{ tag }}
+    {% endif %}
+    </span>
+    {% if forloop.counter == 9 %}
+      …
+    {% endif %}
+  {% endfor %}
+{% endif %}

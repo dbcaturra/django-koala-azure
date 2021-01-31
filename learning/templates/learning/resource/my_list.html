@@ -1,0 +1,85 @@
+{% extends "learning/resource/base.html" %}
+{% load i18n learning django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} − {% trans "My resources" %}{% endblock %}
+
+{% block learning_content %}
+
+  <form method="get">
+    <div class="form-row">
+      <div class="col">
+        {{ form.query }}
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-outline-primary" type="submit"><i class="fa fa-search"></i></button>
+      </div>
+      <div class="col-auto ml-1">
+        <a href="{% url "learning:resource/add" %}" class="float-right btn btn-outline-success">
+          <i class="fa fa-plus"></i> {% trans "Create a new resource" %}
+        </a>
+      </div>
+    </div>
+  </form>
+
+  {# The result of the query: gives resources to display #}
+  {% if search_has_obj == False %}
+    <hr>
+    <h5 class="m-5">{% trans "No resources that you are teaching match your search…" %}</h5>
+  {% else %}
+      {% if search_nb_per_page > 0 %}
+        <hr>
+        <h2>{% trans "My search" %}</h2>
+        <hr class="resource_title_separator">
+        <div class="row" id="searched-resources">
+          {% for resource in search_page_obj %}
+            {% include "learning/resource/_includes/block/resource_block.html" with resource=resource %}
+          {% endfor %}
+        </div>
+        {% include 'learning/_includes/paginator_buttons.html' with current_page=search_page_obj prefix='search' nb_per_page=search_nb_per_page %}
+    {% endif %}
+  {% endif %}
+
+  {# The favourite resources where the connected user is author #}
+  {% if favourite_has_obj %}
+    <hr>
+    <h2>{% trans "My favourites resources" %}</h2>
+    <hr class="resource_title_separator">
+    <div class="row">
+      {% for resource in favourite_page_obj %}
+        {% include "learning/resource/_includes/block/resource_block.html" with resource=resource %}
+      {% endfor %}
+    </div>
+    {% include 'learning/_includes/paginator_buttons.html' with current_page=favourite_page_obj prefix='favourites' nb_per_page=favourite_nb_per_page %}
+  {% endif %}
+
+  {# The resources owned by the connected user #}
+  {% if author_has_obj %}
+    <hr>
+    <h2>{% trans "My resources" %}</h2>
+    <hr class="resource_title_separator">
+    <div class="row" id="my-resources">
+      {% for resource in author_page_obj %}
+        {% include "learning/resource/_includes/block/resource_block.html" with resource=resource %}
+      {% endfor %}
+    </div>
+    {% include 'learning/_includes/paginator_buttons.html' with current_page=author_page_obj prefix='author' nb_per_page=author_nb_per_page %}
+  {% else %}
+    <hr>
+    <div class="alert alert-info" role="alert">
+      {% trans "You did not create a resource yet. Educational ressources are reusable and shareable videos, audio files, articles, that you can use in activities. Go on and create a resource!" %}
+    </div>
+  {% endif %}
+
+  {# The resources on which the user collaborates on #}
+  {% if contributor_has_obj %}
+    <hr>
+    <h2>{% trans "My contributions" %}</h2>
+    <hr class="resource_title_separator">
+    <div class="row">
+      {% for contribution in contributor_page_obj %}
+        {% include "learning/resource/_includes/block/resource_block.html" with resource=contribution.resource contribution=contribution %}
+      {% endfor %}
+    </div>
+    {% include 'learning/_includes/paginator_buttons.html' with current_page=contributor_page_obj prefix='contributor' nb_per_page=contributor_nb_per_page %}
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "learning/base.html" %}
+{% load i18n django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} − {% trans "Create a new activity" %}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Teaching" "" %}
+  {% breadcrumb "My activities" "learning:activity/my" %}
+  {% breadcrumb "Create a new activity" "learning:activity/add" %}
+{% endblock %}
+
+{% block learning_content %}
+  <form name="object_add_form" method="post" id="activity_add_form">
+    <div class="clearfix">
+      <h1 class="float-left">{% trans "Create a new activity" %}</h1>
+      <a class="btn btn-outline-secondary m-2 float-right" href="{% url 'learning:activity/my'%}">
+         <i class="fa fa-times"></i> {% trans "Cancel" %}
+      </a>
+    </div>
+    <hr>
+    {% csrf_token %}
+
+    <ul id="activity_form_progress_bar">
+      <li class="progress_tab">{% trans "Specifications" %}</li>
+      <li class="progress_tab">{% trans "Properties" %}</li>
+      <li class="progress_tab">{% trans "Description" %}</li>
+      <li class="progress_tab">{% trans "Validation" %}</li>
+    </ul>
+
+    {% include "learning/_includes/forms/add_form_buttons.html" %}
+
+    {% include 'learning/activity/_includes/activity_form.html' with form=form %}
+    <hr>
+      <button type="submit" id="add_activity_submit_button" class="btn btn-outline-success float-right">
+        <i class="fa fa-check"></i> {% trans "Create a new activity" %}
+      </button>
+    </div>
+  </form>
+{% endblock %}

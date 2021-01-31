@@ -1,0 +1,39 @@
+{% extends "learning/course/detail.html" %}
+{% load i18n django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} −
+  {% blocktrans with name=course.name %}Delete course “{{ name }}”{% endblocktrans %}
+{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Delete" "learning:course/delete" course.slug %}
+{% endblock %}
+
+{% block learning_content %}
+  <div class="col-md-8 offset-md-2">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="m-0">{% blocktrans with name=course.name %}Deleting “{{ name }}”…{% endblocktrans %}</h2>
+      </div>
+      <div class="card-body">
+        <p>{% blocktrans with name=course.name %}You are about to delete the course “{{ name }}”. This implies a lot of things, including:{% endblocktrans %}</p>
+        <ul>
+          <li>{% trans "You will not be able to recover it later." %}</li>
+          <li>{% trans "Everything will be removed from the database, student progress and so no." %}</li>
+        </ul>
+        <form method="post">
+          {% csrf_token %}
+          <div class="clearfix">
+            <a class="btn btn-outline-secondary float-lg-left m-1" href="{% url "learning:course/detail" slug=course.slug %}">
+             <i class="fa fa-arrow-left"></i> {% trans "Bring me back to the course" %}
+            </a>
+            <button type="submit" class="btn btn-outline-danger float-lg-right m-1">
+             <i class="fa fa-trash"></i> {% trans "Ok, I understand, delete this course" %}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

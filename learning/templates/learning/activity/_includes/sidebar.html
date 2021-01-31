@@ -1,0 +1,109 @@
+{% load i18n learning static %}
+
+<aside id="learning-sidebar" class="border-right bg-light">
+  <div class="d-flex object_bookmark_title">
+    <img src="{% static "learning/img/activity_bookmark.svg" %}" alt="{% trans 'The activity bookmark sign' %}">
+    {% if activity.name|length >= 50 %}
+      <h5 class="sidebar-title text-center text-muted word-break w-75">{{ activity.name|truncatechars:30 }}</h5>
+    {% else %}
+      <h5 class="sidebar-title text-center text-muted word-break w-75">{{ activity.name }}</h5>
+    {% endif %}
+  </div>
+
+  <div class="list-group list-group-flush">
+
+    {# A link to the activity details #}
+    {% with url_name="learning:activity/detail" %}
+      <a id="link-activity-detail" href="{% url url_name slug=activity.slug %}"
+         data-toggle="tooltip" data-placement="right" title="{% trans "Details" %}"
+         data-container="aside#learning-sidebar"
+         class="list-group-item list-group-item-action {% if request.resolver_match.view_name == url_name %}active{% else %}bg-light{% endif %}">
+        <i class="fas fa-info-circle"></i><span class="sidebar-item-title">
+        {% trans "Details" %}</span>
+      </a>
+    {% endwith %}
+
+    {% get_object_perms activity user as activity_perms %}
+
+    {# A link to the form used to view collaborators #}
+    {% if "view_collaborators_activity" in activity_perms %}
+      {% with url_name="learning:activity/detail/collaborators" %}
+        <a id="link-course-collaborators" href="{% url url_name slug=activity.slug %}"
+           data-toggle="tooltip" data-placement="right" title="{% trans "Collaborators" %}"
+           data-container="aside#learning-sidebar"
+           class="list-group-item list-group-item-action {% if request.resolver_match.view_name == url_name %}active{% else %}bg-light{% endif %}">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <span class="sidebar-item-title">{% trans "Collaborators" %}</span>
+        </a>
+      {% endwith %}
+    {% endif %}
+
+    {# A link to the form used to add a resource #}
+    {% if "change_activity" in  activity_perms %}
+      {% with url_name="learning:activity/detail/resource/add" %}
+        <a id="link-activity-add-resource" href="{% url url_name slug=activity.slug %}"
+           data-toggle="tooltip" data-placement="right" title="{% trans "New resource" %}"
+           data-container="aside#learning-sidebar"
+           class="list-group-item list-group-item-action {% if request.resolver_match.view_name == url_name %}active{% else %}bg-light{% endif %}"
+        ><i class="fas fa-plus"></i><span class="sidebar-item-title">{% trans "New resource" %}</span></a>
+      {% endwith %}
+    {% endif %}
+
+    {# display of the activity's resources via a dropdown menu #}
+    {#  resource menu #}
+    <button type="button" title="{% trans "Resources" %}"
+            data-container="aside#learning-sidebar" onclick="dropdown()"
+            class="btn-dropdown list-group-item list-group-item-action {% if request.resolver_match.view_name == url_name %}active{% else %}bg-light{% endif %}">
+      <i class="icn-dropdown fa fa-caret-down"></i><span class="sidebar-item-title">{% trans "Resources" %}</span>
+    </button>
+    <div id="dropdown-container">
+      {% with resources=activity.resources.all %}
+        {% if resources %}
+          {% for resource in resources %}
+            {% include "learning/resource/_includes/resource_title_activity.html" with resource=resource unlink=True linked_activity=activity %}
+          {% endfor %}
+        {% else %} {#  If there is no resources #}
+          <div id="activity-no-resource" class="list-group-item list-group-item-action bg-light" role="alert">
+            {% trans "There is no resource yet." %}
+          </div>
+        {% endif %}
+      {% endwith %}
+    </div>
+
+
+
+    {# A link to the activity usage #}
+    {% if "view_usage_activity" in  activity_perms %}
+      {% with url_name="learning:activity/detail/usage" %}
+        <a id="link-activity-usage" href="{% url url_name slug=activity.slug %}"
+           data-toggle="tooltip" data-placement="right" title="{% trans "Uses" %}"
+           data-container="aside#learning-sidebar"
+           class="list-group-item list-group-item-action {% if request.resolver_match.view_name == url_name %}active{% else %}bg-light{% endif %}">
+          <i class="fas fa-recycle"></i>
+          <span class="sidebar-item-title">{% trans "Uses" %}</span></a>
+      {% endwith %}
+    {% endif %}
+
+    {# A link to the activity similar activities #}
+    {% if "view_similar_activity" in activity_perms %}
+      {% with url_name="learning:activity/detail/similar" %}
+        <a id="link-activity-similar" href="{% url url_name slug=activity.slug %}"
+           data-toggle="tooltip" data-placement="right" title="{% trans "Similar activities" %}"
+           data-container="aside#learning-sidebar"
+           class="list-group-item list-group-item-action {% if request.resolver_match.view_name == url_name %}active{% else %}bg-light{% endif %}"
+        ><i class="fas fa-tags"></i><span class="sidebar-item-title">{% trans "Similar activities" %}</span></a>
+      {% endwith %}
+    {% endif %}
+      {% if "view_objective_activity" in activity_perms %}
+      {% with url_name="learning:activity/detail/objectives" %}
+        <a href="{% url url_name slug=activity.slug %}"
+           id="objective-acces" data-toggle="tooltip" data-placement="right" title="{% trans "Objectives" %}" data-container="aside#learning-sidebar"
+           class="list-group-item list-group-item-action {% if request.resolver_match.view_name == url_name %}active{% else %}bg-light{% endif %}">
+          <i class="fas fa-bullseye"></i>
+          <span class="sidebar-item-title">{% trans "Objectives" %}</span>
+        </a>
+      {% endwith %}
+    {% endif %}
+
+  </div>
+</aside>

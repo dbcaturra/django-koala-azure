@@ -1,0 +1,24 @@
+{% extends "learning/resource/base.html" %}
+{% load i18n learning django_bootstrap_breadcrumbs %}
+
+{% block title %}
+  {{ block.super }} −
+  {% blocktrans with name=resource.name %}Resource “{{ name }}”{% endblocktrans %}
+{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% if resource.name|length >= 70 %}
+    {% breadcrumb resource.name|truncatechars:40 "learning:resource/detail" resource.slug %}
+  {% else %}
+    {% breadcrumb resource.name "learning:resource/detail" resource.slug %}
+  {% endif %}
+{% endblock %}
+
+{% block sidebar %}
+  {% include "learning/resource/_includes/sidebar.html" %}
+{% endblock %}
+
+{% block learning_content %}
+  {% include "learning/resource/_includes/details/detail_page.html" with resource=resource %}
+{% endblock %}

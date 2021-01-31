@@ -1,0 +1,150 @@
+{% load i18n learning static %}
+
+<aside id="learning-sidebar" class="border-right bg-light">
+  <div class="d-flex object_bookmark_title">
+    <img src="{% static "learning/img/course_bookmark.svg" %}" alt="{% trans 'The course bookmark sign' %}">
+    {% if course.name|length >= 50 %}
+      <h5 class="sidebar-title text-center text-muted word-break w-75">{{ course.name|truncatechars:30 }}</h5>
+    {% else %}
+      <h5 class="sidebar-title text-center text-muted word-break w-75">{{ course.name }}</h5>
+    {% endif %}
+  </div>
+
+  <div class="list-group list-group-flush">
+
+    {% with url_name="learning:course/detail" %}
+      <a id="link-course-detail" href="{% url url_name slug=course.slug %}"
+         data-toggle="tooltip" data-placement="right" title="{% trans "Details" %}"
+         data-container="aside#learning-sidebar"
+         class="list-group-item list-group-item-action {% if request.resolver_match.view_name == url_name %}active{% else %}bg-light{% endif %}">
+        <i class="fas fa-info-circle"></i>
+        <span class="sidebar-item-title">{% trans "Details" %}</span>
+      </a>
+    {% endwith %}
+
+    {% get_object_perms object user as course_perms %}
+    {% if not user_is_teacher and course.course_activities.count > 0 %}
+      {% with url_name="learning:course/detail/activities" %}
+        <a id="link-course-activities" href="{% url url_name slug=course.slug %}"
+           data-toggle="tooltip" data-placement="right" title="{% trans "Activities" %}"
+           data-container="aside#learning-sidebar"
+           class="list-group-item list-group-item-action {% if request.resolver_match.view_name == url_name %}active{% else %}bg-light{% endif %}">
+          <i class="fas fa-sitemap"></i>
+          <span class="sidebar-item-title">{% trans "Activities" %}</span>
+        </a>
+      {% endwith %}
+    {% endif %}
+
+    {% if "change_course" in course_perms and not course.read_only %}
+      {% with url_name="learning:course/detail/activity/add" %}
+        <a id="link-course-add-activity" href="{% url url_name slug=course.slug %}"
+           data-toggle="tooltip" data-placement="right" title="{% trans "New activity" %}"
+           data-container="aside#learning-sidebar"
+           class="list-group-item list-group-item-action {% if request.resolver_match.view_name == url_name %}active{% else %}bg-light{% endif %}">
+          <i class="fas fa-plus"></i>
+          <span class="sidebar-item-title">{% trans "New activity" %}</span>
+        </a>
+      {% endwith %}
+    {% endif %}
+    {% if user.is_authenticated %}
+      {% get_course_collaborator_object course user as course_collaborator %}
+      {% if user == course.author or course_collaborator %}
+        {# display of the course's activities via a dropdown menu #}
+        {# activity menu #}
+        <button type="button" title="{% trans "Activities" %}"
+                data-container="aside#learning-sidebar" onclick="dropdown()"
+                class="btn-dropdown list-group-item list-group-item-action bg-light ">
+          <i class="icn-dropdown fa fa-caret-down"></i><span class="sidebar-item-title">{% trans "Activities" %}</span>
+        </button>
+        <div id="dropdown-container">
+          {% with course_activities=course.course_activities.get_queryset %}
+            {% if course_activities %}
+              {% for course_activity in course_activities %}
+                {% with activity=course_activity.activity %}
+                  {% include "learning/activity/_includes/activity_title_course.html" with activity=activity unlink=True linked_course=course %}
+                {% endwith %}
+              {% endfor %}
+            {% else %} {#  If there is no activities #}
+              <div id="course-no-activity" class="list-group-item list-group-item-action bg-light" role="alert">
+                {% trans "There is no activity yet." %}
+              </div>
+            {% endif %}
+          {% endwith %}
+        </div>
+      {% endif %}
+    {% endif %}
+
+    {% if "view_collaborators_course" in course_perms %}
+      {% with url_name="learning:course/detail/collaborators" %}
+        <a id="link-course-collaborators" href="{% url url_name slug=course.slug %}"
+           data-toggle="tooltip" data-placement="right" title="{% trans "Collaborators" %}"
+           data-container="aside#learning-sidebar"
+           class="list-group-item list-group-item-action {% if request.resolver_match.view_name == url_name %}active{% else %}bg-light{% endif %}">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <span class="sidebar-item-title">{% trans "Collaborators" %}</span>
+        </a>
+      {% endwith %}
+    {% endif %}
+
+    {% if "view_students_course" in course_perms %}
+      {% with url_name="learning:course/detail/students" %}
+        <a id="link-course-students" href="{% url url_name slug=course.slug %}"
+           data-toggle="tooltip" data-placement="right" title="{% trans "Students" %}"
+           data-container="aside#learning-sidebar"
+           class="list-group-item list-group-item-action {% if request.resolver_match.view_name == url_name %}active{% else %}bg-light{% endif %}">
+          <i class="fas fa-user-graduate"></i>
+          <span class="sidebar-item-title">{% trans "Students" %}</span>
+        </a>
+      {% endwith %}
+    {% endif %}
+
+    {% if "view_similar_course" in course_perms %}
+      {% with url_name="learning:course/detail/similar" %}
+        <a id="link-course-similar" href="{% url url_name slug=course.slug %}"
+           data-toggle="tooltip" data-placement="right" title="{% trans "Similar courses" %}"
+           data-container="aside#learning-sidebar"
+           class="list-group-item list-group-item-action {% if request.resolver_match.view_name == url_name %}active{% else %}bg-light{% endif %}">
+          <i class="fas fa-tags"></i>
+          <span class="sidebar-item-title">{% trans "Similar courses" %}</span>
+        </a>
+      {% endwith %}
+    {% endif %}
+
+    {% if "change_course" in course_perms %}
+      {% with url_name="learning:course/detail/objectives" %}
+        <a href="{% url url_name slug=course.slug %}"
+           id="objective-acces" data-toggle="tooltip" data-placement="right" title="{% trans "Objectives" %}" data-container="aside#learning-sidebar"
+           class="list-group-item list-group-item-action {% if request.resolver_match.view_name == url_name %}active{% else %}bg-light{% endif %}">
+          <i class="fas fa-bullseye"></i>
+          <span class="sidebar-item-title">{% trans "Objectives" %}</span>
+        </a>
+      {% endwith %}
+    {% endif %}
+
+    {% if "view_course" in course_perms %}
+      {% if not user_is_teacher %}
+      {% with url_name="learning:course/detail/progression/student" %}
+        <a href="{% url url_name slug=course.slug %}"
+           id="objective-acces" data-toggle="tooltip" data-placement="right" title="{% trans "Advancement" %}" data-container="aside#learning-sidebar"
+           class="list-group-item list-group-item-action {% if request.resolver_match.view_name == url_name %}active{% else %}bg-light{% endif %}">
+          <i class="fas fa-carrot"></i>
+          <span class="sidebar-item-title">{% trans "Advancement" %}</span>
+        </a>
+      {% endwith %}
+      {% endif %}
+    {% endif %}
+
+    {% if "view_course" in course_perms %}
+      {% if user_is_teacher %}
+      {% with url_name="learning:course/detail/progression/teacher" %}
+        <a href="{% url url_name slug=course.slug %}"
+           id="objective-acces" data-toggle="tooltip" data-placement="right" title="{% trans "Advancement" %}" data-container="aside#learning-sidebar"
+           class="list-group-item list-group-item-action {% if request.resolver_match.view_name == url_name %}active{% else %}bg-light{% endif %}">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <span class="sidebar-item-title">{% trans "Advancement" %}</span>
+        </a>
+      {% endwith %}
+      {% endif %}
+    {% endif %}
+  </div>
+</aside>

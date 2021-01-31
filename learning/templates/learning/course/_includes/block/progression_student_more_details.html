@@ -1,0 +1,17 @@
+{% load i18n learning %}
+<div class="accordion" id="accordionExample">
+  <div class="card border-0">
+    <div class="card-header bg-white border-0" id="headingOne">
+      <h5 class="mb-0">
+        <a class="btn text-secondary float-right" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          {% trans "See details" %} <i class="fas fa-angle-down"></i>
+        </a>
+      </h5>
+    </div>
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body border">
+        {% include "learning/course/_includes/block/progression_detail_on_progress_bar.html" %}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+{% extends "learning/activity/detail.html" %}
+{% load i18n learning django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} − {% trans "Uses" %}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Uses" "learning:activity/uses" activity.slug %}
+{% endblock %}
+
+{% block learning_content %}
+  {% if page_obj.object_list %}
+    <table id="table-activity-usage" class="table mt-3">
+      <thead>
+      <tr>
+        <th>{% trans "Course" %}</th>
+        <th>{% trans "Written by" %}</th>
+        <th class="d-none d-lg-table-cell">{% trans "Last update" %}</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for course_activity in page_obj %}
+        {% with course=course_activity.course %}
+          <tr id="usage-activity-row">
+            <td><a href="{% url 'learning:course/detail' slug=course.slug %}">{{ course.name }}</a></td>
+            <td>{{ course.author }}</td>
+            <td>{{ course.updated|date:"D. d M. Y" }}</td>
+          </tr>
+        {% endwith %}
+      {% endfor %}
+      </tbody>
+    </table>
+    {% include "learning/_includes/paginator_buttons.html" with current_page=page_obj %}
+  {% else %}
+    <div id="alert-not-used" class="alert alert-info" role="alert">
+      {% trans "This activity is not used by any course yet. If you already manage a course, you can add this activity to it. Hence, you will let users see this activity and its resources." %}
+    </div>
+  {% endif %}
+{% endblock %}

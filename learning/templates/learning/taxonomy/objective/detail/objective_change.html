@@ -1,0 +1,9 @@
+{% load i18n learning %}
+{% include "learning/taxonomy/objective/modals/change_objective_on_object.html" with target_url=target_url%}
+<span style="padding-top: .25rem;" data-toggle="tooltip" data-placement="top"
+      title="{% trans "Edit objective" %}">
+<button class="btn btn-sm btn-outline-primary" type="button" data-toggle="modal"
+        data-target="#change-objective-{{ objective.objective.slug }}-on-{{ object.slug }}" id="id-button-change-object-objective-modal-{{ objective.objective.slug }}">
+  <i class="fas fa-edit"></i>
+</button>
+</span>

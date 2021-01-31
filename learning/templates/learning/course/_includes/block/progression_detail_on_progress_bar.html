@@ -1,0 +1,10 @@
+{% load i18n learning %}
+{% if objective_taxonomy_information %}
+  {% if objective_taxonomy_total %}
+    <div class="w-100">
+    {% for key,value in objective_taxonomy_information.items %}
+      {% include "learning/course/_includes/block/progression_detail_progressbar.html" with level=key progression_data=value color="bg-primary" %}
+    {% endfor %}
+  {% endif %}
+</div>
+{% endif %}

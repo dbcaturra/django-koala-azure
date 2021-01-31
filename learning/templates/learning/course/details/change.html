@@ -1,0 +1,25 @@
+{% extends "learning/course/detail.html" %}
+{% load i18n django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} − {% trans "Edit the course" context "course, title" %}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Edit the course" "learning:course/change" course.slug %}
+{% endblock %}
+
+{% block learning_content %}
+  <form name="object_update_form" method="post" id="course_update_form">
+    {% csrf_token %}
+    <div class="clearfix">
+      <a class="btn btn-outline-secondary float-left" href="{% url 'learning:course/detail' slug=course.slug %}">
+       <i class="fa fa-arrow-left"></i> {% trans "Cancel and get back to course" %}
+      </a>
+    </div>
+    <hr>
+    {% include "learning/course/_includes/course_form.html" %}
+    <button type="submit" class="btn btn-outline-success float-right">
+      <i class="fa fa-check"></i> {% trans "Edit the course" %}
+    </button>
+  </form>
+{% endblock %}

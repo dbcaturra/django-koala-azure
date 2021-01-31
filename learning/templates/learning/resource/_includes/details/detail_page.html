@@ -1,0 +1,95 @@
+{% load i18n learning django_bootstrap_breadcrumbs %}
+{% get_object_perms resource user as resource_perms %}
+
+{% if request.GET.activity in request.META.HTTP_REFERER %}
+  <a href="{{request.META.HTTP_REFERER}}">
+    <button type="button" class="btn btn-outline-warning">
+        <i class="fas fa-arrow-left"></i> {% trans "Go back to your activity" %}
+    </button>
+  </a>
+  <hr>
+{% endif %}
+
+<div id="alert-copy-link" class="alert alert-info hidden" role="alert">
+    {% trans "Link copied to your clipboard." %}
+</div>
+
+<div class="clearfix"> <!-- Resource header begins -->
+
+  {# Resource title and permalink #}
+  <h3 class="float-left my-1 word-break">
+    <button id="copy-link-button" onclick="copyLink()" class="mr-2 btn btn-outline-koala"
+            value="{{ request.get_host }}{% url "learning:resource/detail" slug=resource.slug %}"
+         data-toggle="tooltip" data-placement="top" title="{% trans "Copy the link of the resource" %}">
+        <i class="fa fa-copy"></i>
+      </button>
+    <i class="fa {{ resource.type|get_resource_type_icon }}"></i>
+    {% if resource.name|length >= 70 %}
+        {{ resource.name|truncatechars:40 }}
+      {% else %}
+        {{ resource.name }}
+      {% endif %}
+  </h3>
+
+  {# Resource management buttons #}
+  <div class="my-1 float-right">
+    {% if "change_resource" in resource_perms %}
+      {# Change/update resource button #}
+      <a id="btn-edit-resource" href="{% url 'learning:resource/update' slug=resource.slug %}" class="btn btn-outline-warning">
+        <i class="fa fa-edit"></i> {% trans "Edit" %}
+      </a>
+    {% endif %}
+    {% if "delete_resource" in resource_perms %}
+      {# Delete resource button #}
+      <a id="btn-delete-resource" href="{% url 'learning:resource/delete' slug=resource.slug %}" class="btn btn-outline-danger">
+        <i class="fa fa-trash"></i>
+      </a>
+    {% endif %}
+  </div>
+</div> <!-- Resource header ends -->
+
+<hr class="resource_title_separator">
+  <div class="clearfix">
+  <div id="object-tags" class="float-left">
+    {% include "learning/_includes/object_tags_line.html" %}
+  </div>
+  <div id="object-language" class="float-right">
+    {% include "learning/_includes/object_language.html" %}
+    <span id="author-badge" class="badge badge-pill badge-language p-1 float-right mx-2">
+      <i class="fas fa-pen"></i> {% blocktrans with author=resource.author %}Writen by {{ author }}{% endblocktrans %}
+    </span>
+  </div>
+</div>
+<hr>
+{% if user == resource.author or contribution%}
+    {% include "learning/resource/_includes/details/status_line.html" %}
+    <hr>
+{% endif %}
+
+<div id="resource-description" class="p-3 model_description my-4">
+  {# The attachment file which may be attached to the resource #}
+  {% if resource.attachment %}
+    <div id="resource-attachment" class="media-description p-2">
+      <div class="float-right">
+        <a href="{{ resource.attachment.url }}" class="btn btn-outline-info" target="_blank"><i class="fa fa-eye"></i> {% trans "View the file" %} </a>
+        <a href="{{ resource.attachment.url }}" class="btn btn-outline-primary" download=""
+           data-toggle="tooltip" data-placement="top" title="{{ resource.attachment.name }} ({{ resource.attachment.size|filesizeformat }})">
+          <i class="fa fa-download"></i> {% trans "Download" %}
+          ({{ resource.attachment.size|filesizeformat }})</a>
+      </div>
+    </div>
+  {% endif %}
+  {{ resource.description | render_markdown | safe }}
+</div>
+  <div>
+</div>
+  {% if current_course_activity_resource_objective.has_obj %}
+    {% include "learning/taxonomy/objective/detail/objective_list.html" with object=resource objectives=current_course_activity_resource_objective.page_obj object_name='resource'%}
+  {% elif objectives.has_obj %}
+     {% include "learning/taxonomy/objective/detail/objective_list.html" with object=resource objectives=objectives.page_obj object_name='resource'%}
+  {% else %}
+    <div class="alert alert-info" role="alert">
+            {% trans "There is any objetcive yet." %}
+          </div>
+  {% endif %}
+

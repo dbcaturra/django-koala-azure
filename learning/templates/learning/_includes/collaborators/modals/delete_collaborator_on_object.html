@@ -1,0 +1,47 @@
+{% extends 'learning/_includes/modals/base.html' %}
+{% load i18n %}
+
+{# object : instance of BasicModelMixin #}
+{# object_collaborator : instance of ObjectCollaboratorMixin#}
+{# target_url : URL to be used in the url template tag, the URL that actually removes the collaborator #}
+
+{% block modal_id %}delete-collaborator-{{ object_collaborator.collaborator.id }}-from-{{ object.slug }}{% endblock %}
+{% block modal_aria_label %}delete-collaborator-{{ object_collaborator.collaborator.id }}-from-{{ object.slug }}{% endblock %}
+
+{% block modal_header %}
+  <h5 class="modal-title">
+    {% blocktrans trimmed with name=object.name collaborator=object_collaborator.collaborator %}
+      Remove “{{ collaborator }}” from collaborators on “{{ name }}”
+    {% endblocktrans %}
+  </h5>
+{% endblock %}
+
+{% block modal_body %}
+  <div class="container-fluid">
+    <h6>
+      {% blocktrans trimmed with object=object collaborator=object_collaborator.collaborator %}
+        {{ collaborator }} works with you on “{{ object }}”.
+      {% endblocktrans %}
+    </h6>
+    <p>
+      {% trans "By removing it from your collaborators, the user will lose its rights and will no longer be able to help you writing." %}
+    </p>
+  </div>
+{% endblock %}
+
+{% block modal_footer %}
+
+  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+    <i class="fa fa-times"></i> {% trans "Cancel" %}
+  </button>
+
+  <form action="{% url target_url slug=object.slug %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="user_pk" value="{{ object_collaborator.collaborator.id }}">
+    <button type="submit" class="btn btn-outline-danger">
+      <i class="fa fa-sm fa-trash"></i>
+      {% trans "Remove this collaborator" %}
+    </button>
+  </form>
+
+{% endblock %}

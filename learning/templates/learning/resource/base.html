@@ -1,0 +1,8 @@
+{% extends "learning/base.html" %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Teaching" "" %}
+  {% breadcrumb "My resources" "learning:resource/my" %}
+{% endblock %}

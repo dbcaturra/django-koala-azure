@@ -1,0 +1,40 @@
+{% load i18n learning %}
+{% if objectives_in_course_information %}
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Objective</th>
+      <th scope="col" style="width: 12%;"></th>
+      <th scope="col">Information</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for objective_in_course_information in objectives_in_course_information %}
+      <tr>
+      <td class="w-50">
+        {{ objective_in_course_information.objective_ability }}
+      </td>
+      {% if objective_in_course_information.validated %}
+        <td class="text-success">{% trans "Validated" %}<i class="fas fa-check float-right"></i></td>
+      {% else %}
+        <td class="text-secondary">{% trans "Working" %}<i class="fas fa-cogs float-right"></i></td>
+      {% endif %}
+      <td>
+        {% if objective_in_course_information.on_course %}
+          {% include "learning/course/_includes/block/progression_course_objective_block.html" with objectives_on_entity=objective_in_course_information.on_course entity_type="Course" %}
+        {% endif %}
+        {% if objective_in_course_information.on_activity %}
+          {% include "learning/course/_includes/block/progression_course_objective_block.html" with objectives_on_entity=objective_in_course_information.on_activity entity_type="Activity" %}
+        {% endif %}
+        {% if objective_in_course_information.on_resource %}
+          {% include "learning/course/_includes/block/progression_course_objective_block.html" with objectives_on_entity=objective_in_course_information.on_resource entity_type="Resource" %}
+        {% endif %}
+      </td>
+    {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <div class="alert alert-info" role="alert">
+    {% trans "There is any progression yet" %}
+  </div>
+{% endif %}

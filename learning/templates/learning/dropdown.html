@@ -1,0 +1,56 @@
+{% load i18n %}
+
+<div class="d-none d-md-flex">
+
+  {% if user.is_authenticated %}
+
+    <a class="nav-link" href="{% url 'learning:index' %}">{% trans "Home" %}</a>
+
+    <li class="nav-item dropdown d-none d-md-flex">
+      <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown-studying" data-toggle="dropdown"
+         aria-haspopup="true" aria-expanded="false">
+        {% trans "Studying" %}
+      </a>
+      <div class="dropdown-menu dropdown-menu" aria-labelledby="navbar-dropdown-studying">
+        {% include "learning/_includes/dropdown/dropdown_studying.html" %}
+      </div>
+    </li>
+
+    <li class="nav-item dropdown d-none d-md-flex">
+      <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown-teaching" data-toggle="dropdown"
+         aria-haspopup="true" aria-expanded="false">
+        {% trans "Teaching" %}
+      </a>
+      <div class="dropdown-menu dropdown-menu2" aria-labelledby="navbar-dropdown-teaching">
+        {% include "learning/_includes/dropdown/dropdown_teaching.html" %}
+      </div>
+    </li>
+  {% else %}
+    <a class="nav-link" href="{% url "learning:index" %}">{% trans "Learning" %}</a>
+  {% endif %}
+</div>
+
+<div class="d-flex">
+  <li class="nav-item dropdown d-md-none">
+    {% if user.is_authenticated %}
+      <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown-full" data-toggle="dropdown"
+         aria-haspopup="true" aria-expanded="false">
+        {% trans "Learning" %}
+      </a>
+    {% else %}
+      <a class="nav-link" href="{% url "learning:index" %}">{% trans "Learning" %}</a>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+      <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbar-dropdown-full">
+        <a class="dropdown-item" href="{% url 'learning:index' %}">{% trans "Home" %}</a>
+        <div class="dropdown-divider"></div>
+        <h6 class="dropdown-header">{% trans "Studying" %}</h6>
+        {% include "learning/_includes/dropdown/dropdown_studying.html" %}
+        <div class="dropdown-divider"></div>
+        <h6 class="dropdown-header">{% trans "Teaching" %}</h6>
+        {% include "learning/_includes/dropdown/dropdown_teaching.html" %}
+      </div>
+    {% endif %}
+  </li>
+</div>

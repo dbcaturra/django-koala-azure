@@ -1,0 +1,49 @@
+{% extends 'learning/_includes/modals/base.html' %}
+{% load i18n learning %}
+
+{% block modal_id %}change-objective-{{ objective.objective.slug }}-on-{{ object.slug }}{% endblock %}
+{% block modal_aria_label %}change-objective-{{ objective.objective.slug }}-on-{{ object.slug }}{% endblock %}
+
+{% block modal_header %}
+  <h5 class="modal-title">
+    {% blocktrans trimmed with name=object.name ability=objective.objective.ability %}
+      Change "{{ ability }}" objective on “{{ name }}”
+    {% endblocktrans %}
+  </h5>
+{% endblock %}
+
+{% block modal_body %}
+  <form id="change-objective-form-{{ objective.objective.slug }}" method="post" action="{% url target_url slug=object.slug %}">
+    <div class="container-fluid object_form_tab">
+      {% csrf_token %}
+      <input id="change-object-objective-{{ objective.objective.slug }}-pk" type="hidden"  name="objective_pk" value="{{ objective.id }}">
+
+      {% get_objective_form objective as objective_form %}
+
+      <div class="col">
+        <div class="row">
+          <div class="col-auto">
+            {% include "learning/_includes/forms/form_group_block.html" with field=objective_form.taxonomy_level %}
+          </div>
+        </div>
+        {% if user == objective.objective.author %}
+          <div class="row-auto" id="author-of-objective-change-fields">
+            {% include "learning/_includes/objective_search_input_form.html" with form=objective_form %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="col-auto">
+        {% include "learning/_includes/forms/form_group_block.html" with field=objective_form.objective_reusable %}
+      </div>
+    </div>
+  </form>
+{% endblock %}
+{% block modal_footer %}
+  <button type="button" class="btn btn-secondary justify-content-start" data-dismiss="modal"><i class="fa fa-times"></i> {% trans "Close" %}
+  </button>
+  <button form="change-objective-form-{{ objective.objective.slug }}" id="change-object-objective-{{ objective.objective.slug }}-submit" type="submit" class="btn btn-outline-primary">
+    <i class="fas fa-edit"></i>
+    {% trans "Update objective" %}
+  </button>
+{% endblock %}
+

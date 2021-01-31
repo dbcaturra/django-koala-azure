@@ -1,0 +1,14 @@
+{% load i18n %}
+
+<hr>
+<div class="clearfix mt-1 mb-1">
+  <button type="button" class="btn btn-outline-primary btn_tab float-left" style="display: none" id="previous_tab_btn"
+          onclick="switch_tab(-1)">
+    <i class="fas fa-arrow-left"></i> {% trans "Previous" %}
+  </button>
+  <button type="button" class="btn btn-outline-primary btn_tab float-right" id="next_tab_btn"
+          onclick="switch_tab(1)">
+    {% trans "Next" %}  <i class="fa fa-arrow-right"></i>
+  </button>
+</div>
+<hr>

@@ -1,0 +1,25 @@
+{% extends 'learning/_includes/modals/base.html' %}
+{% load i18n %}
+
+{% block modal_id %}unregister-course-{{ course.slug }}{% endblock %}
+{% block modal_aria_label %}unregister-course-{{ course.slug }}{% endblock %}
+
+{% block modal_header %}
+  <h5 class="modal-title">{% blocktrans with name=course.name %}Unregister from course “{{ name }}”{% endblocktrans %}</h5>
+{% endblock %}
+
+{% block modal_body %}
+  {% blocktrans with name=course.name %}You are about to unregister from the course “{{ name }}”. This implies that every progress you made in this course will be lost. If you are sure of what you do, continue to unregister.{% endblocktrans %}
+{% endblock %}
+
+{% block modal_footer %}
+  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+    <i class="fa fa-times"></i> {% trans "Cancel" %}
+  </button>
+  <form action="{% url 'learning:course/detail/unregister' slug=course.slug %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-outline-danger">
+      <i class="fa fa-user-minus"></i> {% trans "Unregister from this course" %}
+    </button>
+  </form>
+{% endblock %}

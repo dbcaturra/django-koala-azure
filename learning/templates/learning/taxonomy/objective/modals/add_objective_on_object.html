@@ -1,0 +1,45 @@
+{% extends 'learning/_includes/modals/base.html' %}
+{% load i18n learning %}
+
+{% block modal_id %}add-objective-on-{{ object.slug }}{% endblock %}
+{% block modal_aria_label %}add-objective-on-{{ object.slug }}{% endblock %}
+
+{% block modal_header %}
+  <h5 class="modal-title">
+    {% blocktrans trimmed with name=object.name %}
+      Add new objective on “{{ name }}”
+    {% endblocktrans %}
+  </h5>
+{% endblock %}
+{% block modal_body %}
+  {% get_add_objective_form object as add_objective_form %}
+  <form id="add-objective-form-{{ objective.objective.slug }}" method="post" action="{% url target_url slug=object.slug %}">
+    <div class="container-fluid object_form_tab">
+      {% csrf_token %}
+      <div class="col">
+        <div class="row">
+          <div class="col-auto">
+            {% include "learning/_includes/forms/form_group_block.html" with field=add_objective_form.taxonomy_level %}
+          </div>
+          <div class="col-auto">
+            {% include "learning/_includes/forms/form_group_block.html" with field=add_objective_form.existing_ability %}
+          </div>
+        </div>
+        <div class="row-auto">
+          {% include "learning/_includes/objective_search_input_form.html" with form=add_objective_form %}
+        </div>
+      </div>
+      <div class="col-auto">
+        {% include "learning/_includes/forms/form_group_block.html" with field=add_objective_form.objective_reusable %}
+      </div>
+    </div>
+  </form>
+{% endblock %}
+{% block modal_footer %}
+  <button type="button" class="btn btn-secondary float-left" data-dismiss="modal"><i class="fa fa-times"></i> {% trans "Close" %}
+  </button>
+  <button form="add-objective-form-{{ objective.objective.slug }}" id="link-object-objective-add" type="submit" class="btn btn-outline-success">
+    <i class="fa fa-plus"></i>
+    {% trans "Add an objective" %}
+  </button>
+{% endblock %}

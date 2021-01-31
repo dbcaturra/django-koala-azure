@@ -1,0 +1,11 @@
+{% load i18n %}
+
+{% with course.course_activities.count as nb_activities %}
+  {% if nb_activities > 0 %}
+    <span id="badge-nb-course-activities" class="badge badge-pill badge-activity p-1">
+      {% blocktrans count counter=nb_activities %}{{ nb_activities }} activity{% plural %}{{ nb_activities }} activities{% endblocktrans %}
+    </span>
+  {% else %}
+    <span id="badge-nb-course-activities" class="badge p-1 no-badge">{% trans "No activity yet" %}</span>
+  {% endif %}
+{% endwith %}

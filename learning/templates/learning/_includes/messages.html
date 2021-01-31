@@ -1,0 +1,11 @@
+{% if messages %}
+  {% for message in messages %}
+    {% if message.level_tag == "debug" or message.level_tag == "info" or message.level_tag == "success" or message.level_tag == "warning" %}
+      {% include 'learning/_includes/alert_message.html' with alert_type=message.level_tag %}
+    {% endif %}
+
+    {% if message.level_tag == "error" %}
+      {% include 'learning/_includes/alert_message.html' with alert_type="danger" %}
+    {% endif %}
+  {% endfor %}
+{% endif %}

@@ -1,0 +1,19 @@
+{% load i18n learning %}
+{# items of dropdown #}
+<div id="resource-block-for-{{ resource.slug }}">
+   {# The resource name #}
+  {% if resource.name|length >= 30 %}
+    <a data-toggle="tooltip" data-placement="right" title="{{ resource.name }}" class="list-group-item list-group-item-action pl-4
+       {% if request.resolver_match.view_name == url_name %}active{% else %}bg-light{% endif %}"
+       href="{% url 'learning:resource/detail' slug=resource.slug %}{% relative_url activity.slug prefix|add:'activity' params%}" >
+        <i class="fa {{ resource.type|get_resource_type_icon }}"></i> {{ resource.name|truncatechars:20 }}
+  {% else %}
+    <a class="list-group-item list-group-item-action pl-4
+       {% if request.resolver_match.view_name == url_name %}active{% else %}bg-light{% endif %}"
+       href="{% url 'learning:resource/detail' slug=resource.slug %}{% relative_url activity.slug prefix|add:'activity' params%}" >
+      <i class="fa {{ resource.type|get_resource_type_icon }}"></i> {{ resource.name }}
+  {% endif %}
+    </a>
+</div>
+
+

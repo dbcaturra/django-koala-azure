@@ -1,0 +1,24 @@
+{% extends "learning/activity/detail.html" %}
+{% load i18n learning django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} − {% trans "Objectives" %}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Objectives" "learning:activity/details/objective" course.slug %}
+{% endblock %}
+
+{% block learning_content %}
+
+  {# Show a warning if the course is private #}
+  {% if resource.access == 'PRIVATE' %}
+    <div id="alert-objectives-no-access" class="alert alert-warning" role="alert">
+      {% trans "This activity is private. This means your collaborators loose all their permissions until you toggle access level to at least “Collaborators only”." %}
+    </div>
+  {% endif %}
+
+  {% with "activity" as object_name %}
+    {% include "learning/taxonomy/objective/detail/objective_content.html" %}
+  {% endwith %}
+
+{% endblock %}

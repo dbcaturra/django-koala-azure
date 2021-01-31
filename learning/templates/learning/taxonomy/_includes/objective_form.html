@@ -1,0 +1,18 @@
+{% load i18n learning %}
+
+<div class="form-group">
+  <em id="mandatory">{% trans "All fields are mandatory" %} </em>
+  <div class="object_form_tab">
+    <h3>{% trans "Specifications" %}</h3>
+    <div class="form-group">
+      <div class="form-row">
+        <div class="col">
+          {% include "learning/_includes/forms/form_group_block.html" with field=form.ability %}
+        </div>
+        <div class="col-auto">
+          {% include "learning/_includes/forms/form_group_block.html" with field=form.language %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

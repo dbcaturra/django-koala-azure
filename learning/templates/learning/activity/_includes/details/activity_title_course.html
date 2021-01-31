@@ -1,0 +1,10 @@
+{% load i18n learning %}
+{# items of dropdown #}
+<div id="activity-block-for-{{ activity.slug }}" class="listActivities">
+   {# The resource name #}
+    <a class="dropdown-item" href="{% url 'learning:activity/detail' slug=activity.slug %}" >
+         {{ activity.name }}
+    </a>
+</div>
+
+

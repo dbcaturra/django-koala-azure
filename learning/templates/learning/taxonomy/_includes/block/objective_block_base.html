@@ -1,0 +1,8 @@
+{% load i18n learning  %}
+<tr>
+  <td id="row-objective-ability">{{ objective.ability }}</td>
+  <td id="row-created-objective">{{ objective.created }}</td>
+  <td id="row-author-objective">{{ objective.author }}</td>
+  <td>{% include "learning/taxonomy/_includes/block/see_more_link.html" with objective=objective %}</td>
+  <td>{% include "learning/_includes/object_language.html" with object=objective%}</td>
+</tr>

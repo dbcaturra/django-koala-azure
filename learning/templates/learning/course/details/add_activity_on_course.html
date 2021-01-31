@@ -1,0 +1,21 @@
+{% extends "learning/course/detail.html" %}
+{% load i18n django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} − {% trans "Add an activity" %}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Add a new activity" "learning:course/detail/activity/add" course.slug %}
+{% endblock %}
+
+{% block learning_content %}
+  <form method="post">
+    {% csrf_token %}
+    <div class="clearfix">
+      <a class="btn btn-outline-secondary float-left" href="{% url 'learning:course/detail' slug=course.slug %}"><i class="fa fa-arrow-left"></i> {% trans "Cancel and get back to course" %}</a>
+    </div>
+    <hr>
+    {% include "learning/activity/_includes/activity_form.html" with form=form %}
+    <button type="submit" class="btn btn-outline-success float-right"><i class="fa fa-check"></i> {% trans "Create a new activity" %}</button>
+  </form>
+{% endblock %}

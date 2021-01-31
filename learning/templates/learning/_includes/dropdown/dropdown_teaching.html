@@ -1,0 +1,11 @@
+{% load i18n %}
+
+<a class="dropdown-item" href="{% url 'learning:course/teaching' %}">
+  <span class="dot course_dot"></span> {% trans "My courses" %}
+</a>
+<a class="dropdown-item" href="{% url 'learning:activity/my' %}">
+  <span class="activity_dot"></span> {% trans "My activities" %}
+</a>
+<a class="dropdown-item" href="{% url 'learning:resource/my' %}">
+  <span class="dot resource_dot"></span> {% trans "My resources" %}
+</a>

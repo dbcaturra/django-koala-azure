@@ -1,0 +1,108 @@
+{% extends "learning/course/detail.html" %}
+{% load i18n learning django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} −
+  {% blocktrans with name=current_course_activity.activity.name %}Activity “{{ name }}”{% endblocktrans %}
+{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb current_course_activity.activity.name "learning:course/detail/activity" current_course_activity.activity.slug %}
+{% endblock %}
+
+{% block learning_content %}
+    <div id="activities-header" class="row">
+
+    {# A previous activity exists #}
+    {% if previous_course_activity %}
+      <div class="col-md-1 align-self-center col-2">
+        <div class="text-center">
+          <a
+            href="{% url "learning:course/detail/activity" slug=course.slug activity_slug=previous_course_activity.activity.slug %}"
+            class="btn btn-outline-primary my-auto"><i class="fa fa-arrow-left"></i></a>
+        </div>
+      </div>
+      <div id="previous-page" class="col-md-3 d-none d-md-block">
+        <a class="btn btn-outline-default activity_link shadow-none w-100 h-100 p-0" href="{% url "learning:course/detail/activity" slug=course.slug activity_slug=previous_course_activity.activity.slug %}">
+          <div class="card w-100 h-100">
+            <div class="card-body">
+              <h6 class="card-title text-center">{{ previous_course_activity.activity }}</h6>
+              <div class="text-center">
+                {% include "learning/resource/_includes/nb_resources_badge.html" with activity=previous_course_activity.activity %}
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    {% endif %}
+
+    {# The current activity #}
+    <div id="current-page" class="col-md-4 {% if not previous_course_activity %}offset-md-4 offset-2{% endif %} col-7">
+      <div class="card w-100 h-100">
+        <div class="card-body">
+          <h6 class="card-title text-center">{{ current_course_activity.activity }}</h6>
+          <div class="text-center">
+            {% include "learning/resource/_includes/nb_resources_badge.html" with activity=current_course_activity.activity %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# The next activity #}
+    {% if next_course_activity %}
+      <div id="next-page" class="col-md-3 d-none d-md-block">
+        <a class="btn btn-outline-default activity_link shadow-none w-100 h-100 p-0" href="{% url "learning:course/detail/activity" slug=course.slug activity_slug=next_course_activity.activity.slug %}">
+          <div class="card w-100 h-100">
+            <div class="card-body">
+              <h6 class="card-title text-center">{{ next_course_activity.activity }}</h6>
+              <div class="text-center">
+                {% include "learning/resource/_includes/nb_resources_badge.html" with activity=next_course_activity.activity %}
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-1 align-self-center col-2">
+        <div class="text-center">
+          <a
+            href="{% url "learning:course/detail/activity" slug=course.slug activity_slug=next_course_activity.activity.slug %}"
+            class="btn btn-outline-primary my-auto"><i class="fa fa-arrow-right"></i></a></div>
+      </div>
+    {% endif %}
+
+  </div>
+
+  <hr>
+
+    {% get_object_perms current_course_activity.activity user as activity_perms %}
+    {% if "view_activity" in activity_perms or current_course_activity.activity.access == "EXISTING_COURSES" %}
+      <div id="activity-content">
+        <h3 class="text-center">{{ current_course_activity.activity }}</h3>
+        <div class="p-3 model_description">
+          {{ current_course_activity.activity.description | render_markdown | safe }}
+        </div>
+
+        <hr  class="mb-4">
+
+        {% if current_course_activity_objective %}
+          {% include "learning/taxonomy/objective/detail/objective_list.html" with object=current_course_activity.activity objectives=current_course_activity_objective.page_obj object_name='activity'%}
+        {% endif %}
+
+        {% with resources=current_course_activity.activity.resources.all %}
+          {% if resources %}
+            <h4>{% trans "Resources" %}</h4>
+            <hr class="resource_title_separator">
+            <div class="row">
+              {% for resource in resources %}
+                {% include 'learning/resource/_includes/block/resource_block.html' with linked_course=course linked_activity=current_course_activity.activity resource=resource as_student=True %}
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+      </div>
+
+    {% else %}
+      <p class="text-center"><strong>{% trans "Viewing this activity is restricted. You cannot see the activity details." %}</strong></p>
+    {% endif %}
+
+{% endblock %}

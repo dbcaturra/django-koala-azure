@@ -1,0 +1,42 @@
+{% load i18n learning %}
+
+<div class="clearfix" id="course-badge-line">
+  <div class="float-left">
+    <span id="state-badge" class="badge badge-info p-2"
+          data-toggle="tooltip" data-placement="top"
+          title="{{ course.state|get_course_state_badge_title }}">
+      {% blocktrans with state=course.get_state_display %}“{{ state }}” course{% endblocktrans %}
+    </span>
+    <span id="access-badge" class="badge badge-info p-2 d-none d-md-inline-block"
+          data-toggle="tooltip" data-placement="top"
+          title="{{ course.access|get_course_access_badge_title }}">
+        {% blocktrans with access=course.get_access_display %}“{{ access }}” access{% endblocktrans %}
+      </span>
+    {% if user == course.author or user in self.collaborators %}
+      {% if course.registration_enabled %}
+        <span id="registration-opened-badge" class="badge badge-info p-2" data-toggle="tooltip"
+              data-placement="top" title="{% trans "People can register and unregister from this course." %}">
+            {% trans "Opened for registration" %}
+          </span>
+      {% else %}
+        <span id="registration-closed-badge" class="badge badge-info p-2" data-toggle="tooltip"
+              data-placement="top" title="{% trans "People cannot register or unregister from this course." %}">
+            {% trans "Closed for registration" %}
+          </span>
+      {% endif %}
+    {% endif %}
+  </div>
+  <div class="float-right">
+    {% if user == course.author %}
+      <span id="owner-badge" class="badge badge-info p-2 d-none d-md-inline-block" data-toggle="tooltip"
+            data-placement="top" title="{{ "OWNER"|get_role_badge_title }}">
+          {% trans "I write this course." %}
+        </span>
+    {% elif contribution %}
+      <span id="contribution-badge" class="badge badge-info p-2"
+            data-toggle="tooltip" data-placement="top" title="{{ contribution.role|get_role_badge_title }}">
+          {% blocktrans with role=contribution.get_role_display %}I am “{{ role }}” on this course.{% endblocktrans %}
+        </span>
+    {% endif %}
+  </div>
+</div>

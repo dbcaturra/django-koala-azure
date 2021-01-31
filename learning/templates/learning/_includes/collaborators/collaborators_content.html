@@ -1,0 +1,13 @@
+{% load learning %}
+
+{# object: instance of BasicObjectMixin #}
+{# object_collaborator : instance of ObjectCollaboratorMixin#}
+{# page_obj: paginator object with instances of ObjectCollaboratorMixin #}
+
+{% get_object_perms object user as object_perms %}
+
+{% if "add_collaborator_"|add:object_name in object_perms %}
+  {% include "learning/_includes/collaborators/add_collaborator_form.html" with target_url='learning:'|add:object_name|add:'/detail/collaborator/add' %}
+{% endif %}
+
+{% include "learning/_includes/collaborators/collaborators_table.html" %}

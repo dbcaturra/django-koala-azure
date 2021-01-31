@@ -1,0 +1,24 @@
+{% extends "learning/activity/detail.html" %}
+{% load i18n learning django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} − {% trans "Similar activities" %}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Similar activities" "learning:activity/uses" activity.slug %}
+{% endblock %}
+
+{% block learning_content %}
+  {% if has_obj %}
+    <div class="row" id="similar-activities">
+      {% for activity in page_obj %}
+        {% include "learning/activity/_includes/block/activity_block.html" with activity=activity %}
+      {% endfor %}
+    </div>
+    {% include "learning/_includes/paginator_buttons.html" with current_page=page_obj %}
+  {% else %}
+    <div id="alert-no-similar-activity" class="alert alert-info" role="alert">
+      {% trans "There is no similar activity yet. Similar activites are activites that have tags in common." %}
+    </div>
+  {% endif %}
+{% endblock %}

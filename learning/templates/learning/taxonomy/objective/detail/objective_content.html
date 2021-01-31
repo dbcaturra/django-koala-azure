@@ -1,0 +1,8 @@
+{% load learning %}
+{% load i18n %}
+{# object: instance of BasicObjectMixin #}
+{# page_obj: paginator object with instances of ObjectCollaboratorMixin #}
+
+{# todo: implement a fast help on bloom taxonomy #}
+
+{% include "learning/taxonomy/objective/detail/objective_list.html" with objectives=page_obj %}

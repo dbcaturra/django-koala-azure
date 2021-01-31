@@ -1,0 +1,27 @@
+{% load i18n learning %}
+
+<div class="clearfix">
+  <div class="float-left">
+      <span id="access-badge" class="badge badge-info p-2"
+            data-toggle="tooltip" data-placement="top" title="{{ activity.access|get_activity_access_badge_title }}">
+        {% blocktrans with access=activity.get_access_display %}“{{ access }}” access{% endblocktrans %}
+      </span>
+    <span id="access-badge" class="badge badge-info p-2"
+          data-toggle="tooltip" data-placement="top" title="{{ activity.reuse|get_activity_reuse_badge_title }}">
+      {{ activity.get_reuse_display }}
+    </span>
+  </div>
+  <div class="float-right">
+    {% if user == activity.author %}
+      <span id="owner-badge" class="badge badge-info p-2 d-none d-md-inline-block" data-toggle="tooltip"
+            data-placement="top" title="{{ "OWNER"|get_role_badge_title }}">
+          {% trans "I write this activity." %}
+        </span>
+    {% elif contribution %}
+      <span id="contribution-badge" class="badge badge-info p-2"
+            data-toggle="tooltip" data-placement="top" title="{{ contribution.role|get_role_badge_title }}">
+          {% blocktrans with role=contribution.get_role_display %}I am “{{ role }}” on this activity.{% endblocktrans %}
+        </span>
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,18 @@
+{% load i18n learning %}
+<div class="list-group bg-light">
+  {% if course.students.count > 0 %}
+    {% for registered_student in course.students.all  %}
+      {% with url_name="learning:course/detail/progression/teacher/"  %}
+        {% if registered_student == student %}
+          <a id="active-student-{{ registered_student.id }}-list" class="list-group-item list-group-item-action active" href="{% url url_name slug=course.slug username_id=registered_student.id  %}">
+            {{ registered_student }}
+          </a>
+        {% else %}
+          <a id="student-{{ registered_student.id }}-list" class="list-group-item list-group-item-action" href="{% url url_name slug=course.slug username_id=registered_student.id  %}">
+            {{ registered_student }}
+          </a>
+        {% endif %}
+      {% endwith %}
+    {% endfor %}
+  {% endif %}
+</div>

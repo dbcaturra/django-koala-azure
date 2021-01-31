@@ -1,0 +1,17 @@
+{% extends "learning/course/detail.html" %}
+{% load i18n learning django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} − {% trans "Progression" %}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Progression" "learning:course/details/progression" course.slug %}
+{% endblock %}
+
+{% block learning_content %}
+  {% if user_is_teacher %}
+    {% include "learning/course/_includes/progression_teacher.html" %}
+  {% else %}
+    {% include "learning/course/_includes/progression_student.html" %}
+  {% endif %}
+{% endblock %}

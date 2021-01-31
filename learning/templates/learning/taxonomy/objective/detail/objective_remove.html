@@ -1,0 +1,9 @@
+{% load i18n learning %}
+{% include "learning/taxonomy/objective/modals/remove_objective_on_object.html" with target_url=target_url%}
+<span style="padding-top: .25rem;" data-toggle="tooltip" data-placement="top"
+      title="{% trans "Remove objective" %}">
+  <button class="btn btn-sm btn-outline-danger" type="button" data-toggle="modal"
+          data-target="#remove-objective-{{ objective.objective.slug }}-on-{{ object.slug }}" id="id-button-remove-object-objective-modal-{{ objective.objective.slug }}">
+    <i class="fas fa-trash"></i>
+  </button>
+</span>

@@ -1,0 +1,10 @@
+{% load i18n learning %}
+{#  Management of progression #}
+<span class="font-weight-bold">{% trans "Your progression" %}</span>
+<div id="progression-block">
+  {% include "learning/course/_includes/block/progression_progress_bar.html" %}
+
+  {% include "learning/course/_includes/block/progression_student_more_details.html" %}
+  {#  Management of all objectives #}
+  {% include "learning/course/_includes/block/progression_list_objectives.html" %}
+</div>

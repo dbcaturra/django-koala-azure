@@ -1,0 +1,57 @@
+{% extends "learning/activity/detail.html" %}
+{% load i18n django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} −
+  {% blocktrans with name=activity.name %}Associate a resource on “{{ name }}”{% endblocktrans %}
+{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Associate resource" "learning:activity/detail/resource/attach" %}
+{% endblock %}
+
+{% block learning_content %}
+  <form method="get">
+    <div class="form-row">
+      <div class="col">
+        {{ form.query }}
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-outline-primary" type="submit"><i class="fa fa-search"></i></button>
+      </div>
+    </div>
+  </form>
+
+  {% if search_has_obj == False %}
+    <hr>
+    <h5 class="m-5">{% trans "No resources match your search…" %}</h5>
+    {% else %}
+      {% if search_nb_per_page > 0 %}
+        <hr>
+        <h3>{% trans "Search results" %}</h3>
+        <div class="row">
+          {% for resource in search_page_obj %}
+            {% include "learning/resource/_includes/block/resource_block.html" with resource=resource add=True %}
+          {% endfor %}
+        </div>
+        {% include 'learning/_includes/paginator_buttons.html' with current_page=search_page_obj prefix="search" nb_per_page=search_nb_per_page %}
+      {% endif %}
+  {% endif %}
+
+  {% if reusable_has_obj %}
+    <hr>
+    <h3>{% trans "All usable resources" %}</h3>
+    <div class="row">
+      {% for resource in reusable_page_obj %}
+        {% include "learning/resource/_includes/block/resource_block.html" with resource=resource add=True %}
+      {% endfor %}
+    </div>
+    {% include 'learning/_includes/paginator_buttons.html' with current_page=reusable_page_obj prefix="reusable" nb_per_page=reusable_nb_per_page %}
+  {% else %}
+    <hr>
+    <div class="alert alert-info" role="alert">
+        {% trans "There are no more resources to associate with your activity… You can always create one." %}
+      </div>
+  {% endif %}
+
+{% endblock %}

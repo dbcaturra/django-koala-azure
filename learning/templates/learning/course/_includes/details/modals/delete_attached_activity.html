@@ -1,0 +1,24 @@
+{% extends 'learning/_includes/modals/base.html' %}
+{% load i18n %}
+
+{% block modal_id %}delete-modal-{{ activity.slug }}{% endblock %}
+{% block modal_aria_label %}delete-modal-{{ activity.slug }}{% endblock %}
+
+{% block modal_header %}
+  <h5 class="modal-title">{% blocktrans with name=activity.name %}Delete activity “{{ name }}”{% endblocktrans %}</h5>
+{% endblock %}
+
+{% block modal_body %}
+  {% blocktrans with name=activity.name %}You are about to delete the activity <strong>“{{ name }}”</strong>.<br>Maybe you just want to unlink the activity (the activity will not be accessible within this course)?<br>If you are <strong>sure</strong>, you can delete it safely.{% endblocktrans %}
+{% endblock %}
+
+{% block modal_footer %}
+  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal"><i class="fa fa-times"></i> {% trans "Cancel" %}</button>
+  <button type="button" class="btn btn-outline-warning" data-dismiss="modal" data-toggle="modal"
+          data-target="#unlink-modal-{{ activity.slug }}"><i class="fa fa-unlink"></i> {% trans "Unlink the activity" %}</button>
+  <form action="{% url 'learning:course/detail/activity/delete' slug=course.slug %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="activity" value="{{ activity.id }}">
+    <button type="submit" class="btn btn-outline-danger"><i class="fa fa-trash"></i> {% trans "Delete this activity" %}</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'learning/_includes/modals/base.html' %}
+{% load i18n %}
+
+{% block modal_id %}unregister-student-{{ registration.student.id }}{% endblock %}
+{% block modal_aria_label %}unregister-student-{{ registration.student.id }}{% endblock %}
+
+{% block modal_header %}
+  <h5 class="modal-title">
+    {% blocktrans trimmed with name=course.name student=registration.student %}
+      Unregister “{{ student }}” from “{{ name }}”
+    {% endblocktrans %}
+  </h5>
+{% endblock %}
+
+{% block modal_body %}
+  <div class="container-fluid">
+    <h6>
+      {% blocktrans trimmed with course=course student=registration.student %}
+        {{ student }} works with you on the course “{{ course }}”.
+      {% endblocktrans %}
+    </h6>
+    <p>{% trans "By removing it from your students, the user will lose its rights on the course. Any progress made will be automatically removed. If the user want to register again, the student will start from the beginning." %}</p>
+    <hr>
+    <p>
+      {% blocktrans trimmed with name=registration.student.display_name date=registration.created %}
+        As a reminder, {{ name }} is registered since the {{ date }}.
+      {% endblocktrans %}
+      {% if registration.self_registration %}
+        <p class="font-weight-bold">{% trans "The user self registered, this means you're excluding him from the course and remove its progress." %}</p>
+      {% endif %}
+    </p>
+  </div>
+{% endblock %}
+
+{% block modal_footer %}
+  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal"><i class="fa fa-times"></i> {% trans "Cancel" %}
+  </button>
+  <form action="{% url "learning:course/detail/students/delete" slug=course.slug %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="user_pk" value="{{ registration.student.id }}">
+    <button type="submit" class="btn btn-outline-danger">
+      <i class="fa fa-user-minus fa-sm"></i> {% trans "Unregister this student" %}</button>
+  </form>
+{% endblock %}

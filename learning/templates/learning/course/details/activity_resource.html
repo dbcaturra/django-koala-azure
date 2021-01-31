@@ -1,0 +1,14 @@
+{% extends "learning/course/detail.html" %}
+{% load i18n learning django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} − {% trans "Activity resource" %}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb activity.name "learning:course/detail/activity" course.slug activity.slug %}
+  {% breadcrumb resource.name "learning:course/detail/activities/resource" course.slug activity.slug resource.slug %}
+{% endblock %}
+
+{% block learning_content %}
+  {% include "learning/resource/_includes/details/detail_page.html" with resource=resource %}
+{% endblock %}

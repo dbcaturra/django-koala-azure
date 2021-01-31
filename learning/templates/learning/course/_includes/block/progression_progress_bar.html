@@ -1,0 +1,31 @@
+{% load i18n learning %}
+{% if objective_taxonomy_information %}
+  {% if objective_taxonomy_total %}
+    <div class="progress" style="height: 30px;">
+      {% for key,value in objective_taxonomy_information.items %}
+        <div title="{% trans key|title %}"
+                class="progress-bar
+                  {% if key == "KNOWLEDGE" %}
+                  bg-primary
+                  {% elif key == "COMPREHENSION"%}
+                  bg-success
+                  {% elif key == "APPLICATION" %}
+                  bg-info
+                  {% elif key == "ANALYSIS" %}
+                  bg-warning
+                  {% elif key == "SYNTHESIS" %}
+                  bg-danger
+                  {% elif key == "EVALUATION" %}
+                  bg-dark
+                  {% endif %}"
+                role="progressbar"
+                style="width: {{ value.progress_dimension }}%"
+                aria-valuenow="{{  value.number_validation }}"
+                aria-valuemin="1"
+                aria-valuemax="{{  value.total }}">
+          {{ value.number_validation }}/{{ value.total }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endif %}

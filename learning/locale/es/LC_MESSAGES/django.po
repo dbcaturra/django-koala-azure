@@ -1,0 +1,1930 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: learning\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-20 06:31-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: DIEGO BELTRAN <dbcaturra@gmail.com>\n"
+"Language-Team: \n"
+"Language: SPANISH\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: apps.py:28
+msgid "Learning management"
+msgstr "Gestión del aprendizaje"
+
+#: forms.py:59
+msgid ""
+"You can use the <a href=\"https://www.markdownguide.org/basic-syntax/\" "
+"target=\"_blank\">Markdown</a> syntax here."
+msgstr ""
+"Aqui puede usar la sintaxis Markdown <a href=\"https://www.markdownguide.org/basic-syntax/\" "
+"target=\"_blank\">Markdown</a>."
+
+#: forms.py:78
+msgid "Registration is not possible on draft course."
+msgstr "Registro no es posible en un curso borrador."
+
+#: forms.py:79 forms.py:84
+msgid "Change the status of the course if you wish to enable registration."
+msgstr "Cambie el estatus del curso si quiere habilitar registro."
+
+#: forms.py:83
+msgid "Registration is no longer possible on an archived course."
+msgstr "El Registro no es posible en cursos archivados."
+
+#: forms.py:92
+msgid ""
+"Level access is collaborators only but course is published. It seems "
+"inconsistent."
+msgstr "El nivel de acceso es solo para colaboradores cuando el curso esta publicado. Al parecer"
+"hay inconsistencias"
+
+#: forms.py:227
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: forms.py:245 models.py:1118
+#: templates/learning/course/details/collaborators.html:47
+msgid "Role"
+msgstr "Rol"
+
+#: forms.py:259
+msgid "A title, keywords, tags, topics…"
+msgstr "Un titulo, palabra clave, tag, tema, etc.."
+
+#: models.py:130
+msgid "Creative Commons 0 (Public domain)"
+msgstr "Creative Commons 0 (Dominio público)"
+
+#: models.py:131
+msgid "Creative Commons Attribution"
+msgstr "Creative Commons Atribución"
+
+#: models.py:132
+msgid "Creative Commons Attribution, Share Alike"
+msgstr "Creative Commons Atribución, Compartir igual"
+
+#: models.py:133
+msgid "Creative Commons Attribution, Non Commercial"
+msgstr ""
+
+#: models.py:134
+msgid "Creative Commons Attribution, Non Commercial, Share Alike"
+msgstr ""
+
+#: models.py:135
+msgid "Creative Commons Attribution, No Derivatives"
+msgstr ""
+
+#: models.py:136
+msgid "Creative Commons Attribution, No Commercial, No Derivatives"
+msgstr ""
+
+#: models.py:137
+msgid "Not appropriate"
+msgstr "No apropiado"
+
+#: models.py:138
+msgid "All rights reserved"
+msgstr "Todos los derechos reservados"
+
+#: models.py:142
+msgid "Less than 5 minutes"
+msgstr "Menos de 5 minutos"
+
+#: models.py:143
+msgid "Less than 10 minutes"
+msgstr "Menos de 10 minutos"
+
+#: models.py:144
+msgid "Less than 15 minutes"
+msgstr "Menos de 15 minutos"
+
+#: models.py:145
+msgid "Less than 20 minutes"
+msgstr "Menos de 20 minutos"
+
+#: models.py:146
+msgid "Less than 25 minutes"
+msgstr "Menos de 25 minutos"
+
+#: models.py:147
+msgid "30 minutes or more"
+msgstr "30 minutos o más"
+
+#: models.py:148
+msgid "Not specified"
+msgstr "No especificado"
+
+#: models.py:152 models.py:352 models.py:520
+msgid "Public"
+msgstr "Público"
+
+#: models.py:153
+msgid "Only in activities"
+msgstr "Solo en actividades"
+
+#: models.py:154 models.py:354 models.py:523
+msgid "Private"
+msgstr "Privado"
+
+#: models.py:158 models.py:358
+msgid "Reusable"
+msgstr "Reutilizable"
+
+#: models.py:159 models.py:359
+msgid "Author only"
+msgstr "Solo autor"
+
+#: models.py:160 models.py:360
+msgid "Non reusable"
+msgstr "No reutilizable"
+
+#: models.py:164 models.py:242
+#: templates/learning/resource/_includes/resource_form.html:42
+msgid "File"
+msgstr "Archivo"
+
+#: models.py:165
+msgid "Video"
+msgstr "Video"
+
+#: models.py:166
+msgid "Audio"
+msgstr "Audio"
+
+#: models.py:195 models.py:364 models.py:644
+#: templates/learning/course/_includes/details/teacher_activities_view.html:25
+#: templates/learning/course/details/collaborators.html:46
+#: templates/learning/course/details/students.html:45
+msgid "Name"
+msgstr "Nombre"
+
+#: models.py:198 models.py:365 models.py:645
+#: templates/learning/resource/_includes/resource_form.html:66
+msgid "Description"
+msgstr "Descripción"
+
+#: models.py:203 models.py:369 models.py:649
+msgid "Language"
+msgstr "Lenguaje"
+
+#: models.py:208
+msgid "Type"
+msgstr "Tipo"
+
+#: models.py:214 models.py:387 models.py:674
+#: templates/learning/course/_includes/details/teacher_activities_view.html:28
+msgid "Author"
+msgstr "Autor"
+
+#: models.py:220
+msgid "Duration"
+msgstr "Duración"
+
+#: models.py:226
+msgid "Licence"
+msgstr "Licencia"
+
+#: models.py:232 models.py:375 models.py:665
+#: templates/learning/course/_includes/details/teacher_activities_view.html:26
+msgid "Access"
+msgstr "Acceso"
+
+#: models.py:238 models.py:381
+msgid "Reuse"
+msgstr "Reutilización"
+
+#: models.py:250 models.py:396 models.py:694
+msgid "Published the"
+msgstr "Publicado el"
+
+#: models.py:251 models.py:397 models.py:695 models.py:1074 models.py:1125
+msgid "Last updated the"
+msgstr "Última actualización el"
+
+#: models.py:275
+msgid ""
+"Reuse conditions for this resource prevent it from being added to an "
+"activity."
+msgstr "La reutilización de este recurso lo previene de ser agregado a una actividad."
+
+#: models.py:281
+msgid ""
+"The author of this resource is the only one allowed to add it an activity "
+"that it owns."
+msgstr "El autor de este recurso es el único autorizado para agregarlo a una actividad."
+
+#: models.py:297
+#, python-format
+msgid ""
+"The file you tried to upload to the application is too big: you sent "
+"%(media_size)s (maximum is %(upload_size)s)."
+msgstr "El archivo que esta intentando subir a la aplicación es demasiado grande: enviaste "
+"%(media_size)s (el maximo es %(upload_size)s)."
+
+#: models.py:302
+msgid "The resource is private but also reusable. This is inconsistent."
+msgstr "El recurso es privado pero tambien reutilizable. Esto es inconsistente."
+
+#: models.py:304
+msgid ""
+"The resource can be reused by anyone but the licence is too restrictive. "
+"Choose a Creative Commons licence if you wish to share your content."
+msgstr "El recurso puede ser utilizado por cualquiera pero la licencia es demasiado restrictiva."
+"Escoja una licencia Creative Commons si usted desea compartir su contenido."
+
+#: models.py:347
+msgctxt "Resource verbose name (singular form)"
+msgid "resource"
+msgstr "recurso"
+
+#: models.py:348
+msgctxt "Resource verbose name (plural form)"
+msgid "resources"
+msgstr "recursos"
+
+#: models.py:353
+msgid "Only in courses"
+msgstr "Solo en los cursos"
+
+#: models.py:389 templates/learning/activity/detail.html:109
+#: templates/learning/course/details/activities.html:84
+msgid "Resources"
+msgstr "Recursos"
+
+#: models.py:424
+msgid ""
+"Reuse conditions for this activity prevent it from being added to a course."
+msgstr "Reutiliza condiciones para esta actividad lo previne de ser agregado a un curso."
+
+#: models.py:430
+msgid ""
+"The author of this activity is the only one allowed to add it a course that "
+"it owns."
+msgstr "El autor de esta activiad es el único autorizado para agregarla al curso "
+"de su propiedad."
+
+#: models.py:450
+#, python-format
+msgid "%(resource)s is already linked with this activity. Operation cancelled."
+msgstr "%(resource)s ha sido vinculado a esta actividad.Operación cancelada."
+
+#: models.py:467
+#, python-format
+msgid ""
+"%(resource)s is not linked with this activity. Hence, it cannot be removed "
+"from the activity."
+msgstr ""
+
+#: models.py:474
+msgid ""
+"The activity is private and also reusable. This is inconsistent. If you wish "
+"to share the activity, it should be visible by users."
+msgstr ""
+
+#: models.py:503
+msgctxt "Activity verbose name (singular form)"
+msgid "activity"
+msgstr "actividad"
+
+#: models.py:504
+msgctxt "Activity verbose name (plural form)"
+msgid "activities"
+msgstr "actividades"
+
+#: models.py:511
+msgid "Draft"
+msgstr "Borrador"
+
+#: models.py:512
+msgid "Published"
+msgstr "Publicado"
+
+#: models.py:513
+msgid "Archived"
+msgstr "Archivado"
+
+#: models.py:521
+msgid "Students only"
+msgstr "Solo estudiantes"
+
+#: models.py:522
+msgid "Collaborators only"
+msgstr "Solo colaboradores"
+
+#: models.py:527
+msgid "Teacher"
+msgstr "Profesor"
+
+#: models.py:528
+msgid "Non-editor Teacher"
+msgstr "Profesor no editor"
+
+#: models.py:529
+msgid "Owner"
+msgstr "Propietario"
+
+#: models.py:657
+msgid "State"
+msgstr "Estado"
+
+#: models.py:669
+#: templates/learning/course/_includes/block/teacher_course_block.html:29
+msgid "Registration enabled"
+msgstr "Registro habilitado"
+
+#: models.py:680 templates/learning/course/detail.html:48
+#: templates/learning/course/detail.html:51
+#: templates/learning/course/details/collaborators.html:4
+msgid "Collaborators"
+msgstr "Colaboradores"
+
+#: models.py:686 templates/learning/course/detail.html:59
+#: templates/learning/course/detail.html:62
+#: templates/learning/course/details/students.html:4
+msgid "Students"
+msgstr "Estudiantes"
+
+#: models.py:706
+#, python-format
+msgid ""
+"%(user)s is already the author of the course. The user %(user)s cannot be "
+"added as a student."
+msgstr ""
+
+#: models.py:711
+#, python-format
+msgid ""
+"%(user)s is already the author of the course. The user %(user)s cannot be "
+"added as a collaborator."
+msgstr ""
+
+#: models.py:716
+#, python-format
+msgid "You cannot enable registration on a course that is %(state)s."
+msgstr ""
+
+#: models.py:720
+msgid ""
+"Access is collaborators only but course is published. It seems inconsistent. "
+"If you wish to publish the course, you should at least let it accessible to "
+"students."
+msgstr ""
+
+#: models.py:754 models.py:1090
+#, python-format
+msgid ""
+"%(user)s cannot register on this course. %(user)s is already a collaborator "
+"on this course, a user cannot be both."
+msgstr ""
+
+#: models.py:759
+#, python-format
+msgid ""
+"%(user)s is already the author of this course. %(user)s cannot register as a "
+"student."
+msgstr ""
+
+#: models.py:764
+#, python-format
+msgid "%(user)s is already registered on this course."
+msgstr ""
+
+#: models.py:782
+msgid ""
+"Nobody can register on this course. Registration is disabled or the course "
+"is not published yet."
+msgstr ""
+
+#: models.py:819
+#, python-format
+msgid ""
+"User “%(user)s is not a student registered on this course. Thus %(user)s "
+"cannot be unregistered."
+msgstr ""
+
+#: models.py:836
+msgid ""
+"Nobody can unregister from this course. Registration is disabled or the "
+"course is no longer published."
+msgstr ""
+
+#: models.py:841
+msgid "You cannot unregister from this course. Registration is locked for you."
+msgstr ""
+
+#: models.py:876
+#, python-format
+msgid ""
+"The user “%(user)s” is already the author of this course. The user %(user)s "
+"cannot be added as a collaborator."
+msgstr ""
+
+#: models.py:881
+#, python-format
+msgid ""
+"The user “%(user)s” already collaborates on this course. Maybe you just want "
+"to change its role?"
+msgstr ""
+
+#: models.py:900
+#, python-format
+msgid ""
+"The user “%(user)s” does not collaborates on this course. Maybe you just "
+"want to add it as a collaborator?"
+msgstr ""
+
+#: models.py:917
+#, python-format
+msgid "The user “%(user)s” is not already a collaborator on this course."
+msgstr ""
+
+#: models.py:966
+msgid "This course is read only. It is not possible to add activities."
+msgstr ""
+
+#: models.py:969
+#, python-format
+msgid "“%(activity)s is already linked with this course. Operation cancelled."
+msgstr ""
+
+#: models.py:992
+msgid "This course is read only. It is not possible to remove activities."
+msgstr ""
+
+#: models.py:995
+#, python-format
+msgid ""
+"“%(activity)s is not linked with this course. Hence, it cannot be removed "
+"from the course."
+msgstr ""
+
+#: models.py:1041
+msgctxt "Course verbose name (singular form)"
+msgid "course"
+msgstr "curso"
+
+#: models.py:1042
+msgctxt "Course verbose name (plural form)"
+msgid "courses"
+msgstr "cursos"
+
+#: models.py:1049
+msgid "Cours"
+msgstr "cursos"
+
+#: models.py:1055
+msgid "Student"
+msgstr "estudiante"
+
+#: models.py:1060
+msgid "User registered by itself"
+msgstr "Usuario registrado por el mismo"
+
+#: models.py:1061
+msgid ""
+"Indicates the user decided to register to the course by itself, the user was "
+"not registered manually by a teacher in the course or as a member of a group."
+msgstr ""
+
+#: models.py:1066
+msgid "Registration locked"
+msgstr "Registro bloqueado"
+
+#: models.py:1067
+msgid ""
+"Locking a registration means the user will not be able to unregister by "
+"itself."
+msgstr ""
+
+#: models.py:1073
+msgid "Registered the"
+msgstr ""
+
+#: models.py:1077
+#, python-format
+msgid "%(student)s, student in course “%(course)s”"
+msgstr ""
+
+#: models.py:1085
+#, python-format
+msgid ""
+"%(user)s is already the author of this course. %(user)s cannot be registered "
+"as a student."
+msgstr ""
+
+#: models.py:1097
+msgctxt "Course registration verbose name (singular form)"
+msgid "course registration"
+msgstr ""
+
+#: models.py:1098
+msgctxt "Course registration verbose name (plural form)"
+msgid "course registrations"
+msgstr ""
+
+#: models.py:1106
+msgid "Collaborator"
+msgstr ""
+
+#: models.py:1112 models.py:1159
+#: templates/learning/activity/details/usage.html:17
+msgid "Course"
+msgstr "Curso"
+
+#: models.py:1124
+msgid "Since the"
+msgstr ""
+
+#: models.py:1128
+#, python-format
+msgid "%(user)s is ”%(role)s” in course “%(course)s”"
+msgstr ""
+
+#: models.py:1137
+#, python-format
+msgid ""
+"%(user)s is already author of the course. It cannot be added as a "
+"collaborator."
+msgstr ""
+
+#: models.py:1142
+#, python-format
+msgid ""
+"%(user)s cannot be added as a collaborator on this course. %(user)s is "
+"already a student, a user cannot be both."
+msgstr ""
+
+#: models.py:1149
+msgctxt "Course activity verbose name (singular form)"
+msgid "course collaborator"
+msgstr ""
+
+#: models.py:1150
+msgctxt "Course activity verbose name (plural form)"
+msgid "course collaborators"
+msgstr ""
+
+#: models.py:1154
+#: templates/learning/course/_includes/details/teacher_activities_view.html:24
+msgid "Rank"
+msgstr ""
+
+#: models.py:1165 templates/learning/resource/details/usage.html:17
+msgid "Activity"
+msgstr "Actividad"
+
+#: models.py:1169
+#, python-format
+msgid "“%(activity)s”, n°%(rank)d on “%(course)s”"
+msgstr ""
+
+#: models.py:1174
+msgctxt "Course activity verbose name (singular form)"
+msgid "course activity"
+msgstr "actividad del curso"
+
+#: models.py:1175
+msgctxt "Course activity verbose name (plural form)"
+msgid "course activities"
+msgstr "actividades del curso"
+
+#: templates/learning/_includes/object_tags_line.html:9
+msgid "This object does not have any tag yet."
+msgstr "Este objeto no tiene tags."
+
+#: templates/learning/activity/_includes/activity_block.html:47
+#: templates/learning/course/_includes/block/student_course_block.html:6
+#: templates/learning/course/_includes/block/teacher_course_block.html:53
+msgid "By:"
+msgstr ""
+
+#: templates/learning/activity/_includes/activity_block.html:71
+#: templates/learning/course/_includes/block/see_more_link.html:7
+#: templates/learning/resource/_includes/resource_block.html:103
+msgid "See more"
+msgstr "Ver más"
+
+#: templates/learning/activity/_includes/details/modals/add_resource_on_activity.html:8
+#, python-format
+msgid "Add a new resource on activity “%(name)s”"
+msgstr ""
+
+#: templates/learning/activity/_includes/details/modals/add_resource_on_activity.html:14
+msgid "Search for a resource to reuse"
+msgstr ""
+
+#: templates/learning/activity/_includes/details/modals/add_resource_on_activity.html:15
+msgid ""
+"Explore the resource index and find the resource that matches the most your "
+"needs."
+msgstr ""
+
+#: templates/learning/activity/_includes/details/modals/add_resource_on_activity.html:19
+msgid "Look for an existing resource"
+msgstr "Buscar un recurso existente"
+
+#: templates/learning/activity/_includes/details/modals/add_resource_on_activity.html:25
+msgid "Create a brand new resource"
+msgstr "Crear un nuevo recurso"
+
+#: templates/learning/activity/_includes/details/modals/add_resource_on_activity.html:26
+msgid ""
+"The following step allows you to create a brand new resource. The resource "
+"will be linked to this activity automatically."
+msgstr ""
+
+#: templates/learning/activity/_includes/details/modals/add_resource_on_activity.html:29
+msgid "Create a resource"
+msgstr ""
+
+#: templates/learning/activity/_includes/details/modals/add_resource_on_activity.html:38
+#: templates/learning/course/_includes/collaborators/modals/change_collaborator_on_course.html:31
+#: templates/learning/course/_includes/collaborators/modals/delete_collaborator_from_course.html:19
+#: templates/learning/course/_includes/details/modals/add_activity_on_course.html:38
+#: templates/learning/course/_includes/details/modals/delete_attached_activity.html:16
+#: templates/learning/course/_includes/details/modals/unlink_attached_activity.html:16
+#: templates/learning/course/_includes/details/modals/unregister.html:17
+#: templates/learning/course/_includes/students/modals/unregister_student_from_course.html:36
+msgid "Close"
+msgstr ""
+
+#: templates/learning/activity/_includes/details/status_line.html:7
+#: templates/learning/course/_includes/details/status_line.html:13
+#: templates/learning/resource/_includes/details/status_line.html:10
+#, python-format
+msgid "“%(access)s” access"
+msgstr ""
+
+#: templates/learning/activity/_includes/details/status_line.html:17
+#: templates/learning/course/_includes/details/status_line.html:48
+#: templates/learning/resource/_includes/details/status_line.html:35
+#, python-format
+msgid "Writen by %(author)s."
+msgstr ""
+
+#: templates/learning/activity/_includes/nb_activities_badge.html:6
+#, python-format
+msgid "%(nb_activities)s activity"
+msgid_plural "%(nb_activities)s activities"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/learning/activity/_includes/nb_activities_badge.html:9
+msgid "No activity yet"
+msgstr "Sin actividades aún"
+
+#: templates/learning/activity/add.html:4
+#: templates/learning/activity/my_list.html:23
+#: templates/learning/course/details/add_activity_on_course.html:16
+msgid "Create a new activity"
+msgstr ""
+
+#: templates/learning/activity/add.html:15
+#: templates/learning/activity/details/change.html:15
+msgid "Update activity"
+msgstr ""
+
+#: templates/learning/activity/delete.html:5
+#: templates/learning/course/_includes/details/modals/delete_attached_activity.html:8
+#, python-format
+msgid "Delete activity “%(name)s”"
+msgstr ""
+
+#: templates/learning/activity/delete.html:18
+#: templates/learning/course/delete.html:17
+#: templates/learning/resource/delete.html:17
+#, python-format
+msgid "Deleting “%(name)s”…"
+msgstr ""
+
+#: templates/learning/activity/delete.html:22
+#, python-format
+msgid ""
+"You are about to delete the activity “%(name)s”. This implies a lot of "
+"things, including:"
+msgstr ""
+
+#: templates/learning/activity/delete.html:24
+msgid "Every course that use this activity will no longer have access to it."
+msgstr ""
+
+#: templates/learning/activity/delete.html:25
+msgid "Everything will be removed from the database."
+msgstr ""
+
+#: templates/learning/activity/delete.html:31
+msgid "Bring me back to the activity"
+msgstr ""
+
+#: templates/learning/activity/delete.html:34
+msgid "Ok, I understand, delete this activity"
+msgstr ""
+
+#: templates/learning/activity/detail.html:5
+#: templates/learning/course/details/activities.html:5
+#, python-format
+msgid "Activity “%(name)s”"
+msgstr "Actividad “%(name)s”"
+
+#: templates/learning/activity/detail.html:21
+#: templates/learning/activity/detail.html:23
+#: templates/learning/course/detail.html:15
+#: templates/learning/course/detail.html:18
+#: templates/learning/resource/detail.html:22
+#: templates/learning/resource/detail.html:25
+msgid "Details"
+msgstr "Detalles"
+
+#: templates/learning/activity/detail.html:32
+#: templates/learning/activity/detail.html:34
+msgid "New resource"
+msgstr "Nuevo recurso"
+
+#: templates/learning/activity/detail.html:42
+#: templates/learning/activity/detail.html:44
+#: templates/learning/activity/details/usage.html:4
+#: templates/learning/resource/detail.html:34
+#: templates/learning/resource/detail.html:36
+#: templates/learning/resource/details/usage.html:4
+msgid "Uses"
+msgstr "Usos"
+
+#: templates/learning/activity/detail.html:52
+#: templates/learning/activity/detail.html:54
+#: templates/learning/activity/details/similar.html:4
+msgid "Similar activities"
+msgstr "Actividades similares"
+
+#: templates/learning/activity/detail.html:68
+msgid "Permalink to the activity."
+msgstr "Enlace permanente a la actividad"
+
+#: templates/learning/activity/detail.html:79
+#: templates/learning/course/detail.html:125
+#: templates/learning/resource/_includes/details/detail_page.html:20
+msgid "Edit"
+msgstr "Editar"
+
+#: templates/learning/activity/detail.html:116
+msgid "Add a new resource"
+msgstr "Agregar un nuevo recurso"
+
+#: templates/learning/activity/detail.html:132
+msgid "There is no resource yet."
+msgstr "No hay recursos aún"
+
+#: templates/learning/activity/detail.html:134
+msgctxt "add a resource"
+msgid "You should consider adding one."
+msgstr "Deberias considerar agregar un recurso."
+
+#: templates/learning/activity/details/add_resource.html:4
+#: templates/learning/activity/details/add_resource.html:16
+#: templates/learning/resource/add.html:4
+#: templates/learning/resource/add.html:15
+#: templates/learning/resource/my_list.html:18
+msgid "Create a new resource"
+msgstr ""
+
+#: templates/learning/activity/details/add_resource.html:15
+#: templates/learning/activity/details/change.html:14
+msgid "Cancel and get back to activity"
+msgstr ""
+
+#: templates/learning/activity/details/attach_resource.html:5
+#, python-format
+msgid "Attach a resource on “%(name)s”"
+msgstr ""
+
+#: templates/learning/activity/details/attach_resource.html:27
+#: templates/learning/course/details/attach_activity.html:27
+msgid "Search results"
+msgstr "Resultados de busqueda"
+
+#: templates/learning/activity/details/attach_resource.html:38
+#: templates/learning/course/details/attach_activity.html:38
+msgid "Suggestions"
+msgstr "Sugerencias"
+
+#: templates/learning/activity/details/change.html:4
+msgctxt "activity, title"
+msgid "Change"
+msgstr "Cambiar"
+
+#: templates/learning/activity/details/resource.html:4
+msgctxt "activity, title"
+msgid "Resource"
+msgstr ""
+
+#: templates/learning/activity/details/resource.html:16
+msgid ""
+"Viewing this resource is restricted. You cannot see the resource details."
+msgstr ""
+
+#: templates/learning/activity/details/similar.html:21
+msgid ""
+"There is no similar activity yet. Similar activites are activites that have "
+"tags in common."
+msgstr ""
+
+#: templates/learning/activity/details/usage.html:18
+#: templates/learning/resource/details/usage.html:18
+msgid "Written by"
+msgstr "Escrito por"
+
+#: templates/learning/activity/details/usage.html:19
+#: templates/learning/resource/details/usage.html:19
+msgid "Last update"
+msgstr "Última actualización"
+
+#: templates/learning/activity/details/usage.html:38
+msgid ""
+"This activity is not used by any course yet. If you already manage a course, "
+"you can attach this activity to it. Hence, you will let users see this "
+"activity and its resources."
+msgstr ""
+
+#: templates/learning/activity/my_list.html:4
+#: templates/learning/activity/my_list.html:43 templates/learning/base.html:60
+#: templates/learning/dropdown.html:21
+msgid "My activities"
+msgstr "Mis actividades"
+
+#: templates/learning/activity/my_list.html:53
+msgid ""
+"You did not create an activity yet. Activities are reusable and shareable "
+"elements that aggregate educational resources. Go on and create an activity!"
+msgstr ""
+
+#: templates/learning/base.html:26 templates/learning/dropdown.html:6
+#: templates/learning/dropdown.html:8
+msgid "Learning"
+msgstr "Aprendizaje"
+
+#: templates/learning/base.html:36 templates/learning/course/student.html:21
+msgid ""
+"You did not register on any course yet. Go to the search page to find "
+"owesome courses to follow."
+msgstr "No te has registrado en ningun curso todavia. Ve a la pagina de busqueda "
+
+#: templates/learning/base.html:42 templates/learning/dropdown.html:19
+msgid "Teaching"
+msgstr "Enseñanza"
+
+#: templates/learning/base.html:47 templates/learning/course/teaching.html:41
+#: templates/learning/dropdown.html:16 templates/learning/dropdown.html:20
+msgid "My courses"
+msgstr "Mis cursos"
+
+#: templates/learning/base.html:49
+msgid ""
+"Courses are aggregations of activities. User can register to courses and "
+"then become students on courses."
+msgstr "Los cursos son actividades agregadas. Los usuarios pueden registrarse a los cursos"
+"para convertirse en estudiantes de los mismos."
+
+#: templates/learning/base.html:53
+msgid "Go to my courses"
+msgstr "Ir a mis cursos"
+
+#: templates/learning/base.html:61
+msgid ""
+"Activites are parts of courses you can reuse and share. Activities contain "
+"educational resources."
+msgstr "Actividades son partes de cursos que puedes reutilizar y compartir. Las actividades"
+"continen recursos educacionales."
+
+#: templates/learning/base.html:64
+msgid "Go to my activities"
+msgstr "Ir a mis actividades"
+
+#: templates/learning/base.html:71 templates/learning/dropdown.html:22
+#: templates/learning/resource/my_list.html:4
+#: templates/learning/resource/my_list.html:38
+msgid "My resources"
+msgstr "Mis recursos"
+
+#: templates/learning/base.html:73
+msgid ""
+"Resources are educational resources that can be text, videos, audios or "
+"whatever you like. Resources can be reused and shahred between activites."
+msgstr ""
+
+#: templates/learning/base.html:76
+msgid "Go to my resources"
+msgstr "Ir a mis recursos"
+
+#: templates/learning/course/_includes/block/teacher_course_block.html:16
+#: templates/learning/course/_includes/details/status_line.html:39
+msgid "I write this course."
+msgstr "Yo escribo este curso"
+
+#: templates/learning/course/_includes/block/teacher_course_block.html:25
+#: templates/learning/course/_includes/details/status_line.html:17
+msgid ""
+"You registered to this course. You can unregister if registration is enabled "
+"by the course owner."
+msgstr "Te has registrado a este curso. Puedes dar de baja tu registro su el registro esta habilitado"
+
+#: templates/learning/course/_includes/block/teacher_course_block.html:26
+#: templates/learning/course/_includes/details/status_line.html:18
+msgid "Registered"
+msgstr "Registrado"
+
+#: templates/learning/course/_includes/block/teacher_course_block.html:37
+msgid "You do not have the permission to view this course"
+msgstr "No tienes autorización para ver este curso"
+
+#: templates/learning/course/_includes/block/teacher_course_block.html:38
+#: templates/learning/resource/_includes/resource_block.html:106
+msgid "Restricted access"
+msgstr "Acceso restringido"
+
+#: templates/learning/course/_includes/collaborators/modals/change_collaborator_on_course.html:8
+#, python-format
+msgid "Change “%(collaborator)s” on “%(name)s”"
+msgstr "Cambiar “%(collaborator)s” en “%(name)s”"
+
+#: templates/learning/course/_includes/collaborators/modals/change_collaborator_on_course.html:13
+#: templates/learning/course/_includes/collaborators/modals/delete_collaborator_from_course.html:13
+#, python-format
+msgid "%(collaborator)s works with you on the course “%(course)s”."
+msgstr ""
+
+#: templates/learning/course/_includes/collaborators/modals/change_collaborator_on_course.html:23
+msgid "Change the role of this collaborator"
+msgstr ""
+
+#: templates/learning/course/_includes/collaborators/modals/delete_collaborator_from_course.html:8
+#, python-format
+msgid "Remove “%(collaborator)s” from collaborators on “%(name)s”"
+msgstr ""
+
+#: templates/learning/course/_includes/collaborators/modals/delete_collaborator_from_course.html:14
+msgid ""
+"By removing it from your collaborators, the user will lose its rights on the "
+"course and will no longer be able to help you writing this course."
+msgstr ""
+
+#: templates/learning/course/_includes/collaborators/modals/delete_collaborator_from_course.html:23
+msgid "Remove this collaborator"
+msgstr ""
+
+#: templates/learning/course/_includes/details/modals/add_activity_on_course.html:8
+#, python-format
+msgid "Add a new activity on course “%(name)s”"
+msgstr ""
+
+#: templates/learning/course/_includes/details/modals/add_activity_on_course.html:14
+msgid "Search for an activity to reuse"
+msgstr ""
+
+#: templates/learning/course/_includes/details/modals/add_activity_on_course.html:15
+msgid ""
+"Explore the activity index and find the activity that matches the most your "
+"needs."
+msgstr ""
+
+#: templates/learning/course/_includes/details/modals/add_activity_on_course.html:19
+msgid "Look for an existing activity"
+msgstr ""
+
+#: templates/learning/course/_includes/details/modals/add_activity_on_course.html:25
+msgid "Create a brand new activity"
+msgstr ""
+
+#: templates/learning/course/_includes/details/modals/add_activity_on_course.html:26
+msgid ""
+"The following step allows you to create a brand new activity. The activity "
+"will be linked to this course automatically."
+msgstr ""
+
+#: templates/learning/course/_includes/details/modals/add_activity_on_course.html:29
+msgid "Create an activity"
+msgstr ""
+
+#: templates/learning/course/_includes/details/modals/delete_attached_activity.html:12
+#, python-format
+msgid ""
+"You are about to delete the activity <strong>“%(name)s”</strong>.<br>Maybe "
+"you just want to unlink the activity (the activity will not be accessible "
+"within this course)?<br>If you are <strong>sure</strong>, you can delete it "
+"safely."
+msgstr ""
+
+#: templates/learning/course/_includes/details/modals/delete_attached_activity.html:18
+#: templates/learning/course/_includes/details/modals/unlink_attached_activity.html:20
+msgid "Unlink the activity"
+msgstr ""
+
+#: templates/learning/course/_includes/details/modals/delete_attached_activity.html:22
+msgid "Delete this activity"
+msgstr ""
+
+#: templates/learning/course/_includes/details/modals/unlink_attached_activity.html:8
+#, python-format
+msgid "Unlink activity “%(name)s”"
+msgstr ""
+
+#: templates/learning/course/_includes/details/modals/unlink_attached_activity.html:12
+#, python-format
+msgid ""
+"You are about to unlink the activity <strong>“%(name)s”</strong>. This means "
+"that the activity will remain but will no longer be associated with this "
+"course."
+msgstr ""
+
+#: templates/learning/course/_includes/details/modals/unregister.html:8
+#, python-format
+msgid "Unregister from course “%(name)s”"
+msgstr ""
+
+#: templates/learning/course/_includes/details/modals/unregister.html:12
+#, python-format
+msgid ""
+"You are about to unregister from the course “%(name)s”. This implies that "
+"every progress you made in this course will be lost. If you are sure of what "
+"you do, continue to unregister."
+msgstr ""
+
+#: templates/learning/course/_includes/details/modals/unregister.html:22
+msgid "Unregister from this course"
+msgstr ""
+
+#: templates/learning/course/_includes/details/status_line.html:8
+#, python-format
+msgid "“%(state)s” course"
+msgstr ""
+
+#: templates/learning/course/_includes/details/status_line.html:24
+msgid "People can register and unregister from this course."
+msgstr "Las personas pueden registrarse y desregistrarse de este curso"
+
+#: templates/learning/course/_includes/details/status_line.html:25
+msgid "Opened for registration"
+msgstr "Abierto para registro"
+
+#: templates/learning/course/_includes/details/status_line.html:29
+msgid "People cannot register or unregister from this course."
+msgstr "Las personas no pueden registrarse o desregistrarse a este curso"
+
+#: templates/learning/course/_includes/details/status_line.html:30
+msgid "Closed for registration"
+msgstr "Cerrado para registro"
+
+#: templates/learning/course/_includes/details/status_line.html:44
+#, python-format
+msgid "I am “%(role)s” on this course."
+msgstr "Yo soy “%(role)s” en este curso."
+
+#: templates/learning/course/_includes/details/student_activities_view.html:4
+#: templates/learning/course/_includes/details/teacher_activities_view.html:4
+#: templates/learning/course/detail.html:26
+#: templates/learning/course/detail.html:29
+msgid "Activities"
+msgstr "Actividades"
+
+#: templates/learning/course/_includes/details/teacher_activities_view.html:12
+msgid "Add a new activity"
+msgstr ""
+
+#: templates/learning/course/_includes/details/teacher_activities_view.html:27
+msgid "Reusability"
+msgstr ""
+
+#: templates/learning/course/_includes/details/teacher_activities_view.html:29
+#: templates/learning/course/details/collaborators.html:49
+msgid "Actions"
+msgstr "Acciones"
+
+#: templates/learning/course/_includes/details/teacher_activities_view.html:76
+msgid "View activity"
+msgstr "Ver actividad"
+
+#: templates/learning/course/_includes/details/teacher_activities_view.html:85
+msgid "Update the activity"
+msgstr "Actualizar la actividad"
+
+#: templates/learning/course/_includes/details/teacher_activities_view.html:93
+msgid "Unlink the activity from the crouse."
+msgstr "Desvincular la actividad del curso."
+
+#: templates/learning/course/_includes/details/teacher_activities_view.html:104
+msgid "Delete the activity"
+msgstr "Borrar la actividad"
+
+#: templates/learning/course/_includes/details/teacher_activities_view.html:122
+msgid "There is no activity yet."
+msgstr "No hay actividad aún."
+
+#: templates/learning/course/_includes/details/teacher_activities_view.html:124
+msgctxt "add an activity"
+msgid "You should consider adding one."
+msgstr "Debería considerar agregar una."
+
+#: templates/learning/course/_includes/students/modals/unregister_student_from_course.html:9
+#, python-format
+msgid "Unregister “%(student)s” from “%(name)s”"
+msgstr ""
+
+#: templates/learning/course/_includes/students/modals/unregister_student_from_course.html:18
+#, python-format
+msgid "%(student)s works you on the course “%(course)s”."
+msgstr ""
+
+#: templates/learning/course/_includes/students/modals/unregister_student_from_course.html:22
+msgid ""
+"By removing it from your students, the user will lose its rights on the "
+"course. Any progress made will be automatically removed. If the user want to "
+"register again, the student will start from the beginning."
+msgstr ""
+
+#: templates/learning/course/_includes/students/modals/unregister_student_from_course.html:25
+#, python-format
+msgid "As a reminder, %(name)s is registered since the %(date)s."
+msgstr ""
+
+#: templates/learning/course/_includes/students/modals/unregister_student_from_course.html:29
+msgid ""
+"The user self registered, this means you're excluding him from the course "
+"and remove its progress."
+msgstr ""
+
+#: templates/learning/course/_includes/students/modals/unregister_student_from_course.html:42
+msgid "Unregister this student"
+msgstr ""
+
+#: templates/learning/course/add.html:4
+msgid "Add a new course"
+msgstr ""
+
+#: templates/learning/course/add.html:15
+#: templates/learning/course/teaching.html:22
+msgid "Create a new course"
+msgstr ""
+
+#: templates/learning/course/delete.html:5
+#, python-format
+msgid "Delete course “%(name)s”"
+msgstr ""
+
+#: templates/learning/course/delete.html:20
+#, python-format
+msgid ""
+"You are about to delete the course “%(name)s”. This implies a lot of things, "
+"including:"
+msgstr ""
+
+#: templates/learning/course/delete.html:22
+msgid "You will not be able to recover it later."
+msgstr ""
+
+#: templates/learning/course/delete.html:23
+msgid ""
+"Everything will be removed from the database, student progress and so no."
+msgstr ""
+
+#: templates/learning/course/delete.html:29
+msgid "Bring me back to the course"
+msgstr ""
+
+#: templates/learning/course/delete.html:32
+msgid "Ok, I understand, delete this course"
+msgstr ""
+
+#: templates/learning/course/detail.html:5
+#, python-format
+msgid "Course “%(name)s”"
+msgstr "Curso “%(name)s”"
+
+#: templates/learning/course/detail.html:37
+#: templates/learning/course/detail.html:40
+msgid "New activity"
+msgstr "Nueva actividad"
+
+#: templates/learning/course/detail.html:70
+#: templates/learning/course/detail.html:73
+#: templates/learning/course/details/similar.html:4
+msgid "Similar courses"
+msgstr "Cursos similares"
+
+#: templates/learning/course/detail.html:95
+msgid "Permalink to the course."
+msgstr "Enlace permanete al curso"
+
+#: templates/learning/course/detail.html:110
+msgid "Unregister"
+msgstr "Desregistro"
+
+#: templates/learning/course/detail.html:117
+msgid "Register"
+msgstr "Registro"
+
+#: templates/learning/course/detail.html:146
+#, python-format
+msgid ""
+"Description for this course seems too long (%(length)s characters). You "
+"should consider reducing it to less than %(maxlength)s characters for "
+"better\n"
+"          readability."
+msgstr ""
+
+#: templates/learning/course/details/activities.html:95
+msgid ""
+"Viewing this activity is restricted. You cannot see the activity details."
+msgstr "La vista a esta actividad esta restringida. No puede ver detalles."
+
+#: templates/learning/course/details/activity_resource.html:4
+msgid "Activity resource"
+msgstr "Recurso de la actividad"
+
+#: templates/learning/course/details/add_activity_on_course.html:4
+msgid "Add an activity"
+msgstr "Agregar una actividad"
+
+#: templates/learning/course/details/add_activity_on_course.html:15
+#: templates/learning/course/details/change.html:14
+msgid "Cancel and get back to course"
+msgstr ""
+
+#: templates/learning/course/details/attach_activity.html:5
+#, python-format
+msgid "Attach activity on “%(name)s”"
+msgstr ""
+
+#: templates/learning/course/details/change.html:4
+msgctxt "course, title"
+msgid "Change"
+msgstr ""
+
+#: templates/learning/course/details/change.html:15
+msgid "Update course"
+msgstr ""
+
+#: templates/learning/course/details/collaborators.html:26
+msgid "Add a collaborator"
+msgstr ""
+
+#: templates/learning/course/details/collaborators.html:37
+msgid ""
+"This course is private. This means your collaborators loose all their "
+"permissions until you toggle access level to at least “Collaborators only”."
+msgstr ""
+
+#: templates/learning/course/details/collaborators.html:48
+msgid "Permissions"
+msgstr ""
+
+#: templates/learning/course/details/collaborators.html:90
+msgid "You do not have any collaborator on this course."
+msgstr ""
+
+#: templates/learning/course/details/collaborators.html:92
+msgctxt "add a collaborator"
+msgid "You should consider adding one."
+msgstr ""
+
+#: templates/learning/course/details/similar.html:21
+msgid ""
+"There is no similar course yet. Similar courses are courses that have tags "
+"in common."
+msgstr ""
+
+#: templates/learning/course/details/students.html:24
+msgid "Add a student"
+msgstr ""
+
+#: templates/learning/course/details/students.html:35
+msgid ""
+"Access to this course is restricted. This means your students will not be "
+"able to see the course until you toggle access level to at least “Students "
+"only”."
+msgstr ""
+
+#: templates/learning/course/details/students.html:46
+msgid "Since"
+msgstr ""
+
+#: templates/learning/course/details/students.html:47
+msgid "Self registration"
+msgstr ""
+
+#: templates/learning/course/details/students.html:48
+msgid "Locked"
+msgstr ""
+
+#: templates/learning/course/details/students.html:49
+msgid "Delete"
+msgstr ""
+
+#: templates/learning/course/details/students.html:88
+msgid "No student registered on this course."
+msgstr ""
+
+#: templates/learning/course/details/students.html:90
+msgctxt "add a student"
+msgid "You should consider adding one."
+msgstr ""
+
+#: templates/learning/course/search.html:4
+msgid "Search courses"
+msgstr "Buscar cursos"
+
+#: templates/learning/course/search.html:35
+msgid "Some courses that might interest you…"
+msgstr "Algunos cursos pueden interesarte..."
+
+#: templates/learning/course/student.html:4
+msgid "Courses I’m following"
+msgstr "Cursos que estoy siguiendo"
+
+#: templates/learning/course/teaching.html:4
+msgid "Courses I teach in"
+msgstr "Cursos que enseño"
+
+#: templates/learning/course/teaching.html:51
+msgid ""
+"You did not create a course yet. Courses are reusable and shareable elements "
+"that aggregate activities and educational resources. Go on and create a "
+"course!"
+msgstr ""
+
+#: templates/learning/course/teaching.html:59
+msgid "Contributions"
+msgstr ""
+
+#: templates/learning/dropdown.html:13
+msgid "Home"
+msgstr "Inicio"
+
+#: templates/learning/dropdown.html:15
+msgid "Studying"
+msgstr "Estudiando"
+
+#: templates/learning/dropdown.html:17
+msgid "Search for a course"
+msgstr "Buscar un curso"
+
+#: templates/learning/resource/_includes/details/detail_page.html:9
+msgid "Permalink to the resource."
+msgstr "Enlace permanente al recurso"
+
+#: templates/learning/resource/_includes/details/detail_page.html:44
+msgid "View the file"
+msgstr "Ver el archivo"
+
+#: templates/learning/resource/_includes/details/detail_page.html:47
+msgid "Download"
+msgstr "Descargar"
+
+#: templates/learning/resource/_includes/nb_resources_badge.html:6
+#, python-format
+msgid "%(nb_resources)s resource"
+msgid_plural "%(nb_resources)s resources"
+msgstr[0] "%(nb_resources)s recurso"
+msgstr[1] "%(nb_resources)s recursos"
+
+#: templates/learning/resource/_includes/nb_resources_badge.html:9
+msgid "No resource yet"
+msgstr "Sin recursos aún"
+
+#: templates/learning/resource/_includes/resource_block.html:20
+msgid "Attach the resource to the activity."
+msgstr ""
+
+#: templates/learning/resource/_includes/resource_block.html:32
+msgid "Unlink the resource from the activity."
+msgstr ""
+
+#: templates/learning/resource/_includes/resource_block.html:68
+#, python-format
+msgid "By: %(author)s"
+msgstr "Por: %(author)s"
+
+#: templates/learning/resource/_includes/resource_block.html:88
+#, python-format
+msgid "Updated %(date)s."
+msgstr ""
+
+#: templates/learning/resource/_includes/resource_form.html:3
+msgid "General information"
+msgstr ""
+
+#: templates/learning/resource/_includes/resource_form.html:38
+msgid "Media"
+msgstr ""
+
+#: templates/learning/resource/_includes/resource_form.html:44
+#, python-format
+msgid "File size should not exceed %(size)s."
+msgstr ""
+
+#: templates/learning/resource/_includes/resource_form.html:50
+msgid "Clear"
+msgstr ""
+
+#: templates/learning/resource/_includes/resource_form.html:58
+msgid "Download the current media"
+msgstr ""
+
+#: templates/learning/resource/delete.html:5
+#, python-format
+msgid "Delete resource “%(name)s”"
+msgstr ""
+
+#: templates/learning/resource/delete.html:20
+#, python-format
+msgid "You are about to delete the resource “%(name)s”."
+msgstr ""
+
+#: templates/learning/resource/delete.html:25
+msgid "Bring me back to the resource"
+msgstr ""
+
+#: templates/learning/resource/delete.html:28
+msgid "Ok, I understand, delete this resource"
+msgstr ""
+
+#: templates/learning/resource/detail.html:6
+#, python-format
+msgid "Resource “%(name)s”"
+msgstr ""
+
+#: templates/learning/resource/detail.html:44
+#: templates/learning/resource/detail.html:46
+#: templates/learning/resource/details/similar.html:4
+msgid "Similar resources"
+msgstr ""
+
+#: templates/learning/resource/details/change.html:4
+msgctxt "resource, title"
+msgid "Change"
+msgstr ""
+
+#: templates/learning/resource/details/change.html:14
+msgid "Cancel and get back to resource"
+msgstr ""
+
+#: templates/learning/resource/details/change.html:15
+msgid "Update resource"
+msgstr ""
+
+#: templates/learning/resource/details/similar.html:21
+msgid ""
+"There is no similar resource yet. Similar resources are resources that have "
+"tags in common."
+msgstr ""
+
+#: templates/learning/resource/details/usage.html:36
+msgid ""
+"This resource is not used by any activity yet. If you already manage an "
+"activity, you can attach this resource to it. Hence, you will let users see "
+"this resources from the corresponding activity."
+msgstr ""
+
+#: templates/learning/resource/my_list.html:48
+msgid ""
+"You did not create a resource yet. Educational ressources are reusable and "
+"shareable videos, audio files, articles, that you can use in activities. Go "
+"on and create a resource!"
+msgstr ""
+
+#: templates/markdownx/widget2.html:6
+msgid "Write"
+msgstr "Escribir"
+
+#: templates/markdownx/widget2.html:10
+msgid "Preview"
+msgstr "Vista previa"
+
+#: templatetags/learning.py:51
+msgid "Can view the course"
+msgstr "No se puede ver el curso"
+
+#: templatetags/learning.py:53
+msgid "Change change the course"
+msgstr "Cambiar cambio de curso"
+
+#: templatetags/learning.py:55
+msgid "Can delete the course"
+msgstr "No puede borar el curso"
+
+#: templatetags/learning.py:77
+msgid ""
+"This course is a draft. It is not visible by others except collaborators and "
+"no one can register."
+msgstr "Este curso es borrador. Solo sera visible para colaboradores y "
+"nadie puede registrarse."
+
+#: templatetags/learning.py:79
+msgid "This course is published. Every change will be immediately available."
+msgstr ""
+
+#: templatetags/learning.py:81
+msgid ""
+"This course is archived. Therefore, it is read-only. No one can register to "
+"the course anymore."
+msgstr ""
+
+#: templatetags/learning.py:105
+msgid "This course is private. You’re the only one able to access it."
+msgstr ""
+
+#: templatetags/learning.py:107
+msgid "Access to this course is restricted to collaborators only."
+msgstr ""
+
+#: templatetags/learning.py:109
+msgid "Access to this course is restricted to registered students only."
+msgstr ""
+
+#: templatetags/learning.py:111
+msgid ""
+"This course is public. Everyone can view it, but edition is restricted to "
+"its author and his collaborators."
+msgstr ""
+
+#: templatetags/learning.py:137
+msgid ""
+"You can view course details, students and collaborators but without edition "
+"permissions."
+msgstr ""
+
+#: templatetags/learning.py:139
+msgid ""
+"You can add, change, delete elements within the course, but cannot delete it."
+msgstr ""
+
+#: templatetags/learning.py:141
+msgid "You can do anything on the course, without restriction."
+msgstr ""
+
+#: templatetags/learning.py:178
+msgid "This resource is public. Anyone with access can view it."
+msgstr ""
+
+#: templatetags/learning.py:180
+msgid ""
+"This resource can only be viewed in activities. This means that if you can "
+"view the activity that use this resource, you can view this resource."
+msgstr ""
+
+#: templatetags/learning.py:183
+msgid "This resource is private. The author is the only one able to view it."
+msgstr ""
+
+#: templatetags/learning.py:207
+msgid "This resource can be used in other activities without restriction."
+msgstr ""
+
+#: templatetags/learning.py:209
+msgid "This resource can only be reused by its author."
+msgstr ""
+
+#: templatetags/learning.py:211
+msgid "This resource cannot be reused by anyone."
+msgstr ""
+
+#: templatetags/learning.py:235
+msgid ""
+"This resource is distributed under a licence that allow others to reuse it "
+"freely."
+msgstr ""
+
+#: templatetags/learning.py:237
+msgid "Reusing this resource in an activity is limited to some conditions."
+msgstr ""
+
+#: templatetags/learning.py:239
+msgid "This resource cannot be reused by anyone except its author."
+msgstr ""
+
+#: templatetags/learning.py:261
+msgid "Consulting this resource takes little time."
+msgstr ""
+
+#: templatetags/learning.py:263
+msgid "Consulting this resources takes a little more time."
+msgstr ""
+
+#: templatetags/learning.py:265
+msgid "Consulting this resources takes a lot of time."
+msgstr ""
+
+#: templatetags/learning.py:267
+msgid ""
+"The author of this resource did not indicate how much time is necessary to "
+"consult the resource."
+msgstr ""
+
+#: templatetags/learning.py:295
+msgid "This activity is public. Anyone with access can view it."
+msgstr ""
+
+#: templatetags/learning.py:297
+msgid "This activity can only be view in courses that already use it."
+msgstr ""
+
+#: templatetags/learning.py:299
+msgid "This activity is private. You are the only one able to view it."
+msgstr ""
+
+#: templatetags/learning.py:323
+msgid "This activity can be used in other courses without restriction."
+msgstr ""
+
+#: templatetags/learning.py:325
+msgid "This activity can only be reused by its author."
+msgstr ""
+
+#: templatetags/learning.py:327
+msgid "This activity cannot be reused by anyone."
+msgstr ""
+
+#: views/__init__.py:24
+msgid "Attach resource"
+msgstr ""
+
+#: views/__init__.py:25
+msgid "Attach activity"
+msgstr ""
+
+#: views/activity.py:53
+msgid "You do not have the required permissions to access this activity."
+msgstr ""
+
+#: views/activity.py:64
+#, python-format
+msgid "Activity “%(activity)s” created."
+msgstr ""
+
+#: views/activity.py:84
+msgid "You do not have the required permissions to change this activity."
+msgstr ""
+
+#: views/activity.py:89
+#, python-format
+msgid "The activity “%(activity)s” has been updated."
+msgstr ""
+
+#: views/activity.py:109 views/course.py:764
+msgid "You do not have the required permissions to delete this activity."
+msgstr ""
+
+#: views/activity.py:113
+#, python-format
+msgid "The activity ”%(activity)s” has been deleted"
+msgstr ""
+
+#: views/activity.py:162
+msgid ""
+"You do not have the required permissions to view where this activity is used."
+msgstr ""
+
+#: views/activity.py:191
+msgid "You do not have the required permissions to view similar activities."
+msgstr ""
+
+#: views/activity.py:207
+msgid ""
+"The component used to detect similar activities crashed. We try to fix this "
+"as soon as possible."
+msgstr ""
+
+#: views/activity.py:231
+msgid ""
+"You do not have the required permission to access the resource you requested."
+msgstr ""
+
+#: views/activity.py:262
+msgid ""
+"You do not have the required permission to create a new resource on this "
+"activity."
+msgstr ""
+
+#: views/activity.py:273
+#, python-format
+msgid ""
+"The resource “%(resource)s” has been created and added to activity "
+"“%(activity)s”."
+msgstr ""
+
+#: views/activity.py:311
+msgid ""
+"You do not have the required permission to attach a resource on this "
+"activity."
+msgstr ""
+
+#: views/activity.py:322
+#, python-format
+msgid "Resource “%(resource)s” added to the activity “%(activity)s”."
+msgstr ""
+
+#: views/activity.py:369
+msgid ""
+"You do not have the required permission to unlink a resource from this "
+"activity."
+msgstr ""
+
+#: views/activity.py:383
+#, python-format
+msgid "Resource “%(resource)s” removed from the activity “%(activity)s”."
+msgstr ""
+
+#: views/course.py:54
+#, python-format
+msgid "Course “%(course_name)s” created."
+msgstr ""
+
+#: views/course.py:152
+#, python-format
+msgid "The course “%(course_name)s” has been updated."
+msgstr ""
+
+#: views/course.py:163
+msgid "You do not have the required permissions to view this course."
+msgstr ""
+
+#: views/course.py:176
+msgid "This course does not have any activity yet."
+msgstr ""
+
+#: views/course.py:238
+msgid ""
+"You do not have the required permissions to view collaborators of this "
+"course."
+msgstr ""
+
+#: views/course.py:265
+#, python-format
+msgid "%(user)s does now collaborates on the course as a %(role)s."
+msgstr ""
+
+#: views/course.py:268 views/course.py:393
+#, python-format
+msgid "The user identified by %(username)s does not exists."
+msgstr ""
+
+#: views/course.py:307
+#, python-format
+msgid "Role for user “%(user)s“ changed from “%(old_role)s” to “%(new_role)s”"
+msgstr ""
+
+#: views/course.py:334
+#, python-format
+msgid ""
+"The collaborator “%(collaborator)s” has been removed from course "
+"“%(course)s”."
+msgstr ""
+
+#: views/course.py:357
+msgid ""
+"You do not have the required permissions to view students of this course."
+msgstr ""
+
+#: views/course.py:391
+#, python-format
+msgid "%(user)s is now registered on this course."
+msgstr ""
+
+#: views/course.py:422
+#, python-format
+msgid ""
+"The student “%(student)s” has been unregistered from the course “%(course)s”."
+msgstr ""
+
+#: views/course.py:447
+msgid ""
+"The component used to detect similar courses crashed. We try to fix this as "
+"soon as possible."
+msgstr ""
+
+#: views/course.py:454
+msgid "You do not have the required permissions to view similar courses."
+msgstr ""
+
+#: views/course.py:469
+#, python-format
+msgid "You have been registered on the course “%(course)s”"
+msgstr ""
+
+#: views/course.py:489
+#, python-format
+msgid "You have been unregistered from the course “%(course)s”"
+msgstr ""
+
+#: views/course.py:513
+msgid "You do not have the required permissions to delete this course."
+msgstr ""
+
+#: views/course.py:517
+#, python-format
+msgid "The course ”%(course_name)s” has been deleted"
+msgstr ""
+
+#: views/course.py:566
+msgid ""
+"You do not have the required permissions to change this course. It may be "
+"read-only because archived or you may not have the rights to edit the course."
+msgstr ""
+
+#: views/course.py:579
+#, python-format
+msgid "The activity “%(activity_name)s” has been added to this course."
+msgstr ""
+
+#: views/course.py:603
+msgid ""
+"You do not have the required permission to attach an activity on this course."
+msgstr ""
+
+#: views/course.py:647
+#, python-format
+msgid "Activity “%(activity)s” added to the course “%(course)s”"
+msgstr ""
+
+#: views/course.py:686
+#, python-format
+msgid ""
+"Activity “%(activity)s” was repositioned and is now the activity n°%(rank)d "
+"on this course."
+msgstr ""
+
+#: views/course.py:692
+msgid ""
+"You do not have the required permission to change activities of this course."
+msgstr ""
+
+#: views/course.py:721
+#, python-format
+msgid ""
+"The activity “%(activity)s” has been removed from this course. The activity "
+"itself has not been removed."
+msgstr ""
+
+#: views/course.py:728
+msgid ""
+"You do not have the required permissions to unlink this activity from this "
+"course."
+msgstr ""
+
+#: views/course.py:757
+#, python-format
+msgid ""
+"The activity “%(activity)s” has been removed from this course. The activity "
+"has also been removed."
+msgstr ""
+
+#: views/resource.py:47
+msgid "You do not have the required permissions to access this resource."
+msgstr ""
+
+#: views/resource.py:58
+#, python-format
+msgid "Resource “%(resource)s” created."
+msgstr ""
+
+#: views/resource.py:81
+msgid "You do not have the required permissions to change this resource."
+msgstr ""
+
+#: views/resource.py:86
+#, python-format
+msgid "The resource “%(resource)s” has been updated."
+msgstr ""
+
+#: views/resource.py:106
+msgid "You do not have the required permissions to delete this resource."
+msgstr ""
+
+#: views/resource.py:111
+#, python-format
+msgid "The resource ”%(resource)s” has been deleted."
+msgstr ""
+
+#: views/resource.py:162
+msgid ""
+"You do not have the required permissions to view where this resource is used."
+msgstr ""
+
+#: views/resource.py:191
+msgid "You do not have the required permissions to view similar resources."
+msgstr ""
+
+#: views/resource.py:205
+msgid ""
+"The component used to detect similar resources crashed. We try to fix this "
+"as soon as possible."
+msgstr ""

@@ -1,0 +1,54 @@
+{% extends 'learning/_includes/modals/base.html' %}
+{% load i18n learning %}
+
+{% block modal_id %}remove-objective-{{ objective.objective.slug }}-on-{{ object.slug }}{% endblock %}
+{% block modal_aria_label %}remove-objective-{{ objective.objective.slug }}-on-{{ object.slug }}{% endblock %}
+
+{% block modal_header %}
+  <h5 class="modal-title">
+    {% if objective %}
+    {% endif %}
+    {% blocktrans trimmed with name=object.name ability=objective.objective.ability %}
+      Remove "{{ ability }}" objective on “{{ name }}”
+    {% endblocktrans %}
+  </h5>
+{% endblock %}
+
+{% block modal_body %}
+  <div id="body-information">
+    {% blocktrans trimmed with ability=objective.objective.ability object_name=object_name %}
+      You are about to unlink the objective {{ ability }}. This means that the objective will remain but will no
+      longer be associated with this {{ object_name }}.
+    {% endblocktrans %}
+  </div>
+  <div id="body-information-owner">
+    {% if user == objective.objective.author %}
+      {% trans "You are the author of this objective. You can delete it. This means that the objective will delete on the entire application." %}
+    {% endif %}
+  </div>
+
+{% endblock %}
+{% block modal_footer %}
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">
+    <i class="fa fa-times"></i> {% trans "Close" %}
+  </button>
+  {% if user == objective.objective.author %}
+    {% with "learning:objective/delete" as delete_url %}
+      <form id="form-delete-object-objective-{{ objective.objective.slug }}" method="post" action="{% url delete_url %}">
+        {% csrf_token %}
+        <input id="objective-delete-{{ objective.objective.slug }}-pk" type="hidden"  name="objective_pk" value="{{ objective.objective.id }}">
+        <button id="object-objective-{{ objective.objective.slug }}-delete" type="submit" class="btn btn-outline-danger">
+          <i class="fas fa-trash"></i>
+          {% trans "Delete the objective" %}
+        </button>
+      </form>
+    {% endwith %}
+  {% endif %}
+  <form id="form-remove-object-objective-{{ objective.objective.slug }}" method="post" action="{% url target_url slug=object.slug %}">
+    {% csrf_token %}
+    <input id="objective-remove-{{ objective.objective.slug }}-pk" type="hidden"  name="objective_pk" value="{{ objective.id }}">
+    <button id="object-objective-{{ objective.objective.slug }}-remove" type="submit" class="btn btn-outline-warning">
+      <i class="fa fa-unlink"></i> {% trans "Unlink the objective" %}
+    </button>
+  </form>
+{% endblock %}

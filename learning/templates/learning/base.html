@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load i18n static django_bootstrap_breadcrumbs %}
+
+{% block extrastyle %}{{ block.super }}
+  <link rel="stylesheet" href="{% static 'learning/scss/learning.css' %}"/>
+  <link rel="stylesheet" href="{% static 'flags/sprite-hq.css' %}">
+  <script defer src="{% static 'learning/fonts/fontawesome.js' %}"></script>
+  <script defer src="{% static 'learning/js/learning.js' %}"></script>
+  <script defer src="{% static 'learning/js/form.js' %}"></script>
+  <script type="text/javascript" src="{% url 'learning:javascript-catalog' %}"></script>
+{% endblock %}
+
+{% block extrahead %}{{ block.super }}
+  <link rel="icon" type="image/png" href="{% static 'learning/favicon.png' %}"/>
+{% endblock %}
+
+{% block content %}
+  <div class="d-flex">
+    {% block sidebar %}{% endblock %}
+    <main id="learning-content" class="container pt-2 mb-5">
+      {% block breadcrumbs %}
+        {% breadcrumb "Home" "learning:index" %}
+      {% endblock %}
+      {% include "learning/_includes/breadcrumbs.html" %}
+      {% include "learning/_includes/messages.html" %}
+      {% block learning_content %}
+        <div class="clearfix">
+          {% if user.is_authenticated %}
+          <h2 class="float-left">{% blocktrans %}Welcome {{ user }} !{% endblocktrans %}</h2>
+          {% else %}
+            <h2 class="float-left">{% trans "Welcome !" %}</h2>
+          {% endif %}
+          <h2 class="btn-dropdown float-right bg-white" onclick="dropdown()"><i class="icn-dropdown fa fa-caret-down"></i></h2>
+        </div>
+        <div id="dropdown-container">
+              <h4 class="text-muted text-center m-5">{% trans "You are currently on the Koala LMS learning platform. You have the possibility to access the online courses in the « Studying » section or to create new ones in the « Teaching » section." %}</h4>
+        </div>
+        <hr>
+        <h2>{% trans "Studying" %}</h2>
+        {% if has_obj %}
+          <div class="row">
+            {% for course in page_obj %}
+              {% include "learning/course/_includes/block/course_block_base.html" with course=course %}
+            {% endfor %}
+          </div>
+          {% include "learning/_includes/paginator_buttons.html" with current_page=page_obj %}
+        {% else %}
+          <div class="alert alert-info" role="alert">
+            {% trans "You did not register on any course yet. Go to the search page to find owesome courses to follow." %}
+          </div>
+        {% endif %}
+
+        <hr>
+
+        <h2>{% trans "Teaching" %}</h2>
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-6 col-12 p-2">
+            <div class="card w-100 h-100">
+              <div class="card-body">
+                <h5 class="card-title">{% trans "My courses" %}</h5>
+                <p class="card-text">
+                  {% trans "Courses are compose of of activities. User can register to courses and then become students on courses." %}
+                </p>
+              </div>
+              <div class="card-footer bg-transparent">
+                <a href="{% url "learning:course/teaching" %}"
+                   class="float-right text-decoration-none">{% trans "Go to my courses" %}</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6 col-12 p-2">
+            <div class="card w-100 h-100">
+              <div class="card-body">
+                <h5 class="card-title">{% trans "My activities" %}</h5>
+                <p class="card-text">{% trans "Activites are parts of courses you can reuse and share. Activities contain educational resources." %}</p>
+              </div>
+              <div class="card-footer bg-transparent">
+                <a href="{% url "learning:activity/my" %}"
+                   class="float-right text-decoration-none">{% trans "Go to my activities" %}</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6 col-12 p-2">
+            <div class="card w-100 h-100">
+              <div class="card-body">
+                <h5 class="card-title">{% trans "My resources" %}</h5>
+                <p
+                        class="card-text">{% trans "Resources are educational resources that can be text, videos, audios or whatever you like. Resources can be reused and shahred between activites." %}</p>
+              </div>
+              <div class="card-footer bg-transparent">
+                <a href="{% url "learning:resource/my" %}"
+                   class="float-right text-decoration-none">{% trans "Go to my resources" %}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endblock %}
+    </main>
+  </div>
+{% endblock %}

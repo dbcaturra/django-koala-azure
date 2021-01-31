@@ -1,0 +1,12 @@
+{# object : instance of BasicModelMixin #}
+{# object_collaborator : instance of ObjectCollaboratorMixin#}
+{# target_url : URL to be used in the url template tag, the URL that actually removes the collaborator #}
+{% load i18n %}
+{% include "learning/_includes/collaborators/modals/delete_collaborator_on_object.html" with object=object object_collaborator=object_collaborator target_url=target_url %}
+<span style="padding-top: .25rem;" data-toggle="tooltip" data-placement="top"
+                          title="{% trans "Remove the collaborator" %}">
+<button class="btn btn-outline-danger" type="button" data-toggle="modal"
+        data-target="#delete-collaborator-{{ object_collaborator.collaborator.id }}-from-{{ object.slug }}">
+  <i class="fa fa-trash fa-sm"></i>
+</button>
+</span>

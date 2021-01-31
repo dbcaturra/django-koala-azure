@@ -1,0 +1,132 @@
+{% extends "learning/course/base.html" %}
+{% load i18n learning django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} −
+  {% blocktrans with name=course.name %}Course “{{ name }}”{% endblocktrans %}
+{% endblock %}
+
+{% block sidebar %}
+  {% include "learning/course/_includes/sidebar.html" %}
+{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% if course.name|length >= 70 %}
+    {% breadcrumb course.name|truncatechars:40 "learning:course/detail" course.slug %}
+  {% else %}
+    {% breadcrumb course.name "learning:course/detail" course.slug %}
+  {% endif %}
+{% endblock %}
+
+{% block learning_content %}
+  {% get_object_perms object user as course_perms %}
+  <div id="alert-copy-link" class="alert alert-info hidden" role="alert">
+    {% trans "Link copied to your clipboard." %}
+  </div>
+  <div class="clearfix">
+    {# Course title and permalink #}
+    <h3 class="float-left my-1 word-break">
+      <button id="copy-link-button" onclick="copyLink()" class="mr-2 btn btn-outline-koala" value="{{ request.get_host }}{% url "learning:course/detail" slug=course.slug %}"
+         data-toggle="tooltip" data-placement="top" title="{% trans "Copy the link of the course" %}">
+        <i class="fa fa-copy"></i>
+      </button>
+      {% if course.name|length >= 70 %}
+        {{ course.name|truncatechars:40 }}
+      {% else %}
+        {{ course.name }}
+      {% endif %}
+    </h3>
+    {# Course management buttons #}
+    <div class="my-1 ml-2 float-right">
+      {% if not user == course.author and not contribution %}
+      {# Display register or unregister button #}
+        {% if user_can_register %}
+          {% if registration and not registration.registration_locked %}
+            {# The user is a student, he can unregister #}
+            {% include 'learning/course/_includes/details/modals/unregister.html' with course=course %}
+            <button id="btn-course-unregister" type="button" class="btn btn-outline-danger"
+                    data-toggle="modal" data-target="#unregister-course-{{ course.slug }}">
+              <i class="fa fa-user-minus"></i> {% trans "Unregister" %}
+            </button>
+          {% elif registration and registration.registration_locked or user in course.students.all %}
+            <button id="btn-course-unregister-locked" class="btn btn-secondary shadow-none disabled"
+            data-toggle="tooltip" data-placement="top" title="{% trans "You cannot unregister from this course because a teacher in the course feels that you should take it." %}">
+              <i class="fa fa-user-times"></i> {% trans "Unregistration impossible" %}
+            </button>
+          {% elif not registration %}
+            {# It’s not already a student so it can register #}
+            <form class="ml-1 float-right" action="{% url 'learning:course/detail/register' slug=course.slug %}" method="post">
+              {% csrf_token %}
+              <button type="submit" id="btn-course-register" class="btn btn-outline-success">
+                <i class="fa fa-user-plus"></i> {% trans "Register" %}
+              </button>
+            </form>
+          {% endif %}
+          {# This part is for the course with acces on student-only #}
+        {% elif not user_can_register and user in course.students.all %}
+          <button id="btn-course-register-locked" class="btn btn-secondary shadow-none disabled"
+          data-toggle="tooltip" data-placement="top" title="{% trans "You cannot unregister from this course because a teacher in the course feels that you should take it." %}">
+              <i class="fa fa-user-times"></i> {% trans "Unregistration impossible" %}
+            </button>
+        {% else %}
+          <button id="btn-course-unregister-locked" class="btn btn-secondary shadow-none disabled"
+          data-toggle="tooltip" data-placement="top" title="{% trans "You cannot register for this course as free registrations are not allowed." %}">
+              <i class="fa fa-user-times"></i> {% trans "Registration impossible" %}
+            </button>
+        {% endif %}
+      {% else %}
+        {# Display change and delete buttons #}
+        {% if "change_course" in course_perms %}
+          <a id="btn-course-change" href="{% url 'learning:course/update' slug=course.slug %}" class="btn btn-outline-warning">
+            <i class="fa fa-edit"></i> {% trans "Edit" %}
+          </a>
+        {% endif %}
+        {% if "delete_course" in course_perms %}
+          <a id="btn-course-delete" href="{% url 'learning:course/delete' slug=course.slug %}" class="btn btn-outline-danger">
+            <i class="fa fa-trash"></i>
+          </a>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+
+  <hr class="course_title_separator">
+
+  <div class="clearfix">
+    <div id="object-tags" class="float-left">
+      {% include "learning/_includes/object_tags_line.html" %}
+    </div>
+    <div id="object-language" class="float-right">
+      {% include "learning/_includes/object_language.html" %}
+      <span id="author-badge" class="badge badge-pill badge-language p-1 float-right mx-2">
+        <i class="fas fa-pen"></i> {% blocktrans with author=course.author %}Writen by {{ author }}{% endblocktrans %}
+      </span>
+    </div>
+  </div>
+  <hr>
+    {% if user == course.author or contribution%}
+    {% include "learning/course/_includes/details/status_line.html" %}
+    <hr>
+  {% endif %}
+
+  {% with maxlength=2000 length=course.description|render_markdown|striptags|length %}
+    {% if length > maxlength and "change_course" in course_perms %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {% blocktrans %}Description for this course seems too long ({{ length }} characters). You should consider reducing it to less than {{ maxlength }} characters for better
+          readability.{% endblocktrans %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <div class="p-3 model_description my-4">
+    {{ course.description | render_markdown | safe }}
+  </div>
+
+  {# Include the objectives #}
+     {% include "learning/taxonomy/objective/detail/objective_list.html" with objectives=objectives.page_obj object_name='course'%}
+  {% if user_is_teacher %}
+    <hr class="mb-4">
+    {% include "learning/course/_includes/details/teacher_activities_view.html" %}
+  {% endif %}
+
+{% endblock %}

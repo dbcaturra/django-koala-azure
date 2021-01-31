@@ -1,0 +1,71 @@
+{% load i18n learning %}
+
+<div class="form-group">
+
+  <em id="mandatory">{% trans "All fields are mandatory" %} </em>
+
+  {# The course form tab that contains name, tags and language #}
+  <div class="object_form_tab">
+    <h3>{% trans "Specifications" %}</h3>
+    <div class="form-group">
+      <div class="form-row">
+        <div class="col">
+          {% include "learning/_includes/forms/form_group_block.html" with field=form.name %}
+        </div>
+        {% if form.language %}
+          <div class="col-auto">
+            {% include "learning/_includes/forms/form_group_block.html" with field=form.language %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="form-row">
+        <div class="col">
+          {% include "learning/_includes/forms/form_group_block.html" with field=form.tags %}
+          <small class="ml-4 text-muted"> {% trans  'You can write multi-token keywords by surrounding them with  « " » (double quote) symbols.' %}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {# The resource form tab that contains access, state, duration #}
+  <div class="object_form_tab">
+    <h3>{% trans "Properties" %}</h3>
+    <div class="form-group">
+      <div class="form-row">
+        <div class="col">
+          {% if form.access %}
+            {% include "learning/_includes/forms/form_group_block.html" with field=form.access %}
+          {% endif %}
+        </div>
+        <div class="col">
+          {% include "learning/_includes/forms/form_group_block.html" with field=form.state %}
+        </div>
+      </div>
+        <div class="col-auto">
+          {% if form.registration_enabled %}
+            {% include "learning/_includes/forms/form_group_block.html" with field=form.registration_enabled boolean=True %}
+          {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {# The course form tab that contains the object description #}
+  <div class="object_form_tab">
+    <h3>{% trans "Description" %}</h3>
+    <div class="form-group">
+      {{ form.media }}
+      <div onkeypress="count_up()">{% include "learning/_includes/forms/form_group_block.html" with field=form.description %}</div>
+      {% include "learning/_includes/forms/form_group_block.html" with field=form.media %}
+      <small class="ml-4 text-muted">{% trans 'You can use the <a href="https://www.markdownguide.org/basic-syntax/" target=\"_blank\">Markdown</a> syntax here.' %}</small>
+      <div class="float-right mr-4 text-muted">
+        <small id="nb_char">0 {% trans 'characters' %}</small>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.getElementById("id_description").setAttribute("placeholder",
+          "{% trans 'Write a description that helps understanding the theme you are describing. Try not to write too much and express clearly what you mean. Try to avoid ambiguities.' %}");
+</script>

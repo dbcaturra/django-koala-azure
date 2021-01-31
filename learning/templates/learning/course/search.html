@@ -1,0 +1,61 @@
+{% extends "learning/base.html" %}
+{% load i18n django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} − {% trans "Search courses" %}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Studying" "" %}
+  {% breadcrumb "Search for a course" "learning:course/search" %}
+{% endblock %}
+
+{% block learning_content %}
+  <form method="get">
+    <div class="form-row">
+      <div class="col">
+        {{ form.query }}
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-outline-primary" type="submit"><i class="fa fa-search"></i></button>
+      </div>
+    </div>
+  </form>
+
+  {% if search_has_obj == False %}
+    <hr>
+    <h5 class="m-5">{% trans "No courses match your search…" %}</h5>
+    {% else %}
+      {% if search_nb_per_page > 0 %}
+        <hr>
+        <h2>{% trans "My search" %}</h2>
+        <div class="row">
+          {% for course in search_page_obj %}
+            {% include "learning/course/_includes/block/course_block_base.html" with course=course %}
+          {% endfor %}
+        </div>
+    {% endif %}
+      {% include 'learning/_includes/paginator_buttons.html' with current_page=search_page_obj prefix='search' nb_per_page=search_nb_per_page %}
+  {% endif %}
+
+  {% if recommended_has_obj %}
+    <hr>
+    <h2>{% trans "Some courses that might interest you…" %}</h2>
+    <div class="row">
+      {% for course in recommended_page_obj %}
+        {% include "learning/course/_includes/block/course_block_base.html" with course=course %}
+      {% endfor %}
+    </div>
+    {% include 'learning/_includes/paginator_buttons.html' with current_page=recommended_page_obj prefix='recommended' nb_per_page=recommended_nb_per_page %}
+  {% endif %}
+
+  {% if public_has_obj %}
+    <hr>
+    <h2>{% trans "All accessible courses" %}</h2>
+    <div class="row">
+      {% for course in public_page_obj %}
+        {% include "learning/course/_includes/block/course_block_base.html" with course=course %}
+      {% endfor %}
+    </div>
+    {% include 'learning/_includes/paginator_buttons.html' with current_page=public_page_obj prefix='public' nb_per_page=public_nb_per_page %}
+  {% endif %}
+{% endblock %}

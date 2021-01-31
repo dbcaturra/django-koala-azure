@@ -1,0 +1,41 @@
+<tr id="tr-table-object-objective-{{ objective.objective.slug }}">
+  <td id="td-object-objective-{{ objective.objective.slug }}-taxonomy-level">{{ objective.get_taxonomy_level_display }}</td>
+  <td id="td-object-objective-{{ objective.objective.slug }}-ability">{{ objective.objective.ability }}</td>
+  <td id="td-object-objective-{{ objective.objective.slug }}-created">{{ objective.created }}</td>
+  {% if user.is_authenticated %}
+    {% if not user_is_author_of_object and not user_contribute %}
+      {% with "learning:"|add:object_name|add:"/detail/objective/validation/change" as target_url %}
+        <td id="td-object-objective-{{ objective.objective.slug }}-update-validation-form" class="row align-items-center justify-content-center">
+          <form method="post" action="{% url target_url slug=object.slug %}">{% csrf_token %}
+            <input type="hidden"  name="pk_object_objective" id="pk_object_objective-validation-{{ objective.objective.slug }}" value="{{ objective.id }}">
+            {% if auth_user in objective.validators.all %}
+              <button id="button-invalidate-objective-{{ objective.objective.slug }}" class="btn text-success">
+                <i class="far fa-check-square"></i>
+              </button>
+            {% else %}
+              <button id="button-validate-objective-{{ objective.objective.slug }}" class="btn"><i class="far fa-square">
+              </i>
+              </button>
+            {% endif %}
+          </form>
+        </td>
+      {% endwith %}
+    {% else %}
+      <td id="td-object-objective-{{ objective.objective.slug }}-author">{{ objective.objective.author }}</td>
+      {% if "change_objective_"|add:object_name in object_perms %}
+        <td id="td-object-objective-{{ objective.objective.slug }}-modification-panel">
+          <div class="clearfix">
+            <div class="float-right">
+              {% with "learning:"|add:object_name|add:"/detail/objective/change" as target_url %}
+                {% include "learning/taxonomy/objective/detail/objective_change.html" with object=object objective=objective target_url=target_url %}
+              {% endwith %}
+              {% with "learning:"|add:object_name|add:"/detail/objective/remove" as target_url %}
+                {% include "learning/taxonomy/objective/detail/objective_remove.html" with object=object objective=objective target_url=target_url %}
+              {% endwith %}
+            </div>
+          </div>
+        </td>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+</tr>

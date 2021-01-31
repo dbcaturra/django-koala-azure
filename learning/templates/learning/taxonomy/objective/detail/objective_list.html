@@ -1,0 +1,49 @@
+{% load learning %}
+{% load i18n %}
+{% get_object_perms object user as object_perms %}
+<div id="objective_list_block">
+  <div class="clearfix mb-2">
+    <div class="float-right">
+      {% if "add_objective_"|add:object_name in object_perms %}
+        {% with "learning:"|add:object_name|add:"/detail/objective/add" as target_url %}
+          {% include "learning/taxonomy/objective/detail/objective_add.html" with object=object target_url=target_url %}
+        {% endwith %}
+      {% endif %}
+    </div>
+  </div>
+  {% if objectives %}
+    <table class="table" id="table-object-objective-list">
+      <thead>
+      <tr class="table-active">
+        <th scope="col">{% trans "Level" %}</th>
+        <th class="col-6" scope="col">{% trans "Ability" %}</th>
+        <th scope="col">{% trans "Date" %}</th>
+        {% if user_contribute or user_is_author_of_object %}
+          <th scope="col">{% trans "Author" %}</th>
+          {% if "change_objective_"|add:object_name in object_perms %}
+            <th scope="col">{% trans "Actions" %}</th>
+          {% endif %}
+        {% else %}
+           {% if user.is_authenticated %}
+          <th scope="col">{% trans "Validation" %}</th>
+        {% endif %}
+        {% endif %}
+      </tr>
+      </thead>
+      <tbody>
+
+      {% for objective in objectives %}
+        {% include "learning/taxonomy/_includes/block/objective_object_block_base.html" with objective=objective %}
+      {% endfor %}
+
+      </tbody>
+    </table>
+    {% include "learning/_includes/paginator_buttons.html" with current_page=objectives %}
+  {% else %}
+    <div class="col-auto">
+      <div class="alert alert-info" role="alert">
+        {% trans "There is no objective yet. You should consider adding one." %}
+      </div>
+    </div>
+  {% endif %}
+</div>

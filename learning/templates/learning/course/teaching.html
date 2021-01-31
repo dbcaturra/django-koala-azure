@@ -1,0 +1,91 @@
+{% extends "learning/base.html" %}
+{% load i18n django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} − {% trans "Courses I teach in" %}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Teaching" "" %}
+  {% breadcrumb "My courses" "learning:course/teach" course.slug %}
+{% endblock %}
+
+{% block learning_content %}
+  <form method="get">
+    <div class="form-row">
+      <div class="col">
+        {{ form.query }}
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-outline-primary" type="submit"><i class="fa fa-search"></i></button>
+      </div>
+      <div class="col-auto ml-1">
+        <a href="{% url "learning:course/add" %}" class="float-right btn btn-outline-success">
+          <i class="fa fa-plus"></i> {% trans "Create a new course" %}
+        </a>
+      </div>
+    </div>
+  </form>
+
+  {% if search_has_obj == False %}
+    <hr>
+    <h5 class="m-5">{% trans "No courses that you are teaching match your search…" %}</h5>
+    {% else %}
+      {% if search_nb_per_page > 0 %}
+        <hr>
+        <h2>{% trans "My search" %}</h2>
+        <hr class="course_title_separator">
+        <div class="row">
+          {% for course in search_page_obj %}
+            {% include "learning/course/_includes/block/teacher_course_block.html" %}
+          {% endfor %}
+        </div>
+        {% include 'learning/_includes/paginator_buttons.html' with current_page=search_page_obj prefix='search' nb_per_page=search_nb_per_page %}
+      {% endif %}
+  {% endif %}
+
+  {# The favourite courses where the connected user is author #}
+  {% if favourite_has_obj %}
+    <hr>
+    <h2>{% trans "My favourites courses" %}</h2>
+    <hr class="course_title_separator">
+    <div class="row">
+      {% for course in favourite_page_obj %}
+        {% include "learning/course/_includes/block/teacher_course_block.html" %}
+      {% endfor %}
+    </div>
+    {% include 'learning/_includes/paginator_buttons.html' with current_page=favourite_page_obj prefix='favourites' nb_per_page=favourite_nb_per_page %}
+  {% endif %}
+
+  {# The courses where the connected user is author #}
+  {% if author_has_obj %}
+    <hr>
+    <h2>{% trans "My courses" %}</h2>
+    <hr class="course_title_separator">
+    <div class="row">
+      {% for course in author_page_obj %}
+        {% include "learning/course/_includes/block/teacher_course_block.html" %}
+      {% endfor %}
+    </div>
+    {% include 'learning/_includes/paginator_buttons.html' with current_page=author_page_obj prefix='author' nb_per_page=author_nb_per_page %}
+  {% else %}
+    <hr>
+    <div class="alert alert-info" role="alert">
+      {% trans "You did not create a course yet. Courses are reusable and shareable elements that aggregate activities and educational resources. Go on and create a course!" %}
+    </div>
+  {% endif %}
+
+
+  {# The courses on which the user collaborates on #}
+  {% if contributor_has_obj %}
+    <hr>
+    <h2>{% trans "My contributions" %}</h2>
+    <hr class="course_title_separator">
+    <div class="row">
+      {% for contribution in contributor_page_obj %}
+        {% include "learning/course/_includes/block/teacher_course_block.html" with course=contribution.course contribution=contribution %}
+      {% endfor %}
+    </div>
+    {% include 'learning/_includes/paginator_buttons.html' with current_page=contributor_page_obj prefix='contributor' nb_per_page=contributor_nb_per_page %}
+  {% endif %}
+
+{% endblock %}

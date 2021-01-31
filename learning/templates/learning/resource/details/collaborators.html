@@ -1,0 +1,29 @@
+{% extends "learning/resource/detail.html" %}
+{% load i18n learning django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} − {% trans "Collaborators" %}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Collaborators" "learning:resource/details/collaborators" object.slug %}
+{% endblock %}
+
+{% block learning_content %}
+  {% for object_collaborator in page_obj %}
+    {% if user == object_collaborator.collaborator %}
+      <div class="alert alert-info" role="alert">
+        {% trans "You are collaborator of this resource. Check your rights on the table to see what you can do !" %}
+      </div>
+    {% endif %}
+  {% endfor %}
+  {# Show a warning if the resource is private #}
+  {% if resource.access == 'PRIVATE' %}
+    <div id="alert-collaborators-no-access" class="alert alert-warning" role="alert">
+      {% trans "This resource is private. This means your collaborators loose all their permissions until you toggle access level to at least “Collaborators only”." %}
+    </div>
+  {% endif %}
+
+  {% with "resource" as object_name %}
+    {% include "learning/_includes/collaborators/collaborators_content.html" %}
+  {% endwith %}
+{% endblock %}

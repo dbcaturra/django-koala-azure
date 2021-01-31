@@ -1,0 +1,14 @@
+{% extends "learning/base.html" %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% if user_is_student %}
+    {% breadcrumb "Studying" "" %}
+    {% breadcrumb "My courses" "learning:course/my" %}
+  {% elif user_is_teacher %}
+    {% breadcrumb "Teaching" "" %}
+    {% breadcrumb "My courses" "learning:course/teaching" %}
+  {% endif %}
+{% endblock %}
+

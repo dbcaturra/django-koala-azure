@@ -1,0 +1,64 @@
+{% load i18n learning %}
+
+{# object: instance of BasicObjectMixin #}
+{# object_collaborator : instance of ObjectCollaboratorMixin#}
+{# page_obj: paginator object with instances of ObjectCollaboratorMixin #}
+
+{% if page_obj.object_list %}
+  <table id="collaborators-table" class="table mt-3">
+    <thead>
+    <tr>
+      <th>{% trans "Name" %} <i class="fa fa-sort-alpha-down"></i></th>
+      <th>
+        {% trans "Role" %}
+        <span type="button" class="btn btn-sm p-0 m-0" data-toggle="tooltip" data-placement="top"  title='{% trans "Owners can view, edit and delete. Teachers can view and edit. Non-editor teachers can only view." %}'>
+          <i class="fa fa-question-circle"></i>
+        </span>
+      </th>
+      <th class="d-none d-lg-table-cell">{% trans "Permissions" %}</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+      {% for object_collaborator in page_obj %}
+        <tr>
+          <td class="font-weight-bold">{{ object_collaborator.collaborator }}</td>
+          <td>{{ object_collaborator.get_role_display }}</td>
+          <td class="d-none d-lg-table-cell">
+          {% if course.access == "PRIVATE" or activity.access == "PRIVATE" or resource.access == "PRIVATE" %}
+            <span class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="{% trans "Can do nothing." %}">
+              <i class="fa fa-ban"></i>
+             </span>
+          {% else %}
+             {% get_object_perms object object_collaborator.collaborator as collaborator_object_perms %}
+            {% for permission in collaborator_object_perms %}
+              {% get_permission_icon permission object as icon %}
+                {{ icon }}
+            {% endfor %}
+          {% endif %}
+          </td>
+          <td class="text-center">
+            {% if "change_collaborator_"|add:object_name in object_perms %}
+              {% with "learning:"|add:object_name|add:"/detail/collaborator/change" as target_url %}
+                {% include "learning/_includes/collaborators/change_collaborator_on_object.html" with object=object object_collaborator=object_collaborator target_url=target_url %}
+              {% endwith %}
+            {% endif %}
+            {% if "delete_collaborator_"|add:object_name in object_perms %}
+              {% with "learning:"|add:object_name|add:"/detail/collaborator/delete" as target_url %}
+                {% include "learning/_includes/collaborators/delete_collaborator_on_object.html" with object=object object_collaborator=object_collaborator target_url=target_url %}
+              {% endwith %}
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+  </table>
+  <p class="text-muted">{% blocktrans count counter=number_collaborator %}You have only one collaborator.{% plural %}You have {{ counter }} collaborators.{% endblocktrans %}</p>
+  {% include "learning/_includes/paginator_buttons.html" with current_page=page_obj %}
+{% else %}
+  <div class="alert alert-info" role="alert">
+    {% trans "You do not have any collaborator." %}
+    {% if "add_collaborator_"|add:object_name in object_perms %}
+      {% trans "You should consider adding one." context "add a collaborator" %}
+    {% endif %}
+  </div>
+{% endif %}

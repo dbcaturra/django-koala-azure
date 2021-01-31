@@ -1,0 +1,101 @@
+{% load i18n learning %}
+
+<div class="col-lg-4 col-md-6 col-sm-6 col-12 p-2">
+  <a  class="btn btn-outline-default activity_link shadow-none w-100 h-100 p-0"  href="{% url 'learning:activity/detail' slug=activity.slug %}">
+    <div class="card w-100 h-100">
+      <div class="card-body">
+
+        {% block activity_block_header %}
+          {% get_object_perms activity user as activity_perms %}
+            {% if "view_activity" in activity_perms %}
+              <div class="d-flex flex-row-reverse justify-content-around align-items-center word-break w-100">
+              {% if user.is_authenticated %}
+                {% get_activity_collaborator_object activity user as activity_collaborator %}
+                {% if add %}
+                  {# The activity can be linked to a course. In this case, display a button to attach it to the course #}
+                  <form method="post" action="{% url 'learning:course/detail/activity/attach' course.slug %}" id="link-course-to-activity-form">
+                    {% csrf_token %}
+                    <input name="activity" value="{{ activity.id }}" type="hidden">
+                    <button type="submit" class="btn btn-outline-success btn-sm m-2"
+                            data-toggle="tooltip" data-placement="top" title="{% trans "Associate the activity to the course." %}">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </form>
+                {% elif user == activity.author or activity_collaborator%}
+                  {% if not "similar" in request.get_full_path %}
+                    <form action="{% url "learning:activity/my/favourite" activity.slug %}" method="post">
+                    {% csrf_token %}
+                    {% if user in activity.favourite_for.all %}
+                      <button class="btn btn-outline-warning" type="submit" data-toggle="tooltip"
+                              data-placement="top" title="{% trans "Remove favourites" %}">
+                        <i class="fa fa-star"></i>
+                      </button>
+                    {% else %}
+                     <button class="btn btn-outline-warning" type="submit"  data-toggle="tooltip"
+                              data-placement="top" title="{% trans "Add to favourites" %}">
+                       <i class="far fa-star"></i>
+                     </button>
+                    {% endif %}
+                    </form>
+                  {% endif %}
+                {% endif %}
+                  <div class="card-link m-1 w-75 text-left">
+                  {% if activity.name|length >= 50 %}
+                    <h5 class="card-title mb-0">{{ activity.name|truncatechars:30 }}</h5>
+                  {% else %}
+                    <h5 class="card-title mb-0">{{ activity.name }}</h5>
+                  {% endif %}
+                  </div>
+            {% else %}
+                  {% if activity.name|length >= 50 %}
+                    <h5 class="card-title mb-0">{{ activity.name|truncatechars:30 }}</h5>
+                  {% else %}
+                    <h5 class="card-title mb-0">{{ activity.name }}</h5>
+                  {% endif %}
+              {% endif %}
+            {% endif %}
+            </div>
+        {% endblock %}
+
+        <hr>
+
+        <div class="float-left text-left">
+          {% include "learning/_includes/object_tags_line.html" with object=activity %}
+        </div>
+
+        <div class="card-text">
+          {% block activity_block_content %}{% endblock %}
+        </div>
+      </div>
+
+      <div class="card-footer bg-white">
+        {% block activity_card_footer %}
+        {% get_object_perms activity user as activity_perms %}
+          {# The activity name and its status and access badges #}
+          <div class="clearfix">
+            <div class="float-left">
+              {% get_activity_collaborator_object activity user as activity_collaborator %}
+              {% if activity_collaborator %}
+                <span class="badge badge-pill badge-info p-1" data-toggle="tooltip" data-placement="top"
+                      title="{{ activity_collaborator.role|get_role_badge_title }}">
+                  {{ activity_collaborator.get_role_display }}
+                </span>
+              {% elif activity.author == user %}
+                <span class="badge badge-pill badge-info p-1" data-toggle="tooltip" data-placement="top"
+                      title="{% trans "The user can do anything on the activity, without restriction." %}">
+                  {% trans "Owner" %}
+                </span>
+              {% endif %}
+            </div>
+              <div class="float-right">
+                {% include "learning/resource/_includes/nb_resources_badge.html" with activity=activity %}
+              </div>
+          </div>
+        {% endblock %}
+      </div>
+    </div>
+  </a>
+</div>
+
+
+

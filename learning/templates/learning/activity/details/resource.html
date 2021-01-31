@@ -1,0 +1,18 @@
+{% extends "learning/activity/detail.html" %}
+{% load i18n learning django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} − {% trans "Resource" context "activity, title" %}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb resource.name "learning:activity/resource/detail" activity.slug resource.slug %}
+{% endblock %}
+
+{% block learning_content %}
+  {% get_object_perms resource user as resource_perms %}
+  {% if "view_resource" in resource_perms %}
+    {% include "learning/resource/_includes/details/detail_page.html" with resource=resource %}
+  {% else %}
+    <p class="text-center"><strong>{% trans "Viewing this resource is restricted. You cannot see the resource details." %}</strong></p>
+  {% endif %}
+{% endblock %}

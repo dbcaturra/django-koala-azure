@@ -1,0 +1,35 @@
+{% extends "learning/resource/detail.html" %}
+{% load i18n django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} −
+  {% blocktrans with name=resource.name %}Delete resource “{{ name }}”{% endblocktrans %}
+{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Delete" "learning:resource/delete" resource.slug %}
+{% endblock %}
+
+{% block learning_content %}
+  <div class="col-md-8 offset-md-2">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="m-0">{% blocktrans with name=resource.name %}Deleting “{{ name }}”…{% endblocktrans %}</h2>
+      </div>
+      <div class="card-body">
+        <p>{% blocktrans with name=resource.name %}You are about to delete the resource “{{ name }}”.{% endblocktrans %}</p>
+        <form method="post">
+          {% csrf_token %}
+          <div class="clearfix">
+            <a class="btn btn-outline-secondary float-lg-left m-1" href="{% url "learning:resource/detail" slug=resource.slug %}">
+             <i class="fa fa-arrow-left"></i> {% trans "Bring me back to the resource" %}
+            </a>
+            <button type="submit" class="btn btn-outline-danger float-lg-right m-1">
+             <i class="fa fa-trash"></i> {% trans "Ok, I understand, delete this resource" %}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "learning/taxonomy/objective/base.html" %}
+{% load i18n django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} − {% trans "Create a new objective" %}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Objectives" "learning:objective" %}
+  {% breadcrumb "Create a new objective" "learning:objective/create" %}
+{% endblock %}
+
+{% block learning_content %}
+  <form name="object_add_form" method="post" id="objective_create_form">
+    <h1>{% trans "Create a new objective" %}</h1>
+    <hr>
+    {% csrf_token %}
+
+    {% include "learning/taxonomy/_includes/objective_form.html" with form=form %}
+    <button type="submit" id="add_objective_submit_button" class="btn btn-primary float-right">
+      {% trans "Create a new objective" %}
+    </button>
+  </form>
+{% endblock %}

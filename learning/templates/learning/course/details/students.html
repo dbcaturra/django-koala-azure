@@ -1,0 +1,123 @@
+{% extends "learning/course/detail.html" %}
+{% load i18n learning django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} − {% trans "Students" %}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Students" "learning:course/detail/students" course.slug %}
+{% endblock %}
+
+{% block learning_content %}
+  {# Show a warning if the course is private #}
+  {% if course.access == 'COLLABORATORS_ONLY' or course.access == 'PRIVATE' %}
+    <div id="alert-students-no-access" class="alert alert-warning" role="alert">
+      {% trans "Access to this course is restricted. This means your students will not be able to see the course until you toggle access level to at least “Students only”." %}
+    </div>
+  {% endif %}
+  {% get_object_perms object user as course_perms %}
+  <div class="clearfix">
+    {% if "add_student_course" in course_perms %}
+      <form method="post"
+            action="{% url 'learning:course/detail/students/add' slug=course.slug %}">
+        {% csrf_token %}
+        <div class="form-row align-items-center">
+          <div class="col">
+            {% include "learning/_includes/user_search_input_form.html" with form=form %}
+          </div>
+          <div class="col-auto">
+            {% include "learning/_includes/forms/form_group_block.html" with field=form.registration_locked boolean=True %}
+          </div>
+          <div class="col-auto text-center">
+            <button id="link-course-students-add" type="submit" class="mt-3 btn btn-outline-success">
+              <i class="fa fa-plus"></i> <span class="d-none d-md-inline">{% trans "Add a student" %}</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    {% endif %}
+  </div>
+
+
+  {% if page_obj.object_list %}
+    <table id="students-table" class="table mt-3">
+      <thead>
+      <tr class="text-center">
+        <th>{% trans "Name" %}</th>
+        <th class="d-none d-sm-table-cell">{% trans "Since" %}</th>
+        <th class="d-none d-md-table-cell">{% trans "Self registration" %}</th>
+        <th class="d-none d-lg-table-cell">{% trans "Locked" %}</th>
+        <th>{% trans "Delete" %}</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for registration in page_obj %}
+        <tr class="text-center">
+          <td>{{ registration.student }}</td>
+          <td class="text-muted d-none d-sm-table-cell">{{ registration.created|date:"SHORT_DATE_FORMAT" }}</td>
+          <td class="d-none d-md-table-cell">
+            {% if registration.self_registration %}
+              <i class="text-success fa fa-check-circle"></i>
+            {% else %}
+              <i class="text-danger fa fa-times-circle"></i>
+            {% endif %}
+          </td>
+          <td class="d-none d-lg-table-cell">
+
+
+            {% if "change_student_course" in course_perms %}
+              <form action="{% url "learning:course/detail/students/change" slug=course.slug registration_pk=registration.id %}" method="post">
+                {% csrf_token %}
+                {% if registration.registration_locked %}
+                  <span style="padding-top: .25rem;" data-toggle="tooltip" data-placement="top"
+                        title="{% trans "The registration of the student is locked" %}">
+                    <button type="submit" id="id-{{ registration.student.username }}_registration_locked"
+                            name="registration_locked" class="btn btn-outline-koala"  data-toggle="modal">
+                      <i class="fa fa-lock"></i>
+                    </button>
+                  </span>
+                {% else %}
+                  <span style="padding-top: .25rem;" data-toggle="tooltip" data-placement="top"
+                        title="{% trans "The registration of the student is unlocked" %}">
+                    <button type="submit" id="id-{{ registration.student.username }}_registration_unlocked"
+                            name="registration_unlocked"  class="btn btn-outline-koala" data-toggle="modal">
+                      <i class="fas fa-lock-open"></i>
+                    </button>
+                  </span>
+                {% endif %}
+              </form>
+            {% else %}
+              {% if registration.registration_locked %}
+                <i class="text-success fa fa-check-circle"></i>
+              {% else %}
+                <i class="text-danger fa fa-times-circle"></i>
+              {% endif %}
+            {% endif %}
+          </td>
+          <td>
+            {% if "delete_student_course" in course_perms %}
+              {% include "learning/course/_includes/students/modals/unregister_student_from_course.html" with course=object registration=registration %}
+              <span style="padding-top: .25rem;" data-toggle="tooltip" data-placement="top"
+                          title="{% trans "Remove the student" %}">
+              <button class="btn btn-outline-danger" type="button" data-toggle="modal"
+                      data-target="#unregister-student-{{ registration.student.id }}">
+                <i class="fa fa-trash fa-sm"></i>
+              </button>
+              </span>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% include "learning/_includes/paginator_buttons.html" with current_page=page_obj %}
+    <p class="text-muted">{% blocktrans count counter=number_student %}You have only one student.{% plural %}You have {{ counter }} students.{% endblocktrans %}</p>
+  {% else %}
+    <div class="alert alert-info" role="alert">
+      {% trans "No student registered on this course." %}
+      {% if "add_student_course" in course_perms %}
+        {% trans "You should consider adding one." context "add a student" %}
+      {% endif %}
+    </div>
+  {% endif %}
+{% endblock %}

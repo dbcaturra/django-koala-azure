@@ -1,0 +1,8 @@
+{% load i18n %}
+
+{% include "learning/taxonomy/objective/modals/add_objective_on_object.html" with target_url=target_url%}
+<button class="mt-3 btn btn-outline-success" type="button" data-toggle="modal"
+        data-target="#add-objective-on-{{ object.slug }}" id="id-button-add-object-objective-modal">
+  <i class="fas fa-plus-circle"></i>
+  <span>{% trans "Add an objective" %}</span>
+</button>

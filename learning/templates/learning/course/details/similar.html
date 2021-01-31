@@ -1,0 +1,24 @@
+{% extends "learning/course/detail.html" %}
+{% load i18n django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} − {% trans "Similar courses" %}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Similar courses" "learning:course/details/similar" course.slug %}
+{% endblock %}
+
+{% block learning_content %}
+  {% if has_obj %}
+    <div class="row">
+      {% for course in page_obj %}
+        {% include "learning/course/_includes/block/teacher_course_block.html" with course=course %}
+      {% endfor %}
+    </div>
+    {% include "learning/_includes/paginator_buttons.html" with current_page=page_obj %}
+  {% else %}
+    <div class="alert alert-info" role="alert">
+      {% trans "There is no similar course yet. Similar courses are courses that have tags in common." %}
+    </div>
+  {% endif %}
+{% endblock %}

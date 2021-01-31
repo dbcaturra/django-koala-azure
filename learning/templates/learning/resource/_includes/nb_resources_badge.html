@@ -1,0 +1,11 @@
+{% load i18n %}
+
+{% with activity.resources.count as nb_resources %}
+  {% if nb_resources > 0 %}
+    <span id="badge-nb-course-activities" class="badge badge-pill badge-resource p-1">
+      {% blocktrans count counter=nb_resources %}{{ nb_resources }} resource{% plural %}{{ nb_resources }} resources{% endblocktrans %}
+    </span>
+  {% else %}
+    <span id="badge-nb-course-resources" class="badge badge-muted no-badge p-1">{% trans "No resource yet" %}</span>
+  {% endif %}
+{% endwith %}

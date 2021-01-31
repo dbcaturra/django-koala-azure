@@ -1,0 +1,132 @@
+{% load i18n learning %}
+
+<div id="block-teacher-activities" class="clearfix mb-2">
+  <h3 class="float-left">{% trans "Activities" %}</h3>
+  <div class="float-right">
+
+    {# Adding a new activity requires change permission and a writable course #}
+    {% if "change_course" in course_perms and not course.read_only %}
+      <div class="text-center">
+      <a href="{% url 'learning:course/detail/activity/attach' slug=course.slug %}"
+         class="btn btn-outline-primary">
+        <i class="fa fa-search"></i> {% trans "Associate an existing activity" %}
+      </a>
+      <a href="{% url 'learning:course/detail/activity/add' slug=course.slug %}" class="btn btn-outline-success">
+        <i class="fa fa-plus"></i> {% trans "Create an activity" %}
+      </a>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+
+<hr class="activity_title_separator">
+
+{% if course.state == "ARCHIVED" %}
+  <div class="alert alert-warning" role="alert">
+    {% trans "This course is archived, you can't add activities to it." %}
+  </div>
+{% else %}
+
+{% with course_activities=course.course_activities.get_queryset %}
+  {% if course_activities %}
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>{% trans "Priority" %}</th>
+        <th>{% trans "Name" %}</th>
+        <th class="d-none d-lg-table-cell">{% trans "Access" %}</th>
+        <th class="d-none d-lg-table-cell">{% trans "Reusability" %}</th>
+        <th class="d-none d-lg-table-cell">{% trans "Author" %}</th>
+        <th>{% trans "Actions" %}</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for course_activity in course_activities %}
+        <tr>
+          <th class="text-center">
+            {% if course_activity.rank != 1 %}
+              <form method="post" action="{% url "learning:course/detail/activity/up" slug=course.slug %}">
+                {% csrf_token %}
+                <input type="hidden" name="activity" value="{{ course_activity.activity.id }}">
+                <button type="submit" class="btn btn-sm btn-outline-primary"><i class="fa fa-arrow-up"></i></button>
+              </form>
+            {% endif %}
+          </th>
+          {% with activity=course_activity.activity %}
+            {% get_object_perms activity user as activity_perms %}
+            <td>
+              {% if "view_activity" in activity_perms %}
+                <a href="{% url 'learning:activity/detail' slug=activity.slug %}{% relative_url course.slug prefix|add:'course' params%}">{{ activity.name }}</a>
+              {% else %}
+                {{ activity.name }}
+              {% endif %}
+            </td>
+            <td class="d-none d-lg-table-cell">
+              <span class="badge badge-info p-2"
+                    data-toggle="tooltip" data-placement="top"
+                    title="{{ activity.access|get_activity_access_badge_title }}">
+                {{ activity.get_access_display }}
+              </span>
+            </td>
+            <td class="d-none d-lg-table-cell">
+              <span class="badge badge-info p-2"
+                    data-toggle="tooltip" data-placement="top"
+                    title="{{ activity.reuse|get_activity_reuse_badge_title }}">
+                {{ activity.get_reuse_display }}
+              </span>
+            </td>
+            <td class="d-none d-lg-table-cell">{{ activity.author }}</td>
+            <td>
+              <div class="clearfix">
+                <div class="text-center">
+
+                  {% if "change_course" in course_perms and not course.read_only %}
+                    {% include 'learning/course/_includes/details/modals/unlink_attached_activity.html' with activity=activity course=course %}
+                    <span style="padding-top: .25rem;" data-toggle="tooltip" data-placement="top"
+                          title="{% trans "Unlink the activity from the course." %}">
+                      <button id="btn-course-activity-{{ activity.id }}-unlink"
+                              type="button" class="btn btn-sm btn-outline-secondary"
+                              data-toggle="modal" data-target="#unlink-modal-{{ activity.slug }}">
+                        <i class="fa fa-unlink"></i>
+                      </button>
+                    </span>
+                  {% endif %}
+
+                  {% if "change_activity" in activity_perms %}
+                    <a id="btn-course-activity-{{ activity.id }}-change"
+                       href="{% url 'learning:activity/update' slug=activity.slug %}"
+                       class="btn btn-sm btn-outline-warning d-none d-md-inline-block" data-toggle="tooltip"
+                       data-placement="top" title="{% trans "Update the activity" %}">
+                      <i class="fa fa-edit"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if "change_course" in course_perms and "delete_activity" in activity_perms %}
+                    {% include 'learning/course/_includes/details/modals/delete_attached_activity.html' with activity=activity course=course %}
+                    <span style="padding-top: .25rem;" data-toggle="tooltip" data-placement="top" title="{% trans "Delete the activity" %}">
+                      <button id="btn-course-activity-{{ activity.id }}-delete"
+                              type="button" class="btn btn-sm btn-outline-danger"
+                              data-toggle="modal" data-target="#delete-modal-{{ activity.slug }}">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </span>
+                  {% endif %}
+                </div>
+              </div>
+            </td>
+          {% endwith %}
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <div class="alert alert-info mt-4" role="alert">
+      {% trans "There is no activity yet." %}
+      {% if "change_course" in course_perms and not course.read_only %}
+        {% trans "You should consider adding one." context "add an activity" %}
+      {% endif %}
+    </div>
+  {% endif %}
+{% endwith %}
+{% endif %}

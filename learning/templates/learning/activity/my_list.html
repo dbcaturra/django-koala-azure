@@ -1,0 +1,90 @@
+{% extends "learning/activity/base.html" %}
+{% load i18n learning django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} − {% trans "My activities" %}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "My activities" "learning:activity/my" activity.slug %}
+{% endblock %}
+
+{% block learning_content %}
+
+  <form method="get">
+    <div class="form-row">
+      <div class="col">
+        {{ form.query }}
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-outline-primary" type="submit"><i class="fa fa-search"></i></button>
+      </div>
+      <div class="col-auto ml-1">
+        <a href="{% url "learning:activity/add" %}" class="float-right btn btn-outline-success">
+          <i class="fa fa-plus"></i> {% trans "Create a new activity" %}
+        </a>
+      </div>
+    </div>
+  </form>
+
+  {# The result of the query: gives activities to display #}
+  {% if search_has_obj == False %}
+    <hr>
+    <h5 class="m-5">{% trans "No activities that you are teaching match your search…" %}</h5>
+    {% else %}
+      {% if search_nb_per_page > 0 %}
+        <hr>
+        <h2>{% trans "My search" %}</h2>
+        <hr class="activity_title_separator">
+        <div class="row">
+          {% for activity in search_page_obj %}
+            {% include "learning/activity/_includes/block/activity_block.html" with activity=activity %}
+          {% endfor %}
+        </div>
+        {% include 'learning/_includes/paginator_buttons.html' with current_page=search_page_obj prefix='search' nb_per_page=search_nb_per_page %}
+    {% endif %}
+  {% endif %}
+
+  {# The favourite activities where the connected user is author #}
+  {% if favourite_has_obj %}
+    <hr>
+    <h2>{% trans "My favourites activities" %}</h2>
+    <hr class="activity_title_separator">
+    <div class="row">
+      {% for activity in favourite_page_obj %}
+        {% include "learning/activity/_includes/block/activity_block.html" with activity=activity %}
+      {% endfor %}
+    </div>
+    {% include 'learning/_includes/paginator_buttons.html' with current_page=favourite_page_obj prefix='favourites' nb_per_page=favourite_nb_per_page %}
+  {% endif %}
+
+  {# The activities owned by the connected user #}
+  {% if author_has_obj %}
+    <hr>
+    <h2>{% trans "My activities" %}</h2>
+    <hr class="activity_title_separator">
+    <div class="row">
+      {% for activity in author_page_obj %}
+        {% include "learning/activity/_includes/block/activity_block.html" with activity=activity %}
+      {% endfor %}
+    </div>
+    {% include 'learning/_includes/paginator_buttons.html' with current_page=author_page_obj prefix='author' nb_per_page=author_nb_per_page %}
+  {% else %}
+    <hr>
+    <div class="alert alert-info" role="alert">
+      {% trans "You did not create an activity yet. Activities are reusable and shareable elements that aggregate educational resources. Go on and create an activity!" %}
+    </div>
+  {% endif %}
+
+  {# The activities on which the user collaborates on #}
+  {% if contributor_has_obj %}
+    <hr>
+    <h2>{% trans "My contributions" %}</h2>
+    <hr class="activity_title_separator">
+    <div class="row">
+      {% for contribution in contributor_page_obj %}
+        {% include "learning/activity/_includes/block/activity_block.html" with activity=contribution.activity contribution=contribution %}
+      {% endfor %}
+    </div>
+    {% include 'learning/_includes/paginator_buttons.html' with current_page=contributor_page_obj prefix='contributor' nb_per_page=contributor_nb_per_page %}
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,6 @@
+{% load i18n %}
+
+{% get_language_info for object.language as lang %}
+<span class="badge badge-pill badge-default badge-language p-1 float-right">
+  <i class="fas fa-language"></i> {{ lang.name_translated }}
+</span>

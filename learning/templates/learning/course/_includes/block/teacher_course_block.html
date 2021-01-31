@@ -1,0 +1,35 @@
+{% extends "learning/course/_includes/block/course_block_base.html" %}
+{% load i18n learning %}
+
+{% block course_card_footer %}
+  <div class="clearfix">
+    <div class="float-left">
+        {% get_course_collaborator_object course user as course_collaborator %}
+        {% if course_collaborator %}
+          <span class="badge badge-pill badge-info p-1" data-toggle="tooltip" data-placement="top"
+                title="{{ course_collaborator.role|get_role_badge_title }}">
+            {{ course_collaborator.get_role_display }}
+          </span>
+        {% else %}
+          {% if user in course.students.all %}
+            <span class="badge badge-pill badge-info p-1" data-toggle="tooltip" data-placement="top"
+                  title="{% trans "You registered to this course. You can unregister if registration is enabled by the course owner." %}">
+              {% trans "Registered" %}
+            </span>
+          {% elif course.registration_enabled  and not user == course.author %}
+            <span class="badge badge-pill badge-info p-1">{% trans "Registration enabled" %}</span>
+          {% else %}
+            <span class="badge badge-pill badge-info p-1" data-toggle="tooltip" data-placement="top"
+                title="{% trans "The user can do anything on the course, without restriction." %}">
+              {% trans "Owner" %}
+          </span>
+          {% endif %}
+        {% endif %}
+    </div>
+    <div class="float-right">
+      {% include "learning/activity/_includes/nb_activities_badge.html" with course=course %}
+    </div>
+  </div>
+{% endblock %}
+
+

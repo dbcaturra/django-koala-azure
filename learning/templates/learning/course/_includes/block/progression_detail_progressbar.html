@@ -1,0 +1,30 @@
+{% load i18n learning %}
+{% if progression_data %}
+  <div class="row mt-2">
+  <div class="w-25 text-secondary text-xl-left"><span class="m-4">{% trans key|title %}</span></div>
+  <div class="progress w-75" style="height: 25px;">
+    <div title="{% trans key|title %}"
+            class="progress-bar
+          {% if key == "KNOWLEDGE" %}
+          bg-primary
+          {% elif key == "COMPREHENSION"%}
+          bg-success
+          {% elif key == "APPLICATION" %}
+          bg-info
+          {% elif key == "ANALYSIS" %}
+          bg-warning
+          {% elif key == "SYNTHESIS" %}
+          bg-danger
+          {% elif key == "EVALUATION" %}
+          bg-dark
+{% endif %}"
+            role="progressbar"
+            style="width: {{ progression_data.progress_total }}%; height: 100%;"
+            aria-valuenow="{{  progression_data.number_validation }}"
+            aria-valuemin="0"
+            aria-valuemax="{{  progression_data.total }}">
+      {{ progression_data.number_validation }}/{{ progression_data.total }}
+    </div>
+  </div>
+  </div>
+{% endif %}

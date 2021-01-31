@@ -1,0 +1,38 @@
+{% if boolean %}
+  <div class="ml-4 mt-3">
+    <input type="checkbox" class="form-check-input" id="{{ field.id_for_label }}" name="{{ field.html_name }}"
+      {% if field.value %}checked=""{% endif %}>
+    <label class="form-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+    <span type="button" class="btn btn-sm" data-toggle="tooltip" data-placement="top"  title='{{ field.help_text }}'>
+      <i class="fa fa-question-circle"></i>
+    </span>
+  </div>
+{% else %}
+  {% if field == form.roles %}
+    <div class="form-group">
+  {% else %}
+    <div class="form-group m-3">
+  {% endif %}
+    {% if field != form.description %}
+      {{ field.label_tag }}
+    {% endif %}
+    {% if field.help_text %}
+        <span type="button" class="btn btn-sm" data-toggle="tooltip" data-placement="top"  title='{{ field.help_text }}'>
+        <i class="fa fa-question-circle"></i>
+      </span>
+    {% endif %}
+    <div class="input-group">
+      {% if icon %}
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fas {{ icon }}"></i></span>
+        </div>
+      {% endif %}
+      {{ field }}
+      {% if field.errors %}
+        <div class="invalid-feedback">
+          {{ field.errors }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}

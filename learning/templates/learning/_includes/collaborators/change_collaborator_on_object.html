@@ -1,0 +1,12 @@
+{# object : Course, Activity, Resource #}
+{# object_collaborator : CourseCollaborator, ActivityCollaborator, ResourceCollaborator #}
+{# target_url : URL to be used in the url template tag #}
+{% load i18n %}
+{% include "learning/_includes/collaborators/modals/change_collaborator_on_object.html" with target_url=target_url%}
+<span style="padding-top: .25rem;" data-toggle="tooltip" data-placement="top"
+                          title="{% trans "Change the role of the collaborator" %}">
+<button class="btn btn-outline-warning" type="button" data-toggle="modal"
+        data-target="#change-collaborator-{{ object_collaborator.collaborator.id }}-on-{{ object.slug }}">
+  <i class="fa fa-edit fa-sm"></i>
+</button>
+</span>

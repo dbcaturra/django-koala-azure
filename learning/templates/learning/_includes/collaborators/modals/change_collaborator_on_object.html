@@ -1,0 +1,42 @@
+{% extends 'learning/_includes/modals/base.html' %}
+{% load i18n learning %}
+
+{# object : instance of BasicModelMixin #}
+{# object_collaborator : instance of ObjectCollaboratorMixin#}
+{# target_url : URL to be used in the url template tag, the URL that actually updates the collaborator #}
+
+{% block modal_id %}change-collaborator-{{ object_collaborator.collaborator.id }}-on-{{ object.slug }}{% endblock %}
+{% block modal_aria_label %}change-collaborator-{{ object_collaborator.collaborator.id }}-on-{{ object.slug }}{% endblock %}
+
+{% block modal_header %}
+  <h5 class="modal-title">
+    {% blocktrans trimmed with name=object.name collaborator=object_collaborator.collaborator %}
+      Change the role of “{{ collaborator }}” on “{{ name }}”
+    {% endblocktrans %}
+  </h5>
+{% endblock %}
+
+{% block modal_body %}
+  <div class="container-fluid">
+    <h6>{% blocktrans trimmed with object=object collaborator=object_collaborator.collaborator %}
+      {{ collaborator }} works with you on “{{ object }}”.{% endblocktrans %}
+    </h6>
+    <form action="{% url target_url slug=object.slug %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="user_pk" value="{{ object_collaborator.collaborator.id }}">
+      <div class="form-row">
+        <div class="col">
+          {% get_collaborator_role_form object_collaborator as collaborator_form %}
+          {{ collaborator_form.role }}
+        </div>
+      </div>
+  </div>
+{% endblock %}
+
+{% block modal_footer %}
+  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal"><i class="fa fa-times"></i> {% trans "Cancel" %}
+  </button>
+  <button type="submit" class="btn btn-outline-success"><i class="fa fa-sm fa-check">
+    </i> {% trans "Confirm" %}</button>
+  </form>
+{% endblock %}

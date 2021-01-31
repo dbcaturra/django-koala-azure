@@ -1,0 +1,24 @@
+{% extends "learning/resource/detail.html" %}
+{% load i18n learning django_bootstrap_breadcrumbs %}
+
+{% block title %}{{ block.super }} − {% trans "Similar resources" %}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ block.super }}
+  {% breadcrumb "Similar resources" "learning:resource/uses" resource.slug %}
+{% endblock %}
+
+{% block learning_content %}
+  {% if has_obj %}
+    <div class="row" id="similar-resources">
+      {% for resource in page_obj %}
+        {% include "learning/resource/_includes/block/resource_block.html" with resource=resource %}
+      {% endfor %}
+    </div>
+    {% include "learning/_includes/paginator_buttons.html" with current_page=page_obj %}
+  {% else %}
+    <div class="alert alert-info" role="alert" id="alert-no-similar-resource">
+      {% trans "There is no similar resource yet. Similar resources are resources that have tags in common." %}
+    </div>
+  {% endif %}
+{% endblock %}

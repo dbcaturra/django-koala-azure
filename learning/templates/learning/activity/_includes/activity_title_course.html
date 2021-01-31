@@ -1,0 +1,17 @@
+{% load i18n learning %}
+{# items of dropdown #}
+<div id="activity-block-for-{{ activity.slug }}">
+   {# The activity name #}
+  {% if activity.name|length >= 30 %}
+    <a data-toggle="tooltip" data-placement="right" title="{{ activity.name }}" class="list-group-item list-group-item-action pl-4
+       {% if request.resolver_match.view_name == url_name %}active{% else %}bg-light{% endif %}"
+       href="{% url 'learning:activity/detail' slug=activity.slug %}{% relative_url course.slug prefix|add:'course' params%}" >
+        {{ activity.name|truncatechars:30 }}
+      {% else %}
+    <a class="list-group-item list-group-item-action pl-4
+       {% if request.resolver_match.view_name == url_name %}active{% else %}bg-light{% endif %}"
+       href="{% url 'learning:activity/detail' slug=activity.slug %}{% relative_url course.slug prefix|add:'course' params%}" >
+        {{ activity.name }}
+  {% endif %}
+    </a>
+</div>

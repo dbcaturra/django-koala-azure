@@ -1,0 +1,24 @@
+{% load i18n learning %}
+{% if objectives_on_entity %}
+  {% for objectives_on_entity_object in objectives_on_entity %}
+    <div class="row">
+      <div class="col-auto"><small>{{ entity_type }}</small></div>
+      <div class="col">
+        {% if entity_type == "Course" %}
+          {% with url_name="learning:course/detail"%}
+            <small><a href="{% url url_name slug=objectives_on_entity_object.course.slug %}">{{ objectives_on_entity_object.course }}</a></small>
+          {% endwith %}
+        {% elif entity_type == "Activity" %}
+          {% with url_name="learning:course/detail/activity"%}
+            <small><a href="{% url url_name slug=course.slug activity_slug=objectives_on_entity_object.activity.slug %}">{{ objectives_on_entity_object.activity }}</a></small>
+          {% endwith %}
+        {% else %}
+          {% with url_name="learning:course/detail/activities"%}
+            <small><a href="{% url url_name slug=course.slug %}">{{ objectives_on_entity_object.resource }}</a></small>
+          {% endwith %}
+        {% endif %}
+      </div>
+      <div class="col-3"><small>{{ objectives_on_entity_object.get_taxonomy_level_display }}</small></div>
+    </div>
+  {% endfor %}
+{% endif %}
